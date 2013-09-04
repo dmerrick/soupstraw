@@ -13,10 +13,10 @@ class SinatraBootstrap < Sinatra::Base
   end
 
   get '/bitcoins' do
-    @string = "---------- 16:46 9/3/2013 ----------\nApproximate BTC mined: 0.01617622\nUSD rate (current avg.): $136.77\n------------------------------------\nProgress to positive ROI: 3.66%\nBTC left to positive ROI: 0.42542378\n------------------------------------\nApproximate USD earned: $2.21\n------------------------------------"
+    @title = "Bitcoin Earnings"
+    @string = `/Users/dmerrick/.rvm/rubies/ruby-2.0.0-p247/bin/ruby /Users/dmerrick/other_projects/bitcoin_earnings/bitcoin_earnings.rb`
     haml :bitcoins
   end
-
 
   # start the server if ruby file executed directly
   run! if app_file == $0
