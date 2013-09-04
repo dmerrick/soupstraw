@@ -1,4 +1,4 @@
-# Sinatra Bootstrap
+# Soupstraw!
 
 ## How do I get started?
 
