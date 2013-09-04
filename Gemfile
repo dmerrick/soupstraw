@@ -7,3 +7,9 @@ gem 'shotgun'
 gem 'haml'
 gem 'sass'
 gem 'compass'
+
+group :development do
+  gem 'heroku'
+  gem 'pry'
+  gem 'awesome_print'
+end
