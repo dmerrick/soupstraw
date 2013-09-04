@@ -10,7 +10,7 @@ namespace :css do
 
     task :clear do
       puts "*** Clearing CSS ***"
-      system "rm -Rfv public/stylesheets/*"
+      system "rm -Rfv public/stylesheets/*.css"
     end
 
     task :default => :clear do
@@ -20,7 +20,7 @@ namespace :css do
 
     desc "Compile CSS for production"
     task :prod => :clear do
-      puts "*** Compiling CSS ***"
+      puts "*** Compiling Compressed CSS ***"
       system "compass compile --output-style compressed --force"
     end
 
