@@ -8,3 +8,4 @@ gem 'haml'
 # Sass & Compass
 gem 'sass'
 gem 'compass'
+gem 'sinatra-twitter-bootstrap', :require => 'sinatra/twitter-bootstrap'

@@ -4,4 +4,4 @@ module RenderPartial
   end
 end
 
-helpers RenderPartial
+#helpers RenderPartial
