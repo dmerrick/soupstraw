@@ -4,10 +4,26 @@
     = bootstrap_assets
     %meta{:'http-equiv' => "Content-Type", :content => "text/html; charset=utf-8"}
     %meta{:name => "lang", :content => "en"}
-    %title This is the Title.
+    %title= @title || "This is the Title."
+    %link{:href=>'/stylesheets/application.css', :media => "screen", :rel => 'stylesheet', :type => "text/css"}
     %script{:type => "text/javascript", :src => "//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"}
     %script{:type => "text/javascript", :src => "/javascripts/application.js"}
   %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          %a.btn.btn-navbar{ "data-toggle".to_sym => "collapse", "data-target".to_sym => ".nav-collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand{:href => '/'} Project name
+          .nav-collapse
+            %ul.nav
+              %li
+                %a{:href => '/'}Home
+              %li
+                %a{:href => '/bitcoins'}Bitcoins
+
     - container :fluid do
       - row do
         = yield
