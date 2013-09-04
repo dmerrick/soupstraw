@@ -1,30 +1,32 @@
 !!! 5
 %html{html_attrs}
   %head
-    = bootstrap_assets
     %meta{:'http-equiv' => "Content-Type", :content => "text/html; charset=utf-8"}
     %meta{:name => "lang", :content => "en"}
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
     %title= @title || "This is the Title."
-    %link{:href=>'/stylesheets/application.css', :media => "screen", :rel => 'stylesheet', :type => "text/css"}
-    %script{:type => "text/javascript", :src => "//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"}
-    %script{:type => "text/javascript", :src => "/javascripts/application.js"}
+    %link{:href=>'stylesheets/bootstrap.css', :media => "screen", :rel => 'stylesheet'}
+    %link{:href=>'stylesheets/application.css', :media => "screen", :rel => 'stylesheet'}
+    %script{:src => "//code.jquery.com/jquery.js"}
+    %script{:src => "javascripts/application.js"}
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container-fluid
-          %a.btn.btn-navbar{ "data-toggle".to_sym => "collapse", "data-target".to_sym => ".nav-collapse"}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.brand{:href => '/'} Project name
-          .nav-collapse
-            %ul.nav
-              %li
-                %a{:href => '/'}Home
-              %li
-                %a{:href => '/bitcoins'}Bitcoins
+    %nav.navbar.navbar-default.navbar-fixed-top{:role=>"navigation"}
+      .navbar-header
+        %button.navbar-toggle{ "data-toggle".to_sym => "collapse", "data-target".to_sym => ".navbar-ex1-collapse"}
+          %span.sr-only Toggle Navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.navbar-brand{:href => '#'} Soupstraw
+      .collapse.navbar-collapse.navbar-ex1-collapse
+        %ul.nav.navbar-nav
+          %li
+            %a{:href => '/'}Home
+          %li
+            %a{:href => '/bitcoins'}Bitcoins
 
-    - container :fluid do
-      - row do
+    .container
+      .row
         = yield
 
+    %script{:src => "javascripts/bootstrap.min.js"}

@@ -1,12 +1,9 @@
 require 'rubygems'
 require 'sinatra/base'
-require 'sinatra/twitter-bootstrap'
 require 'haml'
 
 class Soupstraw < Sinatra::Base
   require './helpers/render_partial'
-
-  register Sinatra::Twitter::Bootstrap::Assets
 
   get '/' do
     @title = "Soupstraw!"
