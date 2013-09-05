@@ -1,9 +1,14 @@
 require 'rubygems'
 require 'sinatra/base'
 require 'haml'
+require 'open-uri'
+require 'json'
 
 class Soupstraw < Sinatra::Base
   require './helpers/render_partial'
+  require './helpers/bitcoin'
+
+  helpers RenderPartial, Bitcoin
 
   get '/' do
     @title = "Soupstraw!"
@@ -12,8 +17,6 @@ class Soupstraw < Sinatra::Base
 
   get '/bitcoins' do
     @title = "Bitcoin Earnings"
-    #FIXME: this is fugly
-    @command_output = `/Users/dmerrick/.rvm/rubies/ruby-2.0.0-p247/bin/ruby /Users/dmerrick/other_projects/bitcoin_earnings/bitcoin_earnings.rb`
     haml :bitcoins
   end
 

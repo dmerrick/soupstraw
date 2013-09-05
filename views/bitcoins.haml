@@ -1,5 +1,36 @@
-.panel.panel-default
-  .panel-heading
-    bitcoin_earnings.rb
-  .panel-body
-    %pre= @command_output
+.page-header
+  %h1
+    Bitcoins, yo!
+    %small (This page is a work in progress.)
+
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading
+        Dana's Mining Stats
+      .panel-body
+        %p The following is the approximate number of BTC that have been mined, along with the current weighted-average BTC exchange rate.
+      %ul.list-group
+        %li.list-group-item
+          = "$#{current_value} per BTC"
+        %li.list-group-item
+          = "#{total_mined} BTC mined"
+
+  .col-md-4
+    .row
+      .panel.panel-default
+        .panel-heading
+          Progress to Break-Even
+        .panel-body
+          .progress
+            %span= "#{break_even_progress}%"
+            .progress-bar{:role=>"progressbar", :'aria-valuenow'=>break_even_progress, :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{break_even_progress}%;"}
+              %span.sr-only= "#{break_even_progress}% Complete"
+          %span= "~#{break_even} BTC remaining to break even"
+
+    .row
+      .well
+        %a{:href=>Bitcoin::BITCOIN_STATS_URL} Bitcoin Stats Page
+
+
+= #"Approximate USD earned: $#{total_earned}"
