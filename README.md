@@ -10,7 +10,7 @@ Start the app by running:
 
     rake s
 
-This rake command runs `bundle exec shotgun config.ru` behind the scenes for you and starts the app on Sinatra's default port 9393 and will now be able to view the application in your web browser at this URL [http://localhost:9393](http://localhost:9393).
+This rake command runs `bundle exec shotgun config.ru` behind the scenes for you and starts the app on Sinatra's default port 4567 and will now be able to view the application in your web browser at this URL [http://localhost:4567](http://localhost:4567).
 
 You'll also want to open a new terminal window to the same directory and run `compass watch` to watch the Sass files for changes.
 
@@ -23,5 +23,5 @@ There are a few helper Rake tasks that will help you to clear and compile your S
     rake css:clear         # Clear the CSS
     rake css:compile       # Compile CSS
     rake css:compile:prod  # Compile CSS for production
-    rake generate          # Generate a new project at dir=foo
     rake s                 # Run the app
+
