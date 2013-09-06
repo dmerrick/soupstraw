@@ -31,7 +31,7 @@ module Bitcoin
 
   def total_earned
     total = (current_value * total_mined).round(2).to_s
-    total += "0" if total_earned.to_s.split('.').last.size != 2
+    total += "0" if total.to_s.split('.').last.size != 2
     total
   end
 end
