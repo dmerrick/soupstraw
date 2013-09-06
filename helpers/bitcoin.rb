@@ -1,7 +1,5 @@
 module Bitcoin
 
-  #TODO: cache the calculated values so we're not hitting them over and over
-
   # configuration options
   ADDRESS = "1JT86GVai2r7sixvsJfJxNWHon9Dep2erh"
   COST_OF_MINER = 0.4416
@@ -10,20 +8,21 @@ module Bitcoin
 
   # find current BTC->USD exchange rate (weighted average)
   def current_value
+    return session[:current_value] if session[:current_value]
     current_value_json = JSON.parse(URI.parse(Bitcoin::CURRENT_VALUE_URL).read)
-    current_value_json["last"].to_f
+    session[:current_value] = current_value_json["last"].to_f
   end
 
   # find total BTC mined
   def total_mined
-    #bitcoin_stats_json = JSON.parse(URI.parse(Bitcoin::BITCOIN_STATS_URL).read)
-    #total = bitcoin_stats_json[Bitcoin::ADDRESS]["balance"].to_i * 0.00000001
-    #total.round(8)
-    0.01796
+    return session[:total_mined] if session[:total_mined]
+    bitcoin_stats_json = JSON.parse(URI.parse(Bitcoin::BITCOIN_STATS_URL).read)
+    total = bitcoin_stats_json[Bitcoin::ADDRESS]["balance"].to_i * 0.00000001
+    session[:total_mined] = total.round(8)
   end
 
   def break_even
-    Bitcoin::COST_OF_MINER - total_mined
+    (Bitcoin::COST_OF_MINER - total_mined).round(8)
   end
 
   def break_even_progress
