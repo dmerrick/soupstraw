@@ -4,7 +4,7 @@ require 'haml'
 require 'open-uri'
 require 'json'
 
-class Soupstraw < Sinatra::Base
+class BitcoinTracker < Sinatra::Base
 
   require './helpers/render_partial'
   require './helpers/bitcoin'
@@ -15,11 +15,6 @@ class Soupstraw < Sinatra::Base
   use Rack::Session::Pool, :expire_after => 60
 
   get '/' do
-    @title = "Soupstraw!"
-    haml :index
-  end
-
-  get '/bitcoins' do
     @title = "Bitcoin Earnings"
     @data_is_old = true if session[:total_mined]
     haml :bitcoins

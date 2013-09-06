@@ -14,6 +14,7 @@ module Bitcoin
   end
 
   # find total BTC mined
+  # (NOTE: this will need to be updated if you don't use Eligius)
   def total_mined
     return session[:total_mined] if session[:total_mined]
     bitcoin_stats_json = JSON.parse(URI.parse(Bitcoin::BITCOIN_STATS_URL).read)

@@ -1,4 +1,4 @@
-# Soupstraw!
+# Bitcoin Tracker
 
 ## How do I get started?
 
@@ -13,6 +13,12 @@ Start the app by running:
 This rake command runs `bundle exec shotgun config.ru` behind the scenes for you and starts the app on Sinatra's default port 4567 and will now be able to view the application in your web browser at this URL [http://localhost:4567](http://localhost:4567).
 
 You'll also want to open a new terminal window to the same directory and run `compass watch` to watch the Sass files for changes.
+
+## How do I tell it about my mining rig?
+
+You will need to change the configuration set in `helpers/bitcoin.rb`. If you use Eligius as your pool, you just need to update the `ADDRESS`. Otherwise, you will need to edit `total_mined` to return the total amount you have mined.
+
+You will also need to update the QR code in `public/images/bitcoin_qr_code.png`, because that does not automatically update to reflect your wallet address. Everything else should Just Work though.
 
 ## Helper Rake Tasks
 
