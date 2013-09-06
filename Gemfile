@@ -7,6 +7,7 @@ gem 'shotgun'
 gem 'haml'
 gem 'sass'
 gem 'compass'
+gem 'newrelic_rpm'
 
 group :development do
   gem 'heroku'

@@ -26,6 +26,7 @@ GEM
     method_source (0.8.2)
     mime-types (1.25)
     netrc (0.7.7)
+    newrelic_rpm (3.6.6.147)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -55,6 +56,7 @@ DEPENDENCIES
   compass
   haml
   heroku
+  newrelic_rpm
   pry
   rake
   sass
