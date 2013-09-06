@@ -1,18 +1,19 @@
 .page-header
   %h1
     = "$#{total_earned} worth of BTC mined"
-    %small (This is a work in progress.)
+    %small (Updated every minute.)
 
 .row
   .col-md-6
     .panel.panel-default
       .panel-heading
-        Mining Stats
+        Relevant Numbers
       %ul.list-group
         %li.list-group-item
-          = "$#{current_value} per BTC"
-        %li.list-group-item
           = "#{total_mined} BTC mined"
+        %li.list-group-item
+          = "$#{current_value} per BTC"
+
     .panel.panel-default
       .panel-heading
         Progress to Break-Even
