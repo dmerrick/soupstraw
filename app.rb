@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra/base'
 require 'haml'
+require 'newrelic_rpm'
 require 'open-uri'
 require 'json'
 
