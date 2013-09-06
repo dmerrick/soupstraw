@@ -8,6 +8,13 @@
 
 .row
   .col-md-6
+    - if @data_is_old
+      .alert.alert-info.alert-dismissable
+        %button.close{:'data-dismiss'=>'alert', :'aria-hidden'=>'true'} &times;
+        Press
+        %a.alert-link{:href=>"/bitcoins"}
+          refresh
+        in a minute for new data.
     .panel.panel-default
       .panel-heading
         Relevant Numbers
@@ -28,7 +35,13 @@
         %span= "(~#{break_even} BTC to break even)"
 
   .col-md-3
-    .well
+    .well.well-sm
       %a{:href=>"http://eligius.st/~wizkid057/newstats/userstats.php/#{Bitcoin::ADDRESS}"} Mining Progress
-    .well
+    .well.well-sm
       %a{:href=>"http://bitcoinaverage.com/#USD"} Bitcoin Value
+    .panel.panel-default
+      .panel-heading
+        Donate
+      .panel-body
+        %a{:href=>"bitcoin:#{Bitcoin::ADDRESS}"}
+          %img{:src=>"images/bitcoin_qr_code.png", :style=>"height: 80px; width: 80px;"}

@@ -21,6 +21,7 @@ class Soupstraw < Sinatra::Base
 
   get '/bitcoins' do
     @title = "Bitcoin Earnings"
+    @data_is_old = true if session[:total_mined]
     haml :bitcoins
   end
 
