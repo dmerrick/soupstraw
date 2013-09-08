@@ -22,19 +22,6 @@ class Soupstraw < Sinatra::Base
 
   set :database_file, "config/database.yml"
 
-  configure :production do
-    db = URI.parse(ENV['DATABASE_URL'] || 'postgres:///localhost/mydb')
-
-    ActiveRecord::Base.establish_connection(
-      :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
-      :host     => db.host,
-      :username => db.user,
-      :password => db.password,
-      :database => db.path[1..-1],
-      :encoding => 'utf8'
-    )
-  end
-
   helpers do
     def is_user?
       @user != nil
