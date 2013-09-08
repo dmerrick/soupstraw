@@ -7,7 +7,6 @@ require 'sinatra/activerecord'
 require 'haml'
 require 'newrelic_rpm'
 
-require './config/environments'
 require './models/user'
 
 
@@ -17,6 +16,7 @@ class Soupstraw < Sinatra::Base
   require './helpers/bitcoin'
 
   # short sessions for bitcoin page
+  #FIXME: this doesn't work with current authentication system
   use Rack::Session::Pool, :expire_after => 60
 
   set :database_file, "config/database.yml"
