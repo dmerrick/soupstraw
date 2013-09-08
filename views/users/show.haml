@@ -1,2 +1,4 @@
 - if @user
-  %h1= "Hello, #{@user.name}."
+  .container
+    %h1= "Hello, #{@user.name}."
+    %a{:href=>'/log_out'} Log out

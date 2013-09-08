@@ -1,3 +1,20 @@
 .container
-  %h1
-    This will be the login form.
+
+  .col-md-1
+
+  .col-md-4
+    %form.form-signin
+      %h2.form-signin-heading
+        Please sign in
+      %input.form-control{:type=>'text', :placeholder=>"Email address", :autofocus=>true}
+      %input.form-control{:type=>'password', :placeholder=>"Password", :autofocus=>true}
+      %label.checkbox
+        %input{:type=>'checkbox', :value=>"remember-me"}
+          Remember me
+      %button.btn.btn-lg.btn-primary.btn-block
+        Sign in
+
+    %p
+      .well.well-sm
+        %a{:href=>'/cheat'}
+          Or just cheat.

@@ -56,7 +56,7 @@ class Soupstraw < Sinatra::Base
     haml :bitcoins
   end
 
-  get "/protected", :auth => :user do
+  get "/private", :auth => :user do
     haml :'users/show'
   end
 
@@ -72,15 +72,16 @@ class Soupstraw < Sinatra::Base
 
   post "/log_in" do
     session[:user_id] = User.authenticate(params).id
-    haml :'users/show'
+    redirect '/'
   end
 
   get "/log_in" do
     haml :log_in
   end
 
-  get "/logout" do
+  get "/log_out" do
     session[:user_id] = nil
+    haml :log_in
   end
 
   # start the server if ruby file executed directly
