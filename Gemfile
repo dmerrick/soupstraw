@@ -11,6 +11,7 @@ gem 'sass'
 gem 'compass'
 gem 'newrelic_rpm'
 gem 'activerecord'
+gem 'unicorn'
 
 # stuff to try later
 #gem 'sinatra-contrib'
