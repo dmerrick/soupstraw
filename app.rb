@@ -4,9 +4,12 @@ require 'json'
 require 'bundler/setup'
 require 'sinatra/base'
 require 'sinatra/activerecord'
+require 'sinatra/flash'
+require 'sinatra/redirect_with_flash'
 require 'haml'
 require 'newrelic_rpm'
 
+require './lib/sinatra_flash_style'
 require './models/user'
 
 
@@ -31,15 +34,19 @@ class Soupstraw < Sinatra::Base
     end
   end
   helpers RenderPartial, Bitcoin
+  helpers Sinatra::RedirectWithFlash
 
   register do
     def auth (type)
       condition do
-        redirect "/log_in" unless send("is_#{type}?")
+        unless send("is_#{type}?")
+          redirect "/log_in", :warning => 'You must be logged in to view this page.'
+        end
       end
     end
   end
   register Sinatra::ActiveRecordExtension
+  register Sinatra::Flash
 
   before do
     @user = User.find(session[:user_id]) if session[:user_id]
