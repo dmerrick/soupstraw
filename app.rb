@@ -80,7 +80,7 @@ class Soupstraw < Sinatra::Base
   end
 
   get "/log_out" do
-    session[:user_id] = nil
+    session[:user_id] = @user = nil
     haml :log_in
   end
 
