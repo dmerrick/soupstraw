@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'bundler/setup'
 require 'sinatra/base'
 require 'haml'
 require 'newrelic_rpm'
@@ -11,6 +12,12 @@ class Soupstraw < Sinatra::Base
   require './helpers/bitcoin'
 
   helpers RenderPartial, Bitcoin
+
+  helpers do
+    def h(text)
+      Rack::Utils.escape_html(text)
+    end
+  end
 
   # short sessions for bitcoin page
   use Rack::Session::Pool, :expire_after => 60
