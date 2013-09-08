@@ -9,6 +9,7 @@ module Bitcoin
   # find current BTC->USD exchange rate (weighted average)
   def current_value
     return session[:current_value] if session[:current_value]
+
     current_value_json = JSON.parse(URI.parse(Bitcoin::CURRENT_VALUE_URL).read)
     session[:current_value] = current_value_json["last"].to_f
   end
@@ -16,7 +17,14 @@ module Bitcoin
   # find total BTC mined
   def total_mined
     return session[:total_mined] if session[:total_mined]
-    bitcoin_stats_json = JSON.parse(URI.parse(Bitcoin::BITCOIN_STATS_URL).read)
+
+    begin
+      bitcoin_stats_json = JSON.parse(URI.parse(Bitcoin::BITCOIN_STATS_URL).read)
+    rescue Timeout::Error
+      flash.now[:danger] = "Connection to mining stats page timed out. Is their server down?"
+      return session[:total_mined] = 0.0
+    end
+
     total = bitcoin_stats_json[Bitcoin::ADDRESS]["balance"].to_i * 0.00000001
     session[:total_mined] = total.round(8)
   end
