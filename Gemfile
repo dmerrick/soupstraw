@@ -18,7 +18,6 @@ gem 'sinatra-activerecord'
 
 group :production do
   gem 'pg'
-  gem 'activerecord-postgresql-adapter'
 end
 
 group :development do
