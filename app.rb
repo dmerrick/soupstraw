@@ -5,11 +5,11 @@ require 'bundler/setup'
 require 'sinatra/base'
 require 'sinatra/activerecord'
 require 'sinatra/flash'
-require 'sinatra/redirect_with_flash'
 require 'haml'
 require 'newrelic_rpm'
 
-require './lib/sinatra_flash_style'
+require './lib/sinatra/flash_style'
+require './lib/sinatra/redirect_with_flash'
 require './models/user'
 
 
@@ -69,7 +69,7 @@ class Soupstraw < Sinatra::Base
 
   get "/cheat" do
     session[:user_id] = 1
-    "you fuckin' cheater"
+    redirect "/", :danger => "you fuckin\' cheater"
   end
 
   get '/users/:id' do
@@ -88,6 +88,7 @@ class Soupstraw < Sinatra::Base
 
   get "/log_out" do
     session[:user_id] = @user = nil
+    flash.now[:info] = "You are now logged out."
     haml :log_in
   end
 
