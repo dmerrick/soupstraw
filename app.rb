@@ -4,7 +4,6 @@ require 'json'
 require 'bundler/setup'
 require 'sinatra/base'
 require 'sinatra/activerecord'
-require 'sqlite3'
 require 'haml'
 require 'newrelic_rpm'
 
