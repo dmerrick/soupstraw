@@ -22,7 +22,24 @@ class Soupstraw < Sinatra::Base
   #FIXME: this doesn't work with current authentication system
   use Rack::Session::Pool, :expire_after => 60
 
-  set :database_file, "config/database.yml"
+  #set :database_file, "config/database.yml"
+
+  # shouldn't sinatra do this for me?
+  configure :production, :development do
+    env = settings.environment.to_s
+
+    YAML::load(File.open('config/database.yml'))[env].each do |key, value|
+      set key, value
+    end
+
+    ActiveRecord::Base.establish_connection(
+      adapter:  settings.adapter,
+      host:     settings.host,
+      database: settings.database,
+      username: settings.username,
+      password: settings.password
+    )
+  end
 
   helpers do
     def is_user?

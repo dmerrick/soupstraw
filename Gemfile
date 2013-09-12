@@ -11,21 +11,19 @@ gem 'sass'
 gem 'compass'
 gem 'newrelic_rpm'
 gem 'activerecord'
+gem 'activerecord-postgresql-adapter'
 gem 'unicorn'
+gem 'pg'
 
 # stuff to try later
 #gem 'sinatra-contrib'
 
 
-group :production do
-  gem 'pg'
-end
-
 group :development do
-  gem 'heroku'
+  #gem 'heroku'
   gem 'pry'
   gem 'awesome_print'
 
-  gem 'sqlite3'
+  #gem 'sqlite3'
   gem 'tux'
 end
