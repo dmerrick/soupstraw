@@ -3,7 +3,7 @@
 
 .page-header
   %h1
-    = "$#{total_earned} worth of BTC mined"
+    = "$#{@stats.total_earned} worth of BTC mined"
     %small (Updated every minute.)
 
 .row
@@ -13,28 +13,28 @@
         Relevant Numbers
       %ul.list-group
         %li.list-group-item
-          = "#{total_mined} BTC mined"
+          = "#{@stats.btc_mined} BTC mined"
         %li.list-group-item
-          = "$#{current_value} per BTC"
+          = "$#{@stats.usd_value} per BTC"
 
     .panel.panel-default
       .panel-heading
         Progress to Break-Even
       .panel-body
         .progress
-          %span= "#{break_even_progress}%"
-          .progress-bar{:role=>"progressbar", :'aria-valuenow'=>break_even_progress, :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{break_even_progress}%;"}
-            %span.sr-only= "#{break_even_progress}% Complete"
-        %span= "(~#{break_even} BTC to break even)"
+          %span= "#{@stats.break_even_progress}%"
+          .progress-bar{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_progress, :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_progress}%;"}
+            %span.sr-only= "#{@stats.break_even_progress}% Complete"
+        %span= "(~#{@stats.break_even} BTC to break even)"
 
   .col-md-3
     .well.well-sm
-      %a{:href=>"http://eligius.st/~wizkid057/newstats/userstats.php/#{Bitcoin::ADDRESS}"} Mining Progress
+      %a{:href=>"http://eligius.st/~wizkid057/newstats/userstats.php/#{@stats.wallet_address}"} Mining Progress
     .well.well-sm
       %a{:href=>"http://bitcoinaverage.com/#USD"} Bitcoin Value
     .panel.panel-default
       .panel-heading
         Donate
       .panel-body
-        %a{:href=>"bitcoin:#{Bitcoin::ADDRESS}"}
+        %a{:href=>"bitcoin:#{@stats.wallet_address}"}
           %img{:src=>"images/bitcoin_qr_code.png", :style=>"height: 80px; width: 80px;"}

@@ -17,7 +17,6 @@ require './models/bitcoin_stats_snapshot'
 class Soupstraw < Sinatra::Base
 
   require './helpers/render_partial'
-  require './helpers/bitcoin'
 
   # short sessions for bitcoin page
   #FIXME: this doesn't work with current authentication system
@@ -52,7 +51,7 @@ class Soupstraw < Sinatra::Base
       Rack::Utils.escape_html(text)
     end
   end
-  helpers RenderPartial, Bitcoin
+  helpers RenderPartial
   helpers Sinatra::RedirectWithFlash
 
   register do
@@ -78,6 +77,7 @@ class Soupstraw < Sinatra::Base
 
   get '/bitcoins' do
     @title = "Bitcoin Earnings"
+    @stats = BitcoinStatsSnapshot.last
     haml :bitcoins
   end
 
