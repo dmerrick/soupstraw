@@ -1,11 +1,5 @@
 class BitcoinStatsSnapshot < ActiveRecord::Base
 
-  # attributes:
-  # btc_mined
-  # usd_value
-  # time created
-
-
   #FIXME: move out of model
   def wallet_address
     "1JT86GVai2r7sixvsJfJxNWHon9Dep2erh"
