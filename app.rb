@@ -11,6 +11,7 @@ require 'newrelic_rpm'
 require './lib/sinatra/flash_style'
 require './lib/sinatra/redirect_with_flash'
 require './models/user'
+require './models/bitcoin_stats_snapshot'
 
 
 class Soupstraw < Sinatra::Base
@@ -32,6 +33,7 @@ class Soupstraw < Sinatra::Base
       set key, value
     end
 
+    #FIXME: this pollutes the settings namespace
     ActiveRecord::Base.establish_connection(
       adapter:  settings.adapter,
       host:     settings.host,
