@@ -23,6 +23,7 @@ GEM
     awesome_print (1.1.0)
     bond (0.4.3)
     builder (3.1.4)
+    chartkick (1.2.0)
     chunky_png (1.2.8)
     coderay (1.0.9)
     compass (0.12.2)
@@ -30,6 +31,8 @@ GEM
       fssm (>= 0.2.7)
       sass (~> 3.1)
     fssm (0.2.10)
+    groupdate (1.0.4)
+      activerecord (>= 3.0.0)
     haml (4.0.3)
       tilt
     i18n (0.6.5)
@@ -92,7 +95,9 @@ DEPENDENCIES
   activerecord
   activerecord-postgresql-adapter
   awesome_print
+  chartkick
   compass
+  groupdate
   haml
   newrelic_rpm
   pg

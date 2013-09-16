@@ -9,6 +9,8 @@ require 'sinatra/activerecord'
 require 'sinatra/flash'
 require 'haml'
 require 'newrelic_rpm'
+require 'chartkick'
+require 'groupdate'
 
 # include everything in lib and everything in models
 Dir["./lib/sinatra/*.rb"].each { |file| require file }
@@ -90,7 +92,6 @@ class Soupstraw < Sinatra::Base
 
   get '/stats' do
     @title = 'Bitcoin Stats'
-    @stats = BitcoinStatsSnapshot.last
     haml :'bitcoin/stats'
   end
 

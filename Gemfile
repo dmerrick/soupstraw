@@ -14,6 +14,8 @@ gem 'activerecord'
 gem 'activerecord-postgresql-adapter'
 gem 'unicorn'
 gem 'pg'
+gem 'chartkick'
+gem 'groupdate'
 
 # stuff to try later
 #gem 'sinatra-contrib'

@@ -1,6 +1,6 @@
 .page-header
   %h1
-    = "Bitcoin stats!"
+    = "#{@title}!"
     %small Work in progress.
 
 .row
@@ -9,7 +9,7 @@
       .panel-heading
         Graph Here
       .panel-body
-        POOPLOL
+        = line_chart BitcoinStatsSnapshot.group_by_minute(:created_at).average(:btc_mined)
   .col-md-9
     .panel.panel-default
       .panel-heading
