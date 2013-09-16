@@ -78,14 +78,20 @@ class Soupstraw < Sinatra::Base
   end
 
   get '/' do
-    @title = "Soupstraw!"
+    @title = 'Soupstraw!'
     haml :index
   end
 
   get '/bitcoins' do
-    @title = "Bitcoin Earnings"
+    @title = 'Bitcoin Earnings'
     @stats = BitcoinStatsSnapshot.last
-    haml :bitcoins
+    haml :'bitcoin/earnings'
+  end
+
+  get '/stats' do
+    @title = 'Bitcoin Stats'
+    @stats = BitcoinStatsSnapshot.last
+    haml :'bitcoin/stats'
   end
 
   # example json output
