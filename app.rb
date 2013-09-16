@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'rubygems'
 require 'open-uri'
 require 'json'
@@ -8,39 +10,40 @@ require 'sinatra/flash'
 require 'haml'
 require 'newrelic_rpm'
 
-require './lib/sinatra/flash_style'
-require './lib/sinatra/redirect_with_flash'
-require './models/user'
-require './models/bitcoin_stats_snapshot'
+# include everything in lib and everything in models
+Dir["./lib/sinatra/*.rb"].each { |file| require file }
+Dir["./models/*.rb"].each      { |file| require file }
 
 
 class Soupstraw < Sinatra::Base
 
   require './helpers/render_partial'
 
-  # short sessions for bitcoin page
-  #FIXME: this doesn't work with current authentication system
-  use Rack::Session::Pool, :expire_after => 60
+  # enable sessions
+  use Rack::Session::Pool
 
-  #set :database_file, "config/database.yml"
+  # start the server if ruby file executed directly
+  run! if app_file == $0
 
-  # shouldn't sinatra do this for me?
-  configure :production, :development do
-    env = settings.environment.to_s
+  # ------------------------------------------------------------
 
-    YAML::load(File.open('config/database.yml'))[env].each do |key, value|
-      set key, value
-    end
+  set :database_file, "config/database.yml"
 
-    #FIXME: this pollutes the settings namespace
-    ActiveRecord::Base.establish_connection(
-      adapter:  settings.adapter,
-      host:     settings.host,
-      database: settings.database,
-      username: settings.username,
-      password: settings.password
-    )
+  #FIXME: this pollutes the settings namespace
+  env = settings.environment.to_s
+  YAML::load(File.open(settings.database_file))[env].each do |key, value|
+    set key, value
   end
+
+  ActiveRecord::Base.establish_connection(
+    adapter:  settings.adapter,
+    host:     settings.host,
+    database: settings.database,
+    username: settings.username,
+    password: settings.password
+  )
+
+  # ------------------------------------------------------------
 
   helpers do
     def is_user?
@@ -54,6 +57,8 @@ class Soupstraw < Sinatra::Base
   helpers RenderPartial
   helpers Sinatra::RedirectWithFlash
 
+  # ------------------------------------------------------------
+
   register do
     def auth (type)
       condition do
@@ -65,6 +70,8 @@ class Soupstraw < Sinatra::Base
   end
   register Sinatra::ActiveRecordExtension
   register Sinatra::Flash
+
+  # ------------------------------------------------------------
 
   before do
     @user = User.find(session[:user_id]) if session[:user_id]
@@ -79,6 +86,17 @@ class Soupstraw < Sinatra::Base
     @title = "Bitcoin Earnings"
     @stats = BitcoinStatsSnapshot.last
     haml :bitcoins
+  end
+
+  # example json output
+  get '/bitcoins.json' do
+    content_type :json
+    stats = {}
+    BitcoinStatsSnapshot.all.inject(stats) do |stats_hash, snapshot|
+      stats_hash[snapshot.created_at] = [snapshot.btc_mined, snapshot.usd_value]
+      stats_hash
+    end
+    stats.to_json
   end
 
   get "/private", :auth => :user do
@@ -109,8 +127,5 @@ class Soupstraw < Sinatra::Base
     flash.now[:info] = "You are now logged out."
     haml :log_in
   end
-
-  # start the server if ruby file executed directly
-  run! if app_file == $0
 
 end
