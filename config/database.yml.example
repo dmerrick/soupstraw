@@ -1,16 +1,19 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
+#CREATE USER postgres SUPERUSER;
+#CREATE DATABASE soupstraw_development WITH OWNER postgres;
+#CREATE DATABASE soupstraw_test WITH OWNER postgres;
+
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
-  pool: 5
-  timeout: 5000
+  adapter:   postgresql
+  database:  soupstraw_development
+  username:  postgres
+  password:  postgres
+  host:      localhost
+  reconnect: true
 
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
-  pool: 5
-  timeout: 5000
+  adapter:   postgresql
+  database:  soupstraw_test
+  username:  postgres
+  password:  postgres
+  host:      localhost
+  reconnect: true
