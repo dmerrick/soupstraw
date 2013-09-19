@@ -20,12 +20,8 @@ gem 'groupdate'
 # stuff to try later
 #gem 'sinatra-contrib'
 
-
 group :development do
-  #gem 'heroku'
   gem 'pry'
   gem 'awesome_print'
-
-  #gem 'sqlite3'
   gem 'tux'
 end
