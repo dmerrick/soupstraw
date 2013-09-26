@@ -9,7 +9,7 @@
       .panel-heading
         Graph Here
       .panel-body
-        = line_chart BitcoinStatsSnapshot.group_by_minute(:created_at).average(:btc_mined)
+        = line_chart @income_data
 .row
   .col-md-4
     .panel.panel-default

@@ -104,6 +104,10 @@ class Soupstraw < Sinatra::Base
   # this is a work in progress that only dana really needs to see
   get '/stats', :auth => :dana do
     @title = 'Bitcoin Stats'
+
+    # format the data for chartkick
+    @income_data = BitcoinStatsSnapshot.nonzero.group_by_minute(:created_at).average(:btc_mined)
+
     haml :'bitcoin/stats'
   end
 
