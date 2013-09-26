@@ -112,7 +112,7 @@ class Soupstraw < Sinatra::Base
 
   get "/cheat" do
     session[:user_id] = 1
-    redirect "/", :danger => "you fuckin\' cheater"
+    redirect "/", :danger => "you cheater :p"
   end
 
   get '/users/:id' do
