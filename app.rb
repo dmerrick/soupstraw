@@ -56,7 +56,10 @@ class Soupstraw < Sinatra::Base
       Rack::Utils.escape_html(text)
     end
   end
+
+  # enable partials
   helpers RenderPartial
+  # enable redirections with little messages
   helpers Sinatra::RedirectWithFlash
 
   # ------------------------------------------------------------
@@ -70,7 +73,10 @@ class Soupstraw < Sinatra::Base
       end
     end
   end
+
+  # enable activrecord
   register Sinatra::ActiveRecordExtension
+  # enable litte messages
   register Sinatra::Flash
 
   # ------------------------------------------------------------
