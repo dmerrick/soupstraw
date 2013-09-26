@@ -1,7 +1,9 @@
 class BitcoinStatsSnapshot < ActiveRecord::Base
 
   # ignore snapshots when the pool api was down
-  scope :nonzero, where.not(btc_mined: 0)
+  def self.nonzero
+    where.not(btc_mined: 0)
+  end
 
   #FIXME: move out of model
   def wallet_address
