@@ -52,6 +52,10 @@ class Soupstraw < Sinatra::Base
       @user != nil
     end
 
+    def is_dana?
+      is_user? && @user.id == 1
+    end
+
     def h(text)
       Rack::Utils.escape_html(text)
     end
@@ -65,7 +69,8 @@ class Soupstraw < Sinatra::Base
   # ------------------------------------------------------------
 
   register do
-    def auth (type)
+    # this redirects users to the log in page if they're not a user
+    def auth(type)
       condition do
         unless send("is_#{type}?")
           redirect "/log_in", :warning => 'You must be logged in to view this page.'
@@ -96,7 +101,8 @@ class Soupstraw < Sinatra::Base
     haml :'bitcoin/earnings'
   end
 
-  get '/stats' do
+  # this is a work in progress that only dana really needs to see
+  get '/stats', :auth => :dana do
     @title = 'Bitcoin Stats'
     haml :'bitcoin/stats'
   end
