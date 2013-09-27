@@ -96,7 +96,7 @@ class Soupstraw < Sinatra::Base
 
   get '/bitcoins' do
     @title = 'Bitcoin Earnings'
-    @stats = BitcoinStatsSnapshot.last
+    @stats = BitcoinStatsSnapshot.nonzero.last
     haml :'bitcoin/earnings'
   end
 
