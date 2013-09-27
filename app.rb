@@ -110,19 +110,14 @@ class Soupstraw < Sinatra::Base
   get '/btc_mined.json' do
     content_type :json
     # format the data for chartkick
-    BitcoinStatsSnapshot.nonzero.group_by_hour(:created_at).average(:btc_mined).to_json
+    BitcoinStatsSnapshot.nonzero.group_by_hour(:created_at).maximum(:btc_mined).to_json
   end
 
   # to make the btc mined chart load faster
   get '/total_earned.json' do
     content_type :json
     # format the data for chartkick
-    BitcoinStatsSnapshot.nonzero.map do |snapshot|
-      {
-        :name => snapshot.created_at,
-        :data => snapshot.total_earned
-      }
-    end.to_json
+    BitcoinStatsSnapshot.nonzero.group_by_hour(:created_at).sum('btc_mined * usd_value').to_json
   end
 
   # example json output
