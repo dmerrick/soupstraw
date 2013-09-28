@@ -72,7 +72,7 @@ class Soupstraw < Sinatra::Base
     def auth(type)
       condition do
         unless send("is_#{type}?")
-          redirect "/log_in", :warning => 'You must be logged in to view this page.'
+          redirect '/log_in' + "?path=#{request.path}", :warning => 'You must be logged in to view this page.'
         end
       end
     end
@@ -135,9 +135,10 @@ class Soupstraw < Sinatra::Base
     haml :'users/show'
   end
 
-  get "/cheat" do
+  # temporary trick to let other people log in
+  get "/cheat/:path" do
     session[:user_id] = 1
-    redirect "/", :danger => "you cheater :p"
+    redirect params[:path], :danger => 'you cheater :p'
   end
 
   get '/users/:id' do
@@ -147,7 +148,7 @@ class Soupstraw < Sinatra::Base
 
   post "/log_in" do
     session[:user_id] = User.authenticate(params).id
-    redirect '/'
+    redirect back
   end
 
   get "/log_in" do
