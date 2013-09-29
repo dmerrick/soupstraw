@@ -131,10 +131,6 @@ class Soupstraw < Sinatra::Base
     stats.to_json
   end
 
-  get "/private", :auth => :user do
-    haml :'users/show'
-  end
-
   # temporary trick to let other people log in
   get "/cheat/:path" do
     session[:user_id] = 1
