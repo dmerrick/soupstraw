@@ -116,8 +116,11 @@ class Soupstraw < Sinatra::Base
   # to make the btc mined chart load faster
   get '/total_earned.json' do
     content_type :json
+    most_recent_snapshot = BitcoinStatsSnapshot.last
     # format the data for chartkick
-    BitcoinStatsSnapshot.nonzero.group_by_day(:created_at).maximum('btc_mined * usd_value').to_json
+    graph_data = BitcoinStatsSnapshot.nonzero.group_by_day(:created_at).maximum('btc_mined * usd_value')
+    graph_data[most_recent_snapshot.created_at.to_s] = most_recent_snapshot.total_earned
+    graph_data.to_json
   end
 
   # example json output
