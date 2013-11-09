@@ -31,18 +31,19 @@ class Soupstraw < Sinatra::Base
 
   set :database_file, "config/database.yml"
 
-  #FIXME: this pollutes the settings namespace
   env = settings.environment.to_s
+  database_settings = {}
   YAML::load(File.open(settings.database_file))[env].each do |key, value|
-    set key, value
+    database_settings[key.to_sym] = value
   end
+  set :database, database_settings
 
   ActiveRecord::Base.establish_connection(
-    adapter:  settings.adapter,
-    host:     settings.host,
-    database: settings.database,
-    username: settings.username,
-    password: settings.password
+    adapter:  settings.database[:adapter],
+    host:     settings.database[:host],
+    database: settings.database[:database],
+    username: settings.database[:username],
+    password: settings.database[:password]
   )
 
   # ------------------------------------------------------------
