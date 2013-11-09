@@ -13,13 +13,15 @@
         Relevant Numbers
       %ul.list-group
         %li.list-group-item
-          = "#{@stats.btc_mined} BTC mined"
+          %span
+            %strong= "#{@stats.btc_mined}"
+            BTC mined
+          %span.pull-right= "(#{@stats.btc_per_day}/day)"
         %li.list-group-item
-          = "$#{@stats.usd_value} per BTC"
-        %li.list-group-item
-          = "#{@stats.btc_per_day} BTC mined per day"
-        %li.list-group-item
-          = "$#{@stats.usd_per_day} USD earned per day"
+          %span
+            %strong= "$#{@stats.usd_value}"
+            per BTC
+          %span.pull-right= "($#{@stats.usd_per_day}/day)"
 
     .panel.panel-default
       .panel-heading
