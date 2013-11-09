@@ -11,11 +11,6 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     mining_rig.wallet_address
   end
 
-  #TODO: add usd cost too
-  def cost_of_miner
-    mining_rig.btc_cost
-  end
-
   def btc_per_day
     btc_mined / mining_rig.days_running
   end
@@ -57,11 +52,11 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
   end
 
   def break_even
-    (cost_of_miner - btc_mined).round(8)
+    (mining_rig.btc_cost - btc_mined).round(8)
   end
 
   def break_even_progress
-    ((btc_mined / cost_of_miner) * 100.0).round(2)
+    ((btc_mined / mining_rig.btc_cost) * 100.0).round(2)
   end
 
   def total_earned
