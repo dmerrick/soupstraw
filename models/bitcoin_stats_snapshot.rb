@@ -51,12 +51,14 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     total.round(8)
   end
 
-  def break_even
-    (mining_rig.btc_cost - btc_mined).round(8)
+  def break_even(in_usd = false)
+    return (mining_rig.usd_cost - total_earned.to_f).round(2) if in_usd
+    return (mining_rig.btc_cost - btc_mined).round(8)
   end
 
-  def break_even_progress
-    ((btc_mined / mining_rig.btc_cost) * 100.0).round(2)
+  def break_even_progress(in_usd = false)
+    return ((total_earned.to_f / mining_rig.usd_cost) * 100.0).round(2) if in_usd
+    return ((btc_mined / mining_rig.btc_cost) * 100.0).round(2)
   end
 
   def total_earned
