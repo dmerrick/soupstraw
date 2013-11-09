@@ -22,6 +22,7 @@ class Soupstraw < Sinatra::Base
   require './helpers/render_partial'
 
   enable :sessions
+  enable :logging
 
   # start the server if ruby file executed directly
   run! if app_file == $0
