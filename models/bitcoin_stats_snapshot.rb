@@ -12,11 +12,11 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
   end
 
   def btc_per_day
-    btc_mined / mining_rig.days_running
+    (btc_mined / mining_rig.days_running).round(8)
   end
 
   def usd_per_day
-    usd_value / mining_rig.days_running
+    (usd_value / mining_rig.days_running).round(2)
   end
 
   #FIXME: move out of model
