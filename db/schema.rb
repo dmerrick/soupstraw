@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131109191857) do
+ActiveRecord::Schema.define(version: 20131109194156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20131109191857) do
     t.datetime "updated_at"
     t.datetime "start_date"
     t.string   "wallet_address"
+    t.decimal  "btc_cost",       precision: 11, scale: 8
+    t.decimal  "usd_cost",       precision: 9,  scale: 2
   end
 
   create_table "users", force: true do |t|

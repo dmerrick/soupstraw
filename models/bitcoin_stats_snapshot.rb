@@ -11,9 +11,9 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     mining_rig.wallet_address
   end
 
-  #FIXME: move out of model
+  #TODO: add usd cost too
   def cost_of_miner
-    0.4416
+    mining_rig.btc_cost
   end
 
   #FIXME: move out of model
