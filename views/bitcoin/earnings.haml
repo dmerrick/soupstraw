@@ -15,29 +15,47 @@
         %li.list-group-item
           %span
             %strong= "#{@stats.btc_mined}"
-            BTC mined
+            BTC mined:
           %span.pull-right= "(#{@stats.btc_per_day}/day)"
         %li.list-group-item
           %span
             %strong= "$#{@stats.usd_value}"
-            per BTC
+            per BTC:
           %span.pull-right= "($#{@stats.usd_per_day}/day)"
 
     .panel.panel-default
       .panel-heading
         Progress to Break-Even
-      .panel-body
-        .progress
-          %span= "#{@stats.break_even_progress}%"
-          .progress-bar{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_progress, :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_progress}%;"}
-            %span.sr-only= "#{@stats.break_even_progress}% Complete"
-        %span= "(~#{@stats.break_even} BTC to break even)"
+      %ul.list-group
+        %li.list-group-item
+          %p
+            %strong= "#{@stats.break_even}"
+            BTC to break even:
+
+          .progress
+            %span= "#{@stats.break_even_progress}%"
+            .progress-bar{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_progress, :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_progress}%;"}
+              %span.sr-only= "#{@stats.break_even_progress}% Complete"
+
+        %li.list-group-item
+          %p
+            %strong= "$#{@stats.break_even(:usd)}"
+            USD to break even:
+
+          .progress
+            %span= "#{@stats.break_even_progress(:usd)}%"
+            .progress-bar{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_progress(:usd), :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_progress(:usd)}%;"}
+              %span.sr-only= "#{@stats.break_even_progress(:usd)}% Complete"
+
+
 
   .col-md-3
     .well.well-sm
-      %a{:href=>"http://eligius.st/~wizkid057/newstats/userstats.php/#{@stats.wallet_address}"} Mining Progress
+      %a{:href=>"http://bitcoinwisdom.com/"} Bitcoin Stats
     .well.well-sm
-      %a{:href=>"http://bitcoinaverage.com/#USD"} Bitcoin Value
+      %a{:href=>"http://eligius.st/~wizkid057/newstats/userstats.php/#{@stats.wallet_address}"} Pool Stats
+    .well.well-sm
+      %a{:href=>"http://bitcoinaverage.com/#USD"} Average Bitcoin Value
     .panel.panel-default
       .panel-heading
         Donate
@@ -49,6 +67,6 @@
   .col-md-9
     .panel.panel-default
       .panel-heading
-        Value of Mined Bitcoins by Day
+        Average USD Value of Mined Bitcoins by Day
       .panel-body
         = line_chart "/total_earned.json?rig_id=#{@rig_id}"
