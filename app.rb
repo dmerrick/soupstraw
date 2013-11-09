@@ -97,8 +97,12 @@ class Soupstraw < Sinatra::Base
   end
 
   get '/bitcoins' do
+    #TODO: make this variable
+    mining_rig_id = 1
+    rig = MiningRig.find(mining_rig_id)
+
     @title = 'Bitcoin Earnings'
-    @stats = BitcoinStatsSnapshot.nonzero.last
+    @stats = rig.nonzero_snapshots.last
     haml :'bitcoin/earnings'
   end
 
@@ -110,26 +114,38 @@ class Soupstraw < Sinatra::Base
 
   # to make the btc mined chart load faster
   get '/btc_mined.json' do
+    #TODO: make this variable
+    mining_rig_id = 1
+    rig = MiningRig.find(mining_rig_id)
+
     content_type :json
     # format the data for chartkick
-    BitcoinStatsSnapshot.nonzero.group_by_hour(:created_at).maximum(:btc_mined).to_json
+    rig.nonzero_snapshots.group_by_hour(:created_at).maximum(:btc_mined).to_json
   end
 
   # to make the btc mined chart load faster
   get '/total_earned.json' do
+    #TODO: make this variable
+    mining_rig_id = 1
+    rig = MiningRig.find(mining_rig_id)
+
     content_type :json
-    most_recent_snapshot = BitcoinStatsSnapshot.last
+    most_recent_snapshot = rig.nonzero_snapshots.last
     # format the data for chartkick
-    graph_data = BitcoinStatsSnapshot.nonzero.group_by_day(:created_at).maximum('btc_mined * usd_value')
+    graph_data = rig.nonzero_snapshots.group_by_day(:created_at).maximum('btc_mined * usd_value')
     graph_data[most_recent_snapshot.created_at.to_s] = most_recent_snapshot.total_earned
     graph_data.to_json
   end
 
   # example json output
   get '/bitcoins.json' do
+    #TODO: make this variable
+    mining_rig_id = 1
+    rig = MiningRig.find(mining_rig_id)
+
     content_type :json
     stats = {}
-    BitcoinStatsSnapshot.all.inject(stats) do |stats_hash, snapshot|
+    rig.nonzero_snapshots.inject(stats) do |stats_hash, snapshot|
       stats_hash[snapshot.created_at] = [snapshot.btc_mined, snapshot.usd_value]
       stats_hash
     end
