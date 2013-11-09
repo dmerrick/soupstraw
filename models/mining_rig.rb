@@ -6,6 +6,10 @@ class MiningRig < ActiveRecord::Base
     bitcoin_stats_snapshots.nonzero
   end
 
+  def days_running
+    Date.today - start_date.to_date
+  end
+
   def take_snapshot!
     BitcoinStatsSnapshot.create do |s|
       s.mining_rig = self

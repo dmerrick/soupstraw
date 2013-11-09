@@ -16,6 +16,14 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     mining_rig.btc_cost
   end
 
+  def btc_per_day
+    btc_mined / mining_rig.days_running
+  end
+
+  def usd_per_day
+    usd_value / mining_rig.days_running
+  end
+
   #FIXME: move out of model
   def usd_value_url
     'http://api.bitcoinaverage.com/no-mtgox/ticker/USD'
