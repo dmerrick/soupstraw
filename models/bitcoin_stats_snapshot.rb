@@ -7,9 +7,8 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     where.not(btc_mined: 0)
   end
 
-  #FIXME: move out of model
   def wallet_address
-    "1JT86GVai2r7sixvsJfJxNWHon9Dep2erh"
+    mining_rig.wallet_address
   end
 
   #FIXME: move out of model
