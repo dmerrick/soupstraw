@@ -45,4 +45,4 @@
       .panel-heading
         Value of Mined Bitcoins by Day
       .panel-body
-        = line_chart '/total_earned.json'
+        = line_chart "/total_earned.json?rig_id=#{@rig_id}"

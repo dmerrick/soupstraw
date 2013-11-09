@@ -97,9 +97,13 @@ class Soupstraw < Sinatra::Base
   end
 
   get '/bitcoins' do
-    #TODO: make this variable
-    mining_rig_id = 1
-    rig = MiningRig.find(mining_rig_id)
+    @rig_id = request[:rig_id] || 1
+    redirect "/bitcoins/#{@rig_id}"
+  end
+
+  get '/bitcoins/:rig_id' do
+    @rig_id = params[:rig_id] || 1
+    rig = MiningRig.find(@rig_id)
 
     @title = 'Bitcoin Earnings'
     @stats = rig.nonzero_snapshots.last
@@ -108,15 +112,15 @@ class Soupstraw < Sinatra::Base
 
   # this is a work in progress that only dana really needs to see
   get '/stats', :auth => :dana do
+    @rig_id = request[:rig_id] || 1
     @title = 'Bitcoin Stats'
     haml :'bitcoin/stats'
   end
 
   # to make the btc mined chart load faster
   get '/btc_mined.json' do
-    #TODO: make this variable
-    mining_rig_id = 1
-    rig = MiningRig.find(mining_rig_id)
+    @rig_id = request[:rig_id] || 1
+    rig = MiningRig.find(@rig_id)
 
     content_type :json
     # format the data for chartkick
@@ -125,9 +129,8 @@ class Soupstraw < Sinatra::Base
 
   # to make the btc mined chart load faster
   get '/total_earned.json' do
-    #TODO: make this variable
-    mining_rig_id = 1
-    rig = MiningRig.find(mining_rig_id)
+    @rig_id = request[:rig_id] || 1
+    rig = MiningRig.find(@rig_id)
 
     content_type :json
     most_recent_snapshot = rig.nonzero_snapshots.last
@@ -139,9 +142,8 @@ class Soupstraw < Sinatra::Base
 
   # example json output
   get '/bitcoins.json' do
-    #TODO: make this variable
-    mining_rig_id = 1
-    rig = MiningRig.find(mining_rig_id)
+    @rig_id = request[:rig_id] || 1
+    rig = MiningRig.find(@rig_id)
 
     content_type :json
     stats = {}
