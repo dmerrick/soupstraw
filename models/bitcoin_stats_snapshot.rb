@@ -41,6 +41,9 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
       return 0.0
     end
 
+    # return zero if the wallet_address is not in the pool
+    return 0.0 unless bitcoin_stats_json[wallet_address]
+
     total = bitcoin_stats_json[wallet_address]["balance"].to_i * 0.00000001
     total.round(8)
   end
