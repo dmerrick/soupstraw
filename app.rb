@@ -142,11 +142,14 @@ class Soupstraw < Sinatra::Base
     rig_id = params[:rig_id]
     rig = MiningRig.find(rig_id)
 
-    # group by week if running for over 90 days
-    if rig.days_running < 90
-      graph_data = rig.average_earned_by_day
+    # change the timescale based on days_running
+    graph_data = case rig.days_running
+    when 0..5
+      rig.average_earned_by_hour
+    when 6..90
+      rig.average_earned_by_day
     else
-      graph_data = rig.average_earned_by_week
+      rig.average_earned_by_week
     end
 
     most_recent_snapshot = rig.last_snapshot

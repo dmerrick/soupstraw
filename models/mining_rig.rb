@@ -1,5 +1,6 @@
 class MiningRig < ActiveRecord::Base
 
+  #TODO: more validations here
   validates_presence_of :name
   has_many :bitcoin_stats_snapshots
 
@@ -21,6 +22,11 @@ class MiningRig < ActiveRecord::Base
       s.btc_mined  = s.current_btc_mined
       s.usd_value  = s.current_usd_value
     end
+  end
+
+  # format the data for chartkick
+  def average_earned_by_hour
+    nonzero_snapshots.group_by_hour(:created_at).average('btc_mined * usd_value')
   end
 
   # format the data for chartkick
