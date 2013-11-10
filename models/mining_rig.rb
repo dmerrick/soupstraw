@@ -20,7 +20,7 @@ class MiningRig < ActiveRecord::Base
     BitcoinStatsSnapshot.create do |s|
       s.mining_rig = self
       s.btc_mined  = s.current_btc_mined
-      s.usd_value  = s.current_usd_value
+      s.usd_value  = Bitcoin.current_usd_value
     end
   end
 

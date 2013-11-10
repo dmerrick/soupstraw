@@ -13,13 +13,12 @@ require 'chartkick'
 require 'groupdate'
 
 # include everything in lib and everything in models
-Dir["./lib/sinatra/*.rb"].each { |file| require file }
-Dir["./models/*.rb"].each      { |file| require file }
+Dir["./lib/**/*.rb"].each  { |file| require file }
+Dir["./helpers/*.rb"].each { |file| require file }
+Dir["./models/*.rb"].each  { |file| require file }
 
 
 class Soupstraw < Sinatra::Base
-
-  require './helpers/render_partial'
 
   enable :sessions
   enable :logging
@@ -66,6 +65,8 @@ class Soupstraw < Sinatra::Base
   helpers RenderPartial
   # enable redirections with little messages
   helpers Sinatra::RedirectWithFlash
+  # enable bitcoin methods
+  helpers Bitcoin
 
   # ------------------------------------------------------------
 

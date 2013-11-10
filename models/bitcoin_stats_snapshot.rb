@@ -4,6 +4,11 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
   validates  :btc_mined, numericality: { greater_than: 0.0 }
   belongs_to :mining_rig
 
+  # right now we only support Eligius
+  def stats_url
+    'http://eligius.st/~luke-jr/raw/7/balances.json'
+  end
+
   # ignore snapshots when the pool api was down
   def self.nonzero
     where.not(btc_mined: 0)
@@ -21,24 +26,6 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     (total_earned.to_f / mining_rig.days_running).round(2)
   end
 
-  #FIXME: move out of model
-  def usd_value_url
-    'http://api.bitcoinaverage.com/no-mtgox/ticker/USD'
-  end
-
-  #FIXME: move out of model
-  def stats_url
-    'http://eligius.st/~luke-jr/raw/7/balances.json'
-  end
-
-  #TODO: move out of model
-  # find current BTC->USD exchange rate (weighted average)
-  def current_usd_value
-    current_value_json = JSON.parse(URI.parse(usd_value_url).read)
-    current_value_json["last"].to_f
-  end
-
-  #TODO: move out of model
   # find total BTC mined
   def current_btc_mined
     begin
