@@ -163,9 +163,13 @@ class Soupstraw < Sinatra::Base
 
     most_recent_snapshot = rig.last_snapshot
 
-    # format the data for chartkick
-    #TODO: if days_running is > 90, group_by_week
-    graph_data = rig.average_earned_by_day
+    # group by week if running for over 90 days
+    if rig.days_running < 90
+      graph_data = rig.average_earned_by_day
+    else
+      graph_data = rig.average_earned_by_week
+    end
+
     graph_data[most_recent_snapshot.created_at.to_s] = most_recent_snapshot.total_earned
     graph_data.to_json
   end

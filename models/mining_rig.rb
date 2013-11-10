@@ -22,8 +22,14 @@ class MiningRig < ActiveRecord::Base
     end
   end
 
+  # format the data for chartkick
   def average_earned_by_day
     nonzero_snapshots.group_by_day(:created_at).average('btc_mined * usd_value')
+  end
+
+  # format the data for chartkick
+  def average_earned_by_week
+    nonzero_snapshots.group_by_week(:created_at).average('btc_mined * usd_value')
   end
 
   # this allows you to combine two rigs together
