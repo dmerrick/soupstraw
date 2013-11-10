@@ -43,3 +43,9 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+@media (max-width: 767px) {
+  .hidden-if-mobile {
+    display: none !important;
+  }
+}

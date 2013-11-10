@@ -1,4 +1,4 @@
-%a{:href=>"https://github.com/dmerrick/soupstraw/tree/bitcoin_only"}
+%a.hidden-if-mobile{:href=>"https://github.com/dmerrick/soupstraw/tree/bitcoin_only"}
   %img{:style=>"position: absolute; top: 50px; right: 0; border: 0;", :src=>"/images/forkme_right_gray_6d6d6d.png", :alt=>"Fork me on GitHub"}
 
 .page-header
@@ -51,9 +51,9 @@
 
   .col-md-3
     .well.well-sm
-      %a{:href=>"http://bitcoinwisdom.com/"} Bitcoin Stats
+      %a{:href=>"http://bitcoinwisdom.com/"} Bitcoin Value Stats
     .well.well-sm
-      %a{:href=>"http://eligius.st/~wizkid057/newstats/userstats.php/#{@stats.wallet_address}"} Pool Stats
+      %a{:href=>"http://eligius.st/~wizkid057/newstats/userstats.php/#{@stats.wallet_address}"} Mining Pool Stats
     .well.well-sm
       %a{:href=>"http://bitcoinaverage.com/#USD"} Average Bitcoin Value
     .panel.panel-default
@@ -67,6 +67,6 @@
   .col-md-9
     .panel.panel-default
       .panel-heading
-        Average USD Value of Mined Bitcoins by Day
+        USD Value of Mined Bitcoins Over Time
       .panel-body
-        = line_chart "/total_earned.json?rig_id=#{@rig_id}"
+        = line_chart "/total_earned.json?rig_id=#{@rig_id}", :library => {hAxis: {title: "Time"}, vAxis: {title: "Earned (USD)"}}

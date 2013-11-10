@@ -37,3 +37,12 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+// keep this at the bottom
+// http://stackoverflow.com/questions/10513715
+// 767px is taken from bootstrap's navbar-collapse
+@media (max-width: 767px) {
+  .hidden-if-mobile {
+    display:none !important;
+  }
+}
