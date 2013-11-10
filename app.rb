@@ -101,19 +101,9 @@ class Soupstraw < Sinatra::Base
     redirect "/bitcoins/#{@rig_id}"
   end
 
-  get '/bitcoins/:rig_id' do
-    @rig_id = params[:rig_id] || 1
-    rig = MiningRig.find(@rig_id)
-
-    @title = 'Bitcoin Earnings'
-    @stats = rig.last_snapshot
-    @graph_payload = "/total_earned.json?rig_id=#{@rig_id}"
-    haml :'bitcoin/earnings'
-  end
-
-  # matchs /miners1+2
+  # matchs /bitcoins/1+2
   # (or another combination of rig_ids)
-  get '/miners*+*' do |id_a, id_b|
+  get '/bitcoins/*+*' do |id_a, id_b|
     # get the last snapshots for both rigs
     snapshot_a = MiningRig.find(id_a).last_snapshot
     snapshot_b = MiningRig.find(id_b).last_snapshot
@@ -121,6 +111,16 @@ class Soupstraw < Sinatra::Base
     @title = 'Bitcoin Earnings'
     @stats = snapshot_a + snapshot_b
     @graph_payload = "/total_earned#{id_a}+#{id_b}.json"
+    haml :'bitcoin/earnings'
+  end
+
+  get '/bitcoins/:rig_id' do
+    @rig_id = params[:rig_id] || 1
+    rig = MiningRig.find(@rig_id)
+
+    @title = 'Bitcoin Earnings'
+    @stats = rig.last_snapshot
+    @graph_payload = "/total_earned.json?rig_id=#{@rig_id}"
     haml :'bitcoin/earnings'
   end
 
