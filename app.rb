@@ -145,20 +145,22 @@ class Soupstraw < Sinatra::Base
 
   # to make the btc mined chart load faster
   get '/btc_mined.json' do
+    content_type :json
+
     @rig_id = request[:rig_id] || 1
     rig = MiningRig.find(@rig_id)
 
-    content_type :json
     # format the data for chartkick
     rig.nonzero_snapshots.group_by_hour(:created_at).maximum(:btc_mined).to_json
   end
 
   # to make the btc mined chart load faster
   get '/total_earned.json' do
+    content_type :json
+
     rig_id = request[:rig_id] || 1
     rig = MiningRig.find(rig_id)
 
-    content_type :json
     most_recent_snapshot = rig.last_snapshot
 
     # format the data for chartkick
@@ -170,10 +172,11 @@ class Soupstraw < Sinatra::Base
 
   # example json output
   get '/bitcoins.json' do
+    content_type :json
+
     @rig_id = request[:rig_id] || 1
     rig = MiningRig.find(@rig_id)
 
-    content_type :json
     stats = {}
     rig.nonzero_snapshots.inject(stats) do |stats_hash, snapshot|
       stats_hash[snapshot.created_at] = [snapshot.btc_mined, snapshot.usd_value]
