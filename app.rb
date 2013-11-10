@@ -101,6 +101,27 @@ class Soupstraw < Sinatra::Base
     redirect "/bitcoins/#{@rig_id}"
   end
 
+  # combine the total_earned data for two rigs
+  # this allows the chart load to faster via AJAX
+  get '/bitcoins/*+*/total_earned.json' do |id_a, id_b|
+    content_type :json
+
+    graph_a    = MiningRig.find(id_a).average_earned_by_day
+    graph_b    = MiningRig.find(id_b).average_earned_by_day
+
+    # this iterates over the graphed data for the first
+    # rig, and adds to it the data from the second rig
+    graph_data = graph_a.inject({}) do |hash, key_and_value|
+      date           = key_and_value.first
+      total_earned_a = key_and_value.last
+      total_earned_b = graph_b[date] || 0.0
+      hash[date]     = total_earned_a + total_earned_b
+      hash
+    end
+
+    graph_data.to_json
+  end
+
   # matchs /bitcoins/1+2
   # (or another combination of rig_ids)
   get '/bitcoins/*+*' do |id_a, id_b|
@@ -110,8 +131,27 @@ class Soupstraw < Sinatra::Base
 
     @title = 'Bitcoin Earnings'
     @stats = snapshot_a + snapshot_b
-    @graph_payload = "/total_earned#{id_a}+#{id_b}.json"
+    @graph_payload = "/bitcoins/#{id_a}+#{id_b}/total_earned.json"
     haml :'bitcoin/earnings'
+  end
+
+  # this allows the chart load to faster via AJAX
+  get '/bitcoins/:rig_id/total_earned.json' do
+    content_type :json
+
+    rig_id = params[:rig_id]
+    rig = MiningRig.find(rig_id)
+
+    # group by week if running for over 90 days
+    if rig.days_running < 90
+      graph_data = rig.average_earned_by_day
+    else
+      graph_data = rig.average_earned_by_week
+    end
+
+    most_recent_snapshot = rig.last_snapshot
+    graph_data[most_recent_snapshot.created_at.to_s] = most_recent_snapshot.total_earned
+    graph_data.to_json
   end
 
   get '/bitcoins/:rig_id' do
@@ -120,7 +160,7 @@ class Soupstraw < Sinatra::Base
 
     @title = 'Bitcoin Earnings'
     @stats = rig.last_snapshot
-    @graph_payload = "/total_earned.json?rig_id=#{@rig_id}"
+    @graph_payload = "/bitcoins/#{@rig_id}/total_earned.json"
     haml :'bitcoin/earnings'
   end
 
@@ -140,46 +180,6 @@ class Soupstraw < Sinatra::Base
 
     # format the data for chartkick
     rig.nonzero_snapshots.group_by_hour(:created_at).maximum(:btc_mined).to_json
-  end
-
-  # this allows the chart load to faster via AJAX
-  get '/total_earned.json' do
-    content_type :json
-
-    rig_id = request[:rig_id] || 1
-    rig = MiningRig.find(rig_id)
-
-    # group by week if running for over 90 days
-    if rig.days_running < 90
-      graph_data = rig.average_earned_by_day
-    else
-      graph_data = rig.average_earned_by_week
-    end
-
-    most_recent_snapshot = rig.last_snapshot
-    graph_data[most_recent_snapshot.created_at.to_s] = most_recent_snapshot.total_earned
-    graph_data.to_json
-  end
-
-  # combine the total_earned data for two rigs
-  # this allows the chart load to faster via AJAX
-  get '/total_earned*+*.json' do |id_a, id_b|
-    content_type :json
-
-    graph_a    = MiningRig.find(id_a).average_earned_by_day
-    graph_b    = MiningRig.find(id_b).average_earned_by_day
-
-    # this iterates over the graphed data for the first
-    # rig, and adds to it the data from the second rig
-    graph_data = graph_a.inject({}) do |hash, key_and_value|
-      date           = key_and_value.first
-      total_earned_a = key_and_value.last
-      total_earned_b = graph_b[date] || 0.0
-      hash[date]     = total_earned_a + total_earned_b
-      hash
-    end
-
-    graph_data.to_json
   end
 
   # temporary trick to let other people log in
