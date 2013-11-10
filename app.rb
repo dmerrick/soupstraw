@@ -91,12 +91,12 @@ class Soupstraw < Sinatra::Base
     @user = User.find(session[:user_id]) if session[:user_id]
   end
 
-  get '/' do
-    @title = 'Soupstraw!'
-    haml :index
+  get '/?' do
+    # redirect to the dual stats page
+    redirect "/bitcoins/1+2"
   end
 
-  get '/bitcoins' do
+  get '/bitcoins/?' do
     @rig_id = request[:rig_id] || 1
     redirect "/bitcoins/#{@rig_id}"
   end
@@ -106,8 +106,8 @@ class Soupstraw < Sinatra::Base
   get '/bitcoins/*+*/total_earned.json' do |id_a, id_b|
     content_type :json
 
-    graph_a    = MiningRig.find(id_a).average_earned_by_day
-    graph_b    = MiningRig.find(id_b).average_earned_by_day
+    graph_a = MiningRig.find(id_a).average_earned_by_day
+    graph_b = MiningRig.find(id_b).average_earned_by_day
 
     # this iterates over the graphed data for the first
     # rig, and adds to it the data from the second rig
@@ -206,6 +206,11 @@ class Soupstraw < Sinatra::Base
     session[:user_id] = @user = nil
     flash.now[:info] = "You are now logged out."
     haml :log_in
+  end
+
+  get '/home' do
+    @title = 'Soupstraw!'
+    haml :index
   end
 
 end
