@@ -106,7 +106,33 @@ class Soupstraw < Sinatra::Base
     rig = MiningRig.find(@rig_id)
 
     @title = 'Bitcoin Earnings'
-    @stats = rig.nonzero_snapshots.last
+    @stats = rig.last_snapshot
+    haml :'bitcoin/earnings'
+  end
+
+  # matchs /miners1+2
+  # (or another combination of rig_ids)
+  get '/miners*+*' do |id_a, id_b|
+    # get the last snapshots for both rigs
+    rig_a      = MiningRig.find(id_a)
+    rig_b      = MiningRig.find(id_b)
+    snapshot_a = rig_a.last_snapshot
+    snapshot_b = rig_b.last_snapshot
+    graph_a    = rig_a.average_earned_by_day
+    graph_b    = rig_b.average_earned_by_day
+
+    # this iterates over the graphed data for the first
+    # rig, and adds to it the data from the second rig
+    @graph_data = graph_a.inject({}) do |hash, point|
+      date           = point.first
+      total_earned_a = point.last
+      total_earned_b = graph_b[date] || 0.0
+      hash[date]     = total_earned_a + total_earned_b
+      hash
+    end
+
+    @title = 'Bitcoin Earnings'
+    @stats = snapshot_a + snapshot_b
     haml :'bitcoin/earnings'
   end
 
@@ -129,14 +155,15 @@ class Soupstraw < Sinatra::Base
 
   # to make the btc mined chart load faster
   get '/total_earned.json' do
-    @rig_id = request[:rig_id] || 1
-    rig = MiningRig.find(@rig_id)
+    rig_id = request[:rig_id] || 1
+    rig = MiningRig.find(rig_id)
 
     content_type :json
-    most_recent_snapshot = rig.nonzero_snapshots.last
+    most_recent_snapshot = rig.last_snapshot
+
     # format the data for chartkick
     #TODO: if days_running is > 90, group_by_week
-    graph_data = rig.nonzero_snapshots.group_by_day(:created_at).average('btc_mined * usd_value')
+    graph_data = rig.average_earned_by_day
     graph_data[most_recent_snapshot.created_at.to_s] = most_recent_snapshot.total_earned
     graph_data.to_json
   end

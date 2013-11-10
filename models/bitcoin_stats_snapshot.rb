@@ -29,12 +29,14 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     'http://eligius.st/~luke-jr/raw/7/balances.json'
   end
 
+  #TODO: move out of model
   # find current BTC->USD exchange rate (weighted average)
   def current_usd_value
     current_value_json = JSON.parse(URI.parse(usd_value_url).read)
     current_value_json["last"].to_f
   end
 
+  #TODO: move out of model
   # find total BTC mined
   def current_btc_mined
     begin
@@ -66,6 +68,16 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     total = (usd_value * btc_mined).round(2).to_s
     total += "0" if total.to_s.split('.').last.size != 2
     total
+  end
+
+  # this allows you to combine two snapshots together
+  def +(other_snapshot)
+    BitcoinStatsSnapshot.new do |snap|
+      snap.btc_mined  = btc_mined + other_snapshot.btc_mined
+      # take the average of their usd_values
+      snap.usd_value  = (usd_value + other_snapshot.usd_value)/2
+      snap.mining_rig = mining_rig + other_snapshot.mining_rig
+    end
   end
 
 end
