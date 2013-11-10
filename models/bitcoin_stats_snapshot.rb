@@ -1,5 +1,7 @@
 class BitcoinStatsSnapshot < ActiveRecord::Base
 
+  # dont save records that resulted in an error
+  validates  :btc_mined, numericality: { greater_than: 0.0 }
   belongs_to :mining_rig
 
   # ignore snapshots when the pool api was down
