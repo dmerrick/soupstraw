@@ -69,4 +69,4 @@
       .panel-heading
         USD Value of Mined Bitcoins Over Time
       .panel-body
-        = line_chart @graph_data || "/total_earned.json?rig_id=#{@rig_id}", :library => {hAxis: {title: "Time"}, vAxis: {title: "Earned (USD)"}}
+        = line_chart @graph_payload, :library => {hAxis: {title: "Time"}, vAxis: {title: "Earned (USD)"}}
