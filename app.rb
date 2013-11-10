@@ -174,21 +174,6 @@ class Soupstraw < Sinatra::Base
     graph_data.to_json
   end
 
-  # example json output
-  get '/bitcoins.json' do
-    content_type :json
-
-    @rig_id = request[:rig_id] || 1
-    rig = MiningRig.find(@rig_id)
-
-    stats = {}
-    rig.nonzero_snapshots.inject(stats) do |stats_hash, snapshot|
-      stats_hash[snapshot.created_at] = [snapshot.btc_mined, snapshot.usd_value]
-      stats_hash
-    end
-    stats.to_json
-  end
-
   # temporary trick to let other people log in
   get "/cheat/:path" do
     session[:user_id] = 1
