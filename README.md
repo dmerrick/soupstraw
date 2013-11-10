@@ -16,13 +16,13 @@ You'll also want to open a new terminal window to the same directory and run `co
 
 ## How do I add an initial user?
 
-    $ irb
+    $ irb # (or tux)
 
     require './app'
-    u = User.new
-    u.name = "Your Name"
-    u.email = "your@email.com"
-    u.save!
+    User.create do |u|
+      u.name = "Your Name"
+      u.email = "your@email.com"
+    end
 
 ## Helper Rake Tasks
 
@@ -30,11 +30,15 @@ There are a few helper Rake tasks that will help you to clear and compile your S
 
     $ rake -T
 
-    rake css:clear            # Clear the CSS
-    rake css:compile          # Compile CSS
-    rake css:compile:prod     # Compile CSS for production
-    rake db:create_migration  # create an ActiveRecord migration
-    rake db:migrate           # migrate the database (use version with VERSION=n)
-    rake db:rollback          # roll back the migration (use steps with STEP=n)
-    rake s                    # Run the app
+    rake bitcoin:snapshot      # Take a snapshot of the bitcoin stats
+    rake bitcoin:snapshot:all  # Take snapshots for every mining rig
+    rake css:clear             # Clear the CSS
+    rake css:compile           # Compile CSS
+    rake css:compile:prod      # Compile CSS for production
+    rake db:create_migration   # create an ActiveRecord migration
+    rake db:migrate            # migrate the database (use version with VERSION=n)
+    rake db:rollback           # roll back the migration (use steps with STEP=n)
+    rake db:schema:dump        # dump schema into file
+    rake db:schema:load        # load schema into database
+    rake s                     # Run the app
 
