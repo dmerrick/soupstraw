@@ -61,6 +61,7 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     return ((btc_mined / mining_rig.btc_cost) * 100.0).round(2)
   end
 
+  #TODO: make this return a number instead of a string
   def total_earned
     total = (usd_value * btc_mined).round(2).to_s
     total += "0" if total.to_s.split('.').last.size != 2

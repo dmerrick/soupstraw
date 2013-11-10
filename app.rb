@@ -135,6 +135,7 @@ class Soupstraw < Sinatra::Base
     content_type :json
     most_recent_snapshot = rig.nonzero_snapshots.last
     # format the data for chartkick
+    #TODO: if days_running is > 90, group_by_week
     graph_data = rig.nonzero_snapshots.group_by_day(:created_at).average('btc_mined * usd_value')
     graph_data[most_recent_snapshot.created_at.to_s] = most_recent_snapshot.total_earned
     graph_data.to_json
