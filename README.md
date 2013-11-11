@@ -3,6 +3,7 @@
 ## How do I get started?
 
     bundle install
+    rake db:migrate
 
 ## How do I start the application?
 
