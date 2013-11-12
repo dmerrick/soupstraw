@@ -7,4 +7,4 @@ require 'sinatra/activerecord/rake'
 require './app'
 
 
-Dir["tasks/*.rake"].sort.each { |ext| load ext }
+Dir['tasks/*.rake'].sort.each { |ext| load ext }

@@ -38,7 +38,7 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     # return zero if the wallet_address is not in the pool
     return 0.0 unless bitcoin_stats_json[wallet_address]
 
-    total = bitcoin_stats_json[wallet_address]["balance"].to_i * 0.00000001
+    total = bitcoin_stats_json[wallet_address]['balance'].to_i * 0.00000001
     total += mining_rig.preexisting_btc_balance if mining_rig.preexisting_btc_balance
     total.round(8)
   end
@@ -56,7 +56,7 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
   #TODO: make this return a number instead of a string
   def total_earned
     total = (usd_value * btc_mined).round(2).to_s
-    total += "0" if total.to_s.split('.').last.size != 2
+    total += '0' if total.to_s.split('.').last.size != 2
     total
   end
 
@@ -65,7 +65,7 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     BitcoinStatsSnapshot.new do |snap|
       snap.btc_mined  = btc_mined + other_snapshot.btc_mined
       # take the average of their usd_values
-      snap.usd_value  = (usd_value + other_snapshot.usd_value)/2
+      snap.usd_value  = (usd_value + other_snapshot.usd_value) / 2
       snap.mining_rig = mining_rig + other_snapshot.mining_rig
     end
   end
