@@ -16,6 +16,7 @@ gem 'unicorn'
 gem 'pg'
 gem 'chartkick'
 gem 'groupdate'
+gem 'rubocop'
 
 # stuff to try later
 #gem 'sinatra-contrib'

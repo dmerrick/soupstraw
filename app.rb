@@ -13,9 +13,9 @@ require 'chartkick'
 require 'groupdate'
 
 # include everything in lib and everything in models
-Dir["./lib/**/*.rb"].each  { |file| require file }
-Dir["./helpers/*.rb"].each { |file| require file }
-Dir["./models/*.rb"].each  { |file| require file }
+Dir['./lib/**/*.rb'].each  { |file| require file }
+Dir['./helpers/*.rb'].each { |file| require file }
+Dir['./models/*.rb'].each  { |file| require file }
 
 
 class Soupstraw < Sinatra::Base
@@ -24,11 +24,11 @@ class Soupstraw < Sinatra::Base
   enable :logging
 
   # start the server if ruby file executed directly
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 
   # ------------------------------------------------------------
 
-  set :database_file, "config/database.yml"
+  set :database_file, 'config/database.yml'
 
   env = settings.environment.to_s
   database_settings = {}
@@ -75,7 +75,7 @@ class Soupstraw < Sinatra::Base
     def auth(type)
       condition do
         unless send("is_#{type}?")
-          redirect '/log_in' + "?path=#{request.path}", :warning => 'You must be logged in to view this page.'
+          redirect '/log_in' + "?path=#{request.path}", warning: 'You must be logged in to view this page.'
         end
       end
     end
@@ -94,7 +94,7 @@ class Soupstraw < Sinatra::Base
 
   get '/?' do
     # redirect to the dual stats page
-    redirect "/bitcoins/1+2"
+    redirect '/bitcoins/1+2'
   end
 
   get '/bitcoins/?' do
@@ -112,7 +112,7 @@ class Soupstraw < Sinatra::Base
 
     # this iterates over the graphed data for the first
     # rig, and adds to it the data from the second rig
-    graph_data = graph_a.inject({}) do |hash, key_and_value|
+    graph_data = graph_a.reduce({}) do |hash, key_and_value|
       date           = key_and_value.first
       total_earned_a = key_and_value.last
       total_earned_b = graph_b[date] || 0.0
@@ -169,7 +169,7 @@ class Soupstraw < Sinatra::Base
   end
 
   # this is a work in progress that only dana really needs to see
-  get '/stats', :auth => :dana do
+  get '/stats', auth: :dana do
     @rig_id = request[:rig_id] || 1
     @title = 'Bitcoin Stats'
     haml :'bitcoin/stats'
@@ -187,9 +187,9 @@ class Soupstraw < Sinatra::Base
   end
 
   # temporary trick to let other people log in
-  get "/cheat/:path" do
+  get '/cheat/:path' do
     session[:user_id] = 1
-    redirect params[:path], :danger => 'you cheater :p'
+    redirect params[:path], danger: 'you cheater :p'
   end
 
   get '/users/:id' do
@@ -197,18 +197,18 @@ class Soupstraw < Sinatra::Base
     haml :'users/show'
   end
 
-  post "/log_in" do
+  post '/log_in' do
     session[:user_id] = User.authenticate(params).id
     redirect back
   end
 
-  get "/log_in" do
+  get '/log_in' do
     haml :log_in
   end
 
-  get "/log_out" do
+  get '/log_out' do
     session[:user_id] = @user = nil
-    flash.now[:info] = "You are now logged out."
+    flash.now[:info] = 'You are now logged out.'
     haml :log_in
   end
 

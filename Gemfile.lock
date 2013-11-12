@@ -19,6 +19,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.1)
+    ast (1.1.0)
     atomic (1.1.14)
     awesome_print (1.2.0)
     bond (0.4.3)
@@ -41,7 +42,11 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.2)
     newrelic_rpm (3.6.9.171)
+    parser (2.0.0)
+      ast (~> 1.1)
+      slop (~> 3.4, >= 3.4.5)
     pg (0.17.0)
+    powerpack (0.0.9)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -51,6 +56,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rainbow (1.1.4)
     raindrops (0.12.0)
     rake (10.1.0)
     ripl (0.7.0)
@@ -61,6 +67,10 @@ GEM
       rack (>= 1.0)
       rack-test (>= 0.5)
       ripl (>= 0.3.5)
+    rubocop (0.15.0)
+      parser (~> 2.0)
+      powerpack (~> 0.0.6)
+      rainbow (>= 1.1.4)
     sass (3.2.12)
     shotgun (0.9)
       rack (>= 1.0)
@@ -103,6 +113,7 @@ DEPENDENCIES
   pg
   pry
   rake
+  rubocop
   sass
   shotgun
   sinatra
