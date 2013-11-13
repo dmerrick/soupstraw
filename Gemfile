@@ -18,6 +18,7 @@ gem 'groupdate'
 gem 'awesome_print'
 gem 'pry'
 gem 'tux'
+gem 'capistrano'
 
 group :development do
   gem 'shotgun'
