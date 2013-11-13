@@ -11,7 +11,7 @@ Start the app by running:
 
     rake s
 
-This rake command runs `bundle exec shotgun config.ru` behind the scenes for you and starts the app on Sinatra's default port 4567 and will now be able to view the application in your web browser at this URL [http://localhost:4567](http://localhost:4567).
+This rake command runs `rackup -p 9393 config.ru` behind the scenes for you and starts the app on port 9393 and will now be able to view the application in your web browser at this URL [http://localhost:9393](http://localhost:9393).
 
 You'll also want to open a new terminal window to the same directory and run `compass watch` to watch the Sass files for changes.
 
@@ -21,7 +21,7 @@ You'll also want to open a new terminal window to the same directory and run `co
 
     require './app'
     User.create do |u|
-      u.name = "Your Name"
+      u.name  = "Your Name"
       u.email = "your@email.com"
     end
 
