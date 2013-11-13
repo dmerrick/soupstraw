@@ -4,6 +4,10 @@ class MiningRig < ActiveRecord::Base
   validates_presence_of :name
   has_many :bitcoin_stats_snapshots
 
+  # supported periods for the graph interval
+  # (default is :auto)
+  GRAPH_INTERVALS = { auto: 0, hour: 1, day: 2, week: 3 }
+
   def nonzero_snapshots
     bitcoin_stats_snapshots.nonzero
   end
@@ -22,6 +26,18 @@ class MiningRig < ActiveRecord::Base
       s.btc_mined  = s.current_btc_mined
       s.usd_value  = Bitcoin.current_usd_value
     end
+  end
+
+  # override the getter so we can use symbols
+  # i.e. rig.graph_interval #=> :auto
+  def graph_interval
+    GRAPH_INTERVALS.key(read_attribute(:graph_interval))
+  end
+
+  # override the setter so we can use symbols
+  # i.e. rig.graph_interval = :hour
+  def graph_interval=(interval)
+    write_attribute(:graph_interval, GRAPH_INTERVALS[interval])
   end
 
   # format the data for chartkick
