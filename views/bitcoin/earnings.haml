@@ -33,7 +33,7 @@
             BTC to break even:
 
           .progress
-            %span= "#{@stats.break_even_progress}%"
+            %span.pull-right= "#{@stats.break_even_progress}%"
             .progress-bar{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_progress, :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_progress}%;"}
               %span.sr-only= "#{@stats.break_even_progress}% Complete"
 
@@ -43,7 +43,7 @@
             USD to break even:
 
           .progress
-            %span= "#{@stats.break_even_progress(:usd)}%"
+            %span.pull-right= "#{@stats.break_even_progress(:usd)}%"
             .progress-bar{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_progress(:usd), :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_progress(:usd)}%;"}
               %span.sr-only= "#{@stats.break_even_progress(:usd)}% Complete"
 
