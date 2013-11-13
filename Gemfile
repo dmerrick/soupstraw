@@ -5,7 +5,6 @@ gem 'rake'
 gem 'sinatra'
 gem 'sinatra-activerecord'
 gem 'sinatra-flash'
-gem 'shotgun'
 gem 'haml'
 gem 'sass'
 gem 'compass'
@@ -16,13 +15,11 @@ gem 'unicorn'
 gem 'pg'
 gem 'chartkick'
 gem 'groupdate'
-
-# stuff to try later
-#gem 'sinatra-contrib'
+gem 'awesome_print'
+gem 'pry'
+gem 'tux'
 
 group :development do
-  gem 'pry'
-  gem 'awesome_print'
-  gem 'tux'
+  gem 'shotgun'
   gem 'rubocop'
 end
