@@ -9,11 +9,7 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     'http://eligius.st/~luke-jr/raw/7/balances.json'
   end
 
-  # ignore snapshots when the pool api was down
-  def self.nonzero
-    where.not(btc_mined: 0)
-  end
-
+  #FIXME: is this necessary?
   def wallet_address
     mining_rig.wallet_address
   end
