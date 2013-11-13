@@ -9,11 +9,6 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     'http://eligius.st/~luke-jr/raw/7/balances.json'
   end
 
-  #FIXME: is this necessary?
-  def wallet_address
-    mining_rig.wallet_address
-  end
-
   def btc_per_day
     (btc_mined / mining_rig.days_running).round(8)
   end
@@ -32,9 +27,10 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     end
 
     # return zero if the wallet_address is not in the pool
-    return 0.0 unless bitcoin_stats_json[wallet_address]
+    return 0.0 unless bitcoin_stats_json[mining_rig.wallet_address]
 
-    total = bitcoin_stats_json[wallet_address]['balance'].to_i * 0.00000001
+    total  = bitcoin_stats_json[mining_rig.wallet_address]['balance'].to_i
+    total *= 0.00000001
     total += mining_rig.preexisting_btc_balance if mining_rig.preexisting_btc_balance
     total.round(8)
   end
