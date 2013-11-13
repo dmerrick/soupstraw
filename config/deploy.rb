@@ -1,22 +1,28 @@
+# application options
 set :application, 'soupstraw'
 set :domain, "#{fetch(:application)}.com"
 set :deploy_to, "/data/#{fetch(:application)}"
 
+# user options
 set :user, 'deploy'
 set :group, 'deploy'
 set :runner, 'deploy'
 set :use_sudo, false
+set :ssh_key, File.join(ENV['HOME'], '.ssh', 'soupstraw-deploy-v1')
 # set :pty, true
 
+# git options
 set :scm, :git
 set :repo_url, 'git@github.com:dmerrick/soupstraw.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 set :git_shallow_clone, 1
 set :deploy_via, :remote_cache
 
+# symlink options
 set :linked_files, %w{config/database.yml config/unicorn.rb}
 set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
+# rbenv options
 set :rbenv_type, :system
 set :rbenv_ruby, '2.0.0-p247'
 set :rbenv_custom_path, '/opt/rbenv'

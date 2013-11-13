@@ -1,19 +1,14 @@
 set :stage, :production
 set :branch, ENV['REF'] || 'production'
 
-#FIXME: do I need both of these?
-set :rack_env, 'production'
+# this still needs to be rails even if we don't use rails
 set :rails_env, 'production'
-
-
-set :ssh_key, 'soupstraw-deploy-v1'
-ssh_key = 'soupstraw-deploy-v1'
 
 server 'app1.soupstraw.com',
         user: 'deploy',
         roles: %w{web app db},
         ssh_options: {
-          keys: [ File.join(ENV['HOME'], '.ssh', ssh_key) ],
+          keys: [ fetch(:ssh_key) ],
           forward_agent: true
         }
 
