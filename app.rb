@@ -7,7 +7,7 @@ require 'bundler'
 
 # include all gems specified in the gemfile
 Bundler.require(:default)
-Bundler.require(ENV['RACK_ENV'].to_sym) if ENV['RACK_ENV']
+Bundler.require((ENV['RACK_ENV'] || 'development').to_sym)
 
 # include everything in lib and everything in models
 Dir['./lib/**/*.rb'].each  { |file| require file }
