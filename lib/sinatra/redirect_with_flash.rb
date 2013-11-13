@@ -9,14 +9,12 @@ module Sinatra
 
       if flash_opts && flash_opts.is_a?(Hash)
         COMMON_FLASH_NAMES.each do |name|
-          #TODO: ensure this is supposed to be == and not =
-          if val == flash_opts.delete(name)
+          if (val = flash_opts.delete(name))
             flash[name] = val
           end
         end
 
-        #TODO: ensure this is supposed to be == and not =
-        if other_flashes == flash_opts.delete(:flash)
+        if (other_flashes = flash_opts.delete(:flash))
           other_flashes.each { |k, v| flash[k] = v }
         end
       end
