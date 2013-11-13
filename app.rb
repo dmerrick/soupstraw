@@ -3,14 +3,11 @@
 require 'rubygems'
 require 'open-uri'
 require 'json'
-require 'bundler/setup'
-require 'sinatra/base'
-require 'sinatra/activerecord'
-require 'sinatra/flash'
-require 'haml'
-require 'newrelic_rpm'
-require 'chartkick'
-require 'groupdate'
+require 'bundler'
+
+# include all gems specified in the gemfile
+Bundler.require(:default)
+Bundler.require(ENV['RACK_ENV'].to_sym) if ENV['RACK_ENV']
 
 # include everything in lib and everything in models
 Dir['./lib/**/*.rb'].each  { |file| require file }
@@ -22,6 +19,12 @@ class Soupstraw < Sinatra::Base
 
   enable :sessions
   enable :logging
+
+  configure :development do
+    use BetterErrors::Middleware
+    # need to set in order to abbreviate filenames
+    BetterErrors.application_root = File.expand_path('..', __FILE__)
+  end
 
   # start the server if ruby file executed directly
   run! if app_file == $PROGRAM_NAME
