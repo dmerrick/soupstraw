@@ -34,7 +34,7 @@
 
           .progress
             %span.pull-right= "#{@stats.break_even_progress}%"
-            .progress-bar{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_progress, :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_progress}%;"}
+            .progress-bar.progress-bar-warning{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_progress, :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_progress}%;"}
               %span.sr-only= "#{@stats.break_even_progress}% Complete"
 
         %li.list-group-item
