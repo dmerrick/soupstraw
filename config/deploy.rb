@@ -38,8 +38,9 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      #TODO: consider changing to reload or something else
-      execute 'sudo /etc/init.d/unicorn restart'
+      # gracefully restart all workers
+      # requires preload_app=false in unicorn config
+      execute 'sudo /etc/init.d/unicorn reload'
     end
   end
 
