@@ -183,7 +183,7 @@ class Soupstraw < Sinatra::Base
     rig = MiningRig.find(@rig_id)
 
     # format the data for chartkick
-    rig.nonzero_snapshots.group_by_hour(:created_at).maximum(:btc_mined).to_json
+    rig.snapshots.group_by_hour(:created_at).maximum(:btc_mined).to_json
   end
 
   # temporary trick to let other people log in

@@ -8,12 +8,12 @@ class MiningRig < ActiveRecord::Base
   # (default is :auto)
   GRAPH_INTERVALS = { auto: 0, hour: 1, day: 2, week: 3 }
 
-  def nonzero_snapshots
-    bitcoin_stats_snapshots.nonzero
+  def snapshots
+    bitcoin_stats_snapshots
   end
 
   def last_snapshot
-    nonzero_snapshots.last
+    bitcoin_stats_snapshots.last
   end
 
   def days_running
@@ -42,17 +42,17 @@ class MiningRig < ActiveRecord::Base
 
   # format the data for chartkick
   def average_earned_by_hour
-    nonzero_snapshots.group_by_hour(:created_at).average('btc_mined * usd_value')
+    snapshots.group_by_hour(:created_at).average('btc_mined * usd_value')
   end
 
   # format the data for chartkick
   def average_earned_by_day
-    nonzero_snapshots.group_by_day(:created_at).average('btc_mined * usd_value')
+    snapshots.group_by_day(:created_at).average('btc_mined * usd_value')
   end
 
   # format the data for chartkick
   def average_earned_by_week
-    nonzero_snapshots.group_by_week(:created_at).average('btc_mined * usd_value')
+    snapshots.group_by_week(:created_at).average('btc_mined * usd_value')
   end
 
   # this allows you to combine two rigs together
