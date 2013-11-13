@@ -10,10 +10,12 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
   end
 
   def btc_per_day
+    return 0 if mining_rig.days_running == 0
     (btc_mined / mining_rig.days_running).round(8)
   end
 
   def usd_per_day
+    return 0 if mining_rig.days_running == 0
     (total_earned.to_f / mining_rig.days_running).round(2)
   end
 
