@@ -152,6 +152,19 @@ class Soupstraw < Sinatra::Base
     graph_data.to_json
   end
 
+  get '/bitcoins/:rig_id/last_snapshot.json' do
+    rig = MiningRig.find(params[:rig_id])
+    snapshot = rig.last_snapshot
+
+    # list of attributes to include in the json
+    #TODO: figure out how to do break_even(:usd) and break_even_progress(:usd)
+    methods = %i(id btc_mined usd_value created_at btc_per_day usd_per_day total_earned break_even break_even_progress)
+    methods.reduce({}) do |hash, method|
+      hash[method] = snapshot.send(method)
+      hash
+    end.to_json
+  end
+
   get '/bitcoins/:rig_id' do
     @rig_id = params[:rig_id] || 1
     rig = MiningRig.find(@rig_id)
