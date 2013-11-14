@@ -17,7 +17,7 @@ class MiningRig < ActiveRecord::Base
   end
 
   def days_running
-    Date.today - start_date.to_date
+    DateTime.now - start_date.to_datetime
   end
 
   def take_snapshot!
@@ -44,7 +44,7 @@ class MiningRig < ActiveRecord::Base
   def average_earned_graph_data
     if graph_interval == :auto
       # automatically change the timescale based on days_running
-      case days_running
+      case days_running.floor
       when 0..5
         return average_earned_by_hour
       when 6..90
