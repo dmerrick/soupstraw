@@ -16,7 +16,8 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
 
   def usd_per_day
     return 0 if mining_rig.days_running <= 0
-    (total_earned / mining_rig.days_running).round(2)
+    #TODO: remove the to_f when total_earned is no longer a string
+    (total_earned.to_f / mining_rig.days_running).round(2)
   end
 
   # find total BTC mined
