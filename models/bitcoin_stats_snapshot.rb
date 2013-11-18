@@ -33,6 +33,7 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     return 0.0 unless bitcoin_stats_json[mining_rig.wallet_address]
 
     total  = bitcoin_stats_json[mining_rig.wallet_address]['balance'].to_i
+    total += bitcoin_stats_json[mining_rig.wallet_address]['everpaid'].to_i
     total *= 0.00000001
     total += mining_rig.preexisting_btc_balance if mining_rig.preexisting_btc_balance
     total.round(8)
