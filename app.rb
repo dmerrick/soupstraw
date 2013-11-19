@@ -216,4 +216,17 @@ class Soupstraw < Sinatra::Base
     haml :index
   end
 
+  # list all of the available themes
+  get '/themes' do
+    @title = 'Available Themes'
+    @themes = Dir.glob("#{settings.public_folder}/stylesheets/bootstrap/*.min.css")
+    @themes.map! {|theme| theme.sub(/^.*\//, '')}
+    # remove the default bootstrap files
+    @themes.delete "bootstrap.min.css"
+    @themes.delete "bootstrap-theme.min.css"
+    @themes.map! {|theme| theme.sub('.bootstrap.min.css', '')}
+    @themes.sort!
+    haml :themes
+  end
+
 end

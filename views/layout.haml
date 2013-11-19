@@ -30,8 +30,15 @@
             %a{:href => '/home'} Home
           %li
             %a{:href => '/bitcoins/2+3'} Bitcoins
-          %li
-            %a{:href => '/stats'} What's Next
+          %li.dropdown
+            %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown'}
+              Other Stuff
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => '/stats'} Stats
+              %li
+                %a{:href => '/themes'} Themes
 
         %ul.nav.navbar-right
           - if @user
