@@ -110,8 +110,12 @@ class Soupstraw < Sinatra::Base
   get '/bitcoins/*+*/total_earned.json' do |id_a, id_b|
     content_type :json
 
-    graph_a = MiningRig.find(id_a).average_earned_graph_data
-    graph_b = MiningRig.find(id_b).average_earned_graph_data
+    rig_a = MiningRig.find(id_a)
+    rig_b = MiningRig.find(id_b)
+
+    # use the same graph interval for both graphs
+    graph_a = rig_a.average_earned_graph_data
+    graph_b = rig_b.average_earned_graph_data(rig_a.graph_interval)
 
     # this iterates over the graphed data for the first
     # rig, and adds to it the data from the second rig

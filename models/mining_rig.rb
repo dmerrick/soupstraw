@@ -41,8 +41,11 @@ class MiningRig < ActiveRecord::Base
   end
 
   # return different graph data based on the graph_interval
-  def average_earned_graph_data
-    if graph_interval == :auto
+  def average_earned_graph_data(interval = nil)
+    # use the default graph interval if none specified
+    interval ||= graph_interval
+
+    if interval == :auto
       # automatically change the timescale based on days_running
       case days_running.floor
       when 0..5
@@ -54,7 +57,7 @@ class MiningRig < ActiveRecord::Base
       end
     else
       # otherwise use whatever interval was specified
-      return send("average_earned_by_#{graph_interval}")
+      return send("average_earned_by_#{interval}")
     end
   end
 
