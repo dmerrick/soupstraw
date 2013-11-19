@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module SoupstrawHelpers
   def is_user?
     @user != nil
