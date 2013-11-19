@@ -8,5 +8,5 @@
       %ul
         - @themes.each do |theme|
           %li 
-            %a{href: "http://#{theme}.#{request.host_with_port + request.path_info}"}
+            %a{href: "http://#{theme}.soupstraw.com#{request.path_info}"}
               = theme
