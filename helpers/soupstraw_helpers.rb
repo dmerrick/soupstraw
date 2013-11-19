@@ -7,6 +7,15 @@ module SoupstrawHelpers
     is_user? && @user.id == 1
   end
 
+  def bootstrap_theme
+    path = "/stylesheets/bootstrap/#{subdomain}.bootstrap.min.css"
+    if File.exist? "#{settings.root}/public#{path}"
+      return path
+    else
+      return nil
+    end
+  end
+
   def h(text)
     Rack::Utils.escape_html(text)
   end

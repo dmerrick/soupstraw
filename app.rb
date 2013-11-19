@@ -83,10 +83,6 @@ class Soupstraw < Sinatra::Base
     @user = User.find(session[:user_id]) if session[:user_id]
   end
 
-  get '/test' do
-    subdomain
-  end
-
   get '/?' do
     # redirect to the dual stats page
     redirect '/bitcoins/1+2'
