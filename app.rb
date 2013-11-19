@@ -50,20 +50,8 @@ class Soupstraw < Sinatra::Base
 
   # ------------------------------------------------------------
 
-  helpers do
-    def is_user?
-      @user != nil
-    end
-
-    def is_dana?
-      is_user? && @user.id == 1
-    end
-
-    def h(text)
-      Rack::Utils.escape_html(text)
-    end
-  end
-
+  # helpers specific to soupstraw
+  helpers SoupstrawHelpers
   # enable partials
   helpers RenderPartial
   # enable redirections with little messages
