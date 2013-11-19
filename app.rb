@@ -115,7 +115,7 @@ class Soupstraw < Sinatra::Base
 
     # use the same graph interval for both graphs
     graph_a = rig_a.average_earned_graph_data
-    graph_b = rig_b.average_earned_graph_data(rig_a.graph_interval)
+    graph_b = rig_b.average_earned_graph_data(rig_a.effective_graph_interval)
 
     # this iterates over the graphed data for the first
     # rig, and adds to it the data from the second rig
