@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module Bitcoin
 
   def self.usd_value_url

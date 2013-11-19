@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 # enable redirections with little messages
 Soupstraw.helpers Sinatra::RedirectWithFlash
 

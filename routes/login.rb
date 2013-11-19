@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class Soupstraw < Sinatra::Base
 
   # temporary trick to let other people log in
