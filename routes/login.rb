@@ -1,11 +1,5 @@
 class Soupstraw < Sinatra::Base
 
-  # temporary trick to let other people log in
-  get '/cheat/:path' do
-    session[:user_id] = 1
-    redirect params[:path], danger: 'you cheater :p'
-  end
-
   get '/users/:id' do
     @user = User.find(params[:id])
     haml :'users/show'

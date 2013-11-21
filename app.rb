@@ -65,7 +65,7 @@ class Soupstraw < Sinatra::Base
     def auth(type)
       condition do
         unless send("is_#{type}?")
-          redirect '/log_in' + "?path=#{request.path}", warning: 'You must be logged in to view this page.'
+          redirect '/log_in', warning: 'You must be logged in to view this page.'
         end
       end
     end

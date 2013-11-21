@@ -79,9 +79,9 @@ class Soupstraw < Sinatra::Base
     haml :'bitcoin/earnings'
   end
 
-  # this is a work in progress that only dana really needs to see
+  # this is a work in progress that only logged in users should see
   #TODO: make this work with different rigs
-  get '/stats', auth: :dana do
+  get '/stats', auth: :user do
     @rig_id = request[:rig_id] || 1
     #TODO: consider making this an activerecord order
     @rigs = MiningRig.all.sort_by { |rig| rig.total_earned }.reverse
