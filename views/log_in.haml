@@ -3,7 +3,7 @@
   .col-md-1
 
   .col-md-4
-    %form.form-signin
+    %form.form-signin{:action=>'/log_in',:method=>'post'}
       %h2.form-signin-heading
         Please sign in
       %input.form-control{:type=>'text', :placeholder=>"Email address", :autofocus=>true}

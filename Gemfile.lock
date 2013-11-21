@@ -29,6 +29,7 @@ GEM
     ast (1.1.0)
     atomic (1.1.14)
     awesome_print (1.2.0)
+    bcrypt-ruby (3.1.2)
     better_errors (1.0.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -70,6 +71,8 @@ GEM
       slop (~> 3.4, >= 3.4.5)
     pg (0.17.0)
     powerpack (0.0.9)
+    protected_attributes (1.0.5)
+      activemodel (>= 4.0.1, < 5.0)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -135,6 +138,7 @@ DEPENDENCIES
   activerecord
   activerecord-postgresql-adapter
   awesome_print
+  bcrypt-ruby
   better_errors
   binding_of_caller
   capistrano
@@ -146,6 +150,7 @@ DEPENDENCIES
   haml
   newrelic_rpm
   pg
+  protected_attributes
   pry
   rake
   rubocop

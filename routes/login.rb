@@ -12,8 +12,14 @@ class Soupstraw < Sinatra::Base
   end
 
   post '/log_in' do
-    session[:user_id] = User.authenticate(params).id
-    redirect back
+    user = User.authenticate(params)
+    if user
+      session[:user_id] = user.id
+      redirect back
+    else
+      flash.now[:warning] = 'Something went awry!'
+      redirect back
+    end
   end
 
   get '/log_in' do

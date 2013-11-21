@@ -15,6 +15,8 @@ gem 'unicorn'
 gem 'pg'
 gem 'chartkick'
 gem 'groupdate'
+gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'protected_attributes' #TODO: refactor this out
 gem 'awesome_print'
 gem 'pry'
 gem 'tux'
