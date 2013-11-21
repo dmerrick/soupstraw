@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   def self.authenticate(options)
     user = find_by_email(options[:email])
-    if user && user.password_hash == BCrypt::Engine.hash_secret(options[:email], user.password_salt)
+    if user && user.password_hash == BCrypt::Engine.hash_secret(options[:password], user.password_salt)
       user
     else
       nil

@@ -6,8 +6,8 @@
     %form.form-signin{:action=>'/log_in',:method=>'post'}
       %h2.form-signin-heading
         Please sign in
-      %input.form-control{:type=>'text', :placeholder=>"Email address", :autofocus=>true}
-      %input.form-control{:type=>'password', :placeholder=>"Password", :autofocus=>true}
+      %input.form-control{:type=>'text', :placeholder=>"Email address", :name=>"email", :autofocus=>true}
+      %input.form-control{:type=>'password', :placeholder=>"Password", :name=>"password", :autofocus=>true}
       %label.checkbox
         %input{:type=>'checkbox', :value=>"remember-me"}
           Remember me
