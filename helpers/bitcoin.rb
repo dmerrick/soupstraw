@@ -12,7 +12,7 @@ module Bitcoin
 
   def usd_format(value)
     string = value.round(2).to_s
-    string += '0' if total.split('.').last.size != 2
+    string += '0' if string.split('.').last.size != 2
     string
   end
 
