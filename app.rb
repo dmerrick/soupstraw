@@ -10,8 +10,8 @@ Bundler.require(:default)
 Bundler.require((ENV['RACK_ENV'] || 'development').to_sym)
 
 # include everything in lib and everything in models
-Dir['./lib/**/*.rb'].each  { |file| require file }
-Dir['./models/*.rb'].each  { |file| require file }
+Dir['./lib/**/*.rb'].each { |file| require file }
+Dir['./models/*.rb'].each { |file| require file }
 
 
 class Soupstraw < Sinatra::Base
@@ -31,14 +31,25 @@ class Soupstraw < Sinatra::Base
   # ------------------------------------------------------------
 
   set :database_file, 'config/database.yml'
+  set :settings_file, 'config/application.yml'
 
   env = settings.environment.to_s
+
+  # import settings from application.yml
+  application_settings = {}
+  YAML::load(File.open(settings.settings_file))[env].each do |key, value|
+    application_settings[key.to_sym] = value
+  end
+  set :app, application_settings
+
+  # import settings from database.yml
   database_settings = {}
   YAML::load(File.open(settings.database_file))[env].each do |key, value|
     database_settings[key.to_sym] = value
   end
   set :database, database_settings
 
+  # set up activerecord connection
   ActiveRecord::Base.establish_connection(
     adapter:  settings.database[:adapter],
     host:     settings.database[:host],
