@@ -7,6 +7,20 @@
   .col-md-9
     .panel.panel-default
       .panel-heading
+        Top Earners
+      %table.table.table-hover
+        %tbody
+          - @rigs.each do |rig|
+            %tr
+            %td= usd_format(rig.total_earned)
+            %td
+              %a{href: "/bitcoins/#{rig.id}"}
+                = rig.name
+
+.row
+  .col-md-9
+    .panel.panel-default
+      .panel-heading
         BTC Mined Over Time
       .panel-body
         = line_chart "/btc_mined.json?rig_id=#{@rig_id}"

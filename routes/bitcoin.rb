@@ -83,6 +83,8 @@ class Soupstraw < Sinatra::Base
   #TODO: make this work with different rigs
   get '/stats', auth: :dana do
     @rig_id = request[:rig_id] || 1
+    #TODO: consider making this an activerecord order
+    @rigs = MiningRig.all.sort_by { |rig| rig.total_earned }.reverse
     @title = 'Bitcoin Stats'
     haml :'bitcoin/stats'
   end
