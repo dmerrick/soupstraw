@@ -1,6 +1,7 @@
 class Soupstraw < Sinatra::Base
 
-  get '/users/:id' do
+  #FIXME: users can go to other users' pages
+  get '/users/:id', auth: :user do
     @user = User.find(params[:id])
     haml :'users/show'
   end
