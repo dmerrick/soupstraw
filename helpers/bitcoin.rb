@@ -10,4 +10,10 @@ module Bitcoin
     current_value_json['last'].to_f
   end
 
+  def self.usd_format(value)
+    string = value.round(2).to_s
+    string += '0' if total.split('.').last.size != 2
+    string
+  end
+
 end

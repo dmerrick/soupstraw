@@ -16,8 +16,7 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
 
   def usd_per_day
     return 0 if mining_rig.days_running <= 0
-    #TODO: remove the to_f when total_earned is no longer a string
-    (total_earned.to_f / mining_rig.days_running).round(2)
+    (total_earned / mining_rig.days_running).round(2)
   end
 
   # find total BTC mined
@@ -43,8 +42,7 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
   def break_even(in_usd = false)
     if in_usd
       return 0 if mining_rig.usd_cost == 0
-      #TODO: remove the to_f when total_earned is no longer a string
-      return (mining_rig.usd_cost - total_earned.to_f).round(2)
+      return (mining_rig.usd_cost - total_earned).round(2)
     else
       return 0 if mining_rig.btc_cost == 0
       return (mining_rig.btc_cost - btc_mined).round(8)
@@ -55,19 +53,15 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
   def break_even_progress(in_usd = false)
     if in_usd
       return 0 if mining_rig.usd_cost == 0
-      #TODO: remove the to_f when total_earned is no longer a string
-      return ((total_earned.to_f / mining_rig.usd_cost) * 100.0).round(2)
+      return ((total_earned / mining_rig.usd_cost) * 100.0).round(2)
     else
       return 0 if mining_rig.btc_cost == 0
       return ((btc_mined / mining_rig.btc_cost) * 100.0).round(2)
     end
   end
 
-  #TODO: make this return a number instead of a string
   def total_earned
-    total = (usd_value * btc_mined).round(2).to_s
-    total += '0' if total.to_s.split('.').last.size != 2
-    total
+    usd_value * btc_mined
   end
 
   # this allows you to combine two snapshots together
