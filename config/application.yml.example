@@ -1,3 +1,2 @@
 development:
-  hostname: soupstraw.com
-  foo: bar
+  site_url: soupstraw.com
