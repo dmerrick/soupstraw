@@ -22,7 +22,8 @@ gem 'pry'
 gem 'tux'
 gem 'capistrano'
 gem 'capistrano-bundler'
-gem 'capistrano-rails'
+#TODO: get migrations working
+#gem 'capistrano-rails'
 gem 'capistrano-rbenv', github: 'capistrano/rbenv'
 
 group :development do

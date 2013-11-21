@@ -11,7 +11,8 @@ require 'capistrano/rbenv'
 require 'capistrano/bundler'
 
 # includes migration tasks
-require 'capistrano/rails/migrations'
+#TODO: get migrations working
+#require 'capistrano/rails/migrations'
 
 #TODO: maybe add this later?
 #require 'new_relic/recipes'
