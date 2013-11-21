@@ -21,8 +21,10 @@ You'll also want to open a new terminal window to the same directory and run `co
 
     require './app'
     User.create do |u|
-      u.name  = "Your Name"
+      u.name = "Your Name"
       u.email = "your@email.com"
+      u.password = "password"
+      u.password_confirmation = "password"
     end
 
 ## Helper Rake Tasks
