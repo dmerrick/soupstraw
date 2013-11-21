@@ -39,7 +39,7 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     total.round(8)
   end
 
-  # returns the remaining amoun to earn in order to break even
+  # returns the remaining amount to earn in order to break even
   def break_even(in_usd = false)
     if in_usd
       return 0 if mining_rig.usd_cost == 0
