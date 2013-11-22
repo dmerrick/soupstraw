@@ -19,9 +19,9 @@
           %span.pull-right= "(#{@stats.btc_per_day}/day)"
         %li.list-group-item
           %span
-            %strong= "$#{@stats.usd_value}"
+            %strong= "#{usd_format(@stats.usd_value)}"
             per BTC:
-          %span.pull-right= "($#{@stats.usd_per_day}/day)"
+          %span.pull-right= "(#{usd_format(@stats.usd_per_day)}/day)"
 
     .panel.panel-default
       .panel-heading
@@ -39,7 +39,7 @@
 
         %li.list-group-item
           %p
-            %strong= "$#{@stats.break_even(:usd)}"
+            %strong= "#{usd_format(@stats.break_even(:usd))}"
             USD to break even:
 
           .progress
