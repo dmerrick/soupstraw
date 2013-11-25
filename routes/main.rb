@@ -6,7 +6,7 @@ class Soupstraw < Sinatra::Base
 
   # redirect to to path specified in application.yml
   get '/?' do
-    redirect settings.app[:default_path]
+    redirect settings.app[:default_path] || '/home'
   end
 
   get '/home' do
