@@ -10,6 +10,13 @@ require 'capistrano/rbenv'
 # includes bundler tasks
 require 'capistrano/bundler'
 
+# enable OSX notifications
+require 'capistrano-nc/nc'
+
+#TODO: implement this
+# https://github.com/cramerdev/capistrano-chef
+#require 'capistrano/chef'
+
 # includes migration tasks
 #TODO: get migrations working
 #require 'capistrano/rails/migrations'

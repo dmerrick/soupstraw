@@ -22,6 +22,8 @@ gem 'pry'
 gem 'tux'
 gem 'capistrano'
 gem 'capistrano-bundler'
+# enables OSX notifications
+gem 'capistrano-nc', '~> 0.1.0'
 #TODO: get migrations working
 #gem 'capistrano-rails'
 gem 'capistrano-rbenv', github: 'capistrano/rbenv'
