@@ -4,13 +4,18 @@ set :branch, ENV['REF'] || 'production'
 # this still needs to be rails even if we don't use rails
 set :rails_env, 'production'
 
+set :ssh_options, {
+  keys: [ fetch(:ssh_key) ],
+  forward_agent: true
+}
+
 server 'app1.soupstraw.com',
         user: 'deploy',
-        roles: %w{web app db},
-        ssh_options: {
-          keys: [ fetch(:ssh_key) ],
-          forward_agent: true
-        }
+        roles: %w{ web app db }
+
+server 'app2.soupstraw.com',
+        user: 'deploy',
+        roles: %w{ web app }
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
