@@ -11,7 +11,7 @@ set :ssh_options, {
 
 server 'app1.soupstraw.com',
         user: 'deploy',
-        roles: %w{ web app db }
+        roles: %w{ app db }
 
 server 'app2.soupstraw.com',
         user: 'deploy',

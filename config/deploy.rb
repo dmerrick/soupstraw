@@ -37,9 +37,9 @@ set :log_level, :info
 
 namespace :deploy do
 
-  desc 'Restart application'
+  desc 'Restart web server'
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
+    on roles(:web), in: :sequence, wait: 5 do
       # gracefully restart all workers
       # requires preload_app=false in unicorn config
       execute 'sudo /etc/init.d/unicorn reload'
@@ -47,19 +47,19 @@ namespace :deploy do
   end
 
   task :start do
-    on roles(:app), in: :sequence, wait: 5 do
+    on roles(:web), in: :sequence, wait: 5 do
       execute 'sudo /etc/init.d/unicorn start'
     end
   end
 
   task :stop do
-    on roles(:app), in: :sequence, wait: 5 do
+    on roles(:web), in: :sequence, wait: 5 do
       execute 'sudo /etc/init.d/unicorn stop'
     end
   end
 
   task :status do
-    on roles(:app), in: :sequence, wait: 5 do
+    on roles(:web), in: :sequence, wait: 5 do
       execute 'sudo /etc/init.d/unicorn status'
     end
   end
