@@ -89,8 +89,13 @@ class Soupstraw < Sinatra::Base
     haml :'bitcoin/earnings'
   end
 
+  get '/stats/?' do
+    @rig_id = request[:rig_id] || 1
+    redirect "/stats/#{@rig_id}"
+  end
+
   # this is a work in progress that only logged in users should see
-  get '/stats/?:rig_id?', auth: :user do
+  get '/stats/:rig_id', auth: :user do
     @rig_id = params[:rig_id] || 1
     @title = 'Bitcoin Stats'
     @graph_payload = "/bitcoins/#{@rig_id}/btc_mined.json"
