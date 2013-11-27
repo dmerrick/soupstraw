@@ -108,7 +108,7 @@ class Soupstraw < Sinatra::Base
 
   get '/bladehealth', auth: :user do
     response = home_api('/bladehealth')
-    @content = response.body
+    @content = h(response.body)
     haml :blank
   end
 
