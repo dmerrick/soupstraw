@@ -34,8 +34,9 @@
               BTC to break even:
               %span.pull-right= "#{@stats.break_even_progress}%"
             - else
-              %strong= "#{@stats.break_even.abs}"
-              BTC in profit!
+              %span.text-success
+                %strong= "#{@stats.break_even.abs}"
+                BTC in profit!
 
 
           .progress{:class => ('progress-striped active' if @stats.break_even_progress < 100)}
@@ -50,8 +51,9 @@
               USD to break even:
               %span.pull-right= "#{@stats.break_even_progress(:usd)}%"
             - else
-              %strong= "#{usd_format(@stats.break_even(:usd).abs)}"
-              USD in profit!
+              %span.text-success
+                %strong= "#{usd_format(@stats.break_even(:usd).abs)}"
+                USD in profit!
 
           .progress{:class => ('progress-striped active' if @stats.break_even_progress(:usd) < 100)}
             .progress-bar{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_bar_value(:usd), :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_bar_value(:usd)}%;"}
