@@ -13,7 +13,7 @@ namespace :bitcoin do
   namespace :snapshot do
     desc "Take snapshots for every mining rig"
     task :all do
-      MiningRig.all.each do |rig|
+      MiningRig.active.each do |rig|
         snapshot = rig.take_snapshot!
         ap snapshot
       end

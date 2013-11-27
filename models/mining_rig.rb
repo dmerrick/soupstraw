@@ -8,6 +8,9 @@ class MiningRig < ActiveRecord::Base
   # (default is :auto)
   GRAPH_INTERVALS = { auto: 0, hour: 1, day: 2, week: 3 }
 
+  # find all active miners
+  scope :active, -> { where( active: true ) }
+
   def snapshots
     bitcoin_stats_snapshots
   end
