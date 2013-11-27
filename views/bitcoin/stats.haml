@@ -14,7 +14,7 @@
             %tr
             %td= usd_format(rig.total_earned)
             %td
-              %a{href: "/bitcoins/#{rig.id}"}
+              %a{href: "/bitcoins/#{rig.id}", :class => ('text-muted' unless rig.active?)}
                 = rig.name
 
 .row

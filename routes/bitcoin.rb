@@ -102,7 +102,7 @@ class Soupstraw < Sinatra::Base
 
     # this is for the table of rigs
     #TODO: consider making this an activerecord order
-    @rigs = MiningRig.active.sort_by { |rig| rig.total_earned }.reverse
+    @rigs = MiningRig.all.sort_by { |rig| rig.total_earned }.reverse
     haml :'bitcoin/stats'
   end
 
