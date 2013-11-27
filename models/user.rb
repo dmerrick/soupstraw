@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
 
+  def first_name
+    name.split.first
+  end
+
   def self.authenticate(options)
     user = find_by_email(options[:email].downcase)
     if user && user.password_hash == BCrypt::Engine.hash_secret(options[:password], user.password_salt)

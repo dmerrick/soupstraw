@@ -53,8 +53,8 @@
           - if @user
             %li
               %p.navbar-text
-                Hello
-                %a.navbar-link{:href=>"/users/#{@user.id}"}= @user.name
+                Hello,
+                %a.navbar-link{:href=>"/users/#{@user.id}"}= @user.first_name
           - else
             %li
               %p.navbar-text
