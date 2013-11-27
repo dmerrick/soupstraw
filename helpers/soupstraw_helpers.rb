@@ -1,4 +1,5 @@
 module SoupstrawHelpers
+
   def is_user?
     @user != nil
   end
@@ -36,4 +37,5 @@ module SoupstrawHelpers
     #parts.pop(settings.tld_size + 1)
     parts.first
   end
+
 end
