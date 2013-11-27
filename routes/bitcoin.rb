@@ -89,6 +89,12 @@ class Soupstraw < Sinatra::Base
     haml :'bitcoin/stats'
   end
 
+  get '/bladehealth', auth: :user do
+    response = home_api('/bladehealth')
+    @content = response.body
+    haml :blank
+  end
+
   # this allows the chart load to faster via AJAX
   #TODO: make this work with different rigs
   get '/btc_mined.json' do
