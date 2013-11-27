@@ -42,7 +42,10 @@ namespace :deploy do
     on roles(:web), in: :sequence, wait: 5 do
       # gracefully restart all workers
       # requires preload_app=false in unicorn config
-      execute 'sudo /etc/init.d/unicorn reload'
+      #execute 'sudo /etc/init.d/unicorn reload'
+
+      #FIXME: this is heavy-handed
+      execute 'sudo /etc/init.d/unicorn full-restart'
     end
   end
 
