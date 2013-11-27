@@ -7,9 +7,9 @@
       %h2.form-signin-heading
         Please sign in
       %input.form-control{:type=>'text', :placeholder=>"Email address", :name=>"email", :autofocus=>true}
-      %input.form-control{:type=>'password', :placeholder=>"Password", :name=>"password", :autofocus=>true}
+      %input.form-control{:type=>'password', :placeholder=>"Password", :name=>"password"}
       %label.checkbox
-        %input{:type=>'checkbox', :value=>"remember-me"}
+        %input{:type=>'checkbox', :value=>"remember-me", :checked=>true, :disabled=>true}
           Remember me
       %button.btn.btn-lg.btn-primary.btn-block
         Sign in
