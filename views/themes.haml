@@ -7,6 +7,6 @@
     %p
       %ul
         - @themes.each do |theme|
-          %li 
+          %li
             %a{href: "http://#{theme}.soupstraw.com#{request.path_info}"}
               = theme
