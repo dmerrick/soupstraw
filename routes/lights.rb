@@ -1,11 +1,11 @@
 class Soupstraw < Sinatra::Base
 
-  get '/lights/on' do
+  get '/lights/on', auth: :user do
     response = home_api('/lights/on')
     response.body
   end
 
-  get '/lights/off' do
+  get '/lights/off', auth: :user do
     response = home_api('/lights/off')
     response.body
   end
