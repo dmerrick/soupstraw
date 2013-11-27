@@ -1,4 +1,20 @@
 - if @user
-  .container
-    %h2= "Hello, #{@user.name}."
-    %a{:href=>'/log_out'} Log out
+  .page-header
+    %h2= "Welcome, #{@user.name}"
+
+  .row
+    .col-md-6
+      .panel.panel-default
+        .panel-heading
+          Hue Lights
+        %ul.list-group
+          %li.list-group-item
+            %span
+              %a{:href=>'/lights/on'} on
+              \/
+              %a{:href=>'/lights/off'} off
+
+    .col-md-2
+      .well.well-lg
+        %strong
+          %a{:href=>'/log_out'} Log out
