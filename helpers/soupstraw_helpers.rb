@@ -20,6 +20,14 @@ module SoupstrawHelpers
     Rack::Utils.escape_html(text)
   end
 
+  def home_api(path)
+    uri = URI.parse('http://' + settings.app[:home_url] + path)
+    request = Net::HTTP::Get.new(uri.request_uri)
+    #request.basic_auth(settings.app[:home_username], settings.app[:home_password])
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.request(request)
+  end
+
   def subdomain
     uri = URI.parse("http://#{request.env["HTTP_HOST"]}")
     parts = uri.host.split(".")

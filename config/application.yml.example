@@ -1,3 +1,4 @@
 development:
   site_url: soupstraw.com
   default_path: /home
+  home_url: localhost:8080

@@ -3,6 +3,8 @@
 require 'rubygems'
 require 'open-uri'
 require 'json'
+require 'net/http'
+require 'uri'
 require 'bundler'
 
 # include all gems specified in the gemfile

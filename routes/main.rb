@@ -27,4 +27,9 @@ class Soupstraw < Sinatra::Base
     haml :themes
   end
 
+  get '/deafguy' do
+    response = home_api('/')
+    response.body
+  end
+
 end
