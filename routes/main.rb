@@ -29,7 +29,8 @@ class Soupstraw < Sinatra::Base
 
   get '/deafguy' do
     response = home_api('/')
-    response.body
+    @content = response.body
+    haml :blank
   end
 
 end
