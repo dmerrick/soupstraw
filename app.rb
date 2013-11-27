@@ -18,9 +18,6 @@ Dir['./models/*.rb'].each { |file| require file }
 
 class Soupstraw < Sinatra::Base
 
-  enable :sessions
-  enable :logging
-
   configure :development do
     use BetterErrors::Middleware
     # need to set in order to abbreviate filenames
@@ -77,6 +74,14 @@ class Soupstraw < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   # enable litte messages
   register Sinatra::Flash
+
+  # ------------------------------------------------------------
+
+  enable :logging
+
+  # enable sessions
+  use Rack::Session::Cookie, :expire_after => 90.days,
+                             :secret => settings.app[:cookie_secret]
 
 end
 

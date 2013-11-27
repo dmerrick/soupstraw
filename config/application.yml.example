@@ -1,6 +1,7 @@
 development:
   site_url: soupstraw.com
   default_path: /home
+  cookie_secret: super_secure
   home_url: localhost:8080
   home_username: username
   home_password: password
