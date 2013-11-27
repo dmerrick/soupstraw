@@ -6,7 +6,7 @@ class Soupstraw < Sinatra::Base
   end
 
   get '/lights/off' do
-    response = home_api('/lights/on')
+    response = home_api('/lights/off')
     response.body
   end
 
