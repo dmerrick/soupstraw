@@ -10,7 +10,7 @@ class Soupstraw < Sinatra::Base
     user = User.authenticate(params)
     if user
       session[:user_id] = user.id
-      redirect '/'
+      redirect "/users/#{user.id}"
     else
       flash.now[:warning] = 'Something went awry!'
       redirect back
