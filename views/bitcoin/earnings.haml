@@ -31,21 +31,23 @@
           %p
             %strong= "#{@stats.break_even}"
             BTC to break even:
+            %span.pull-right= "#{@stats.break_even_progress}%"
 
           .progress
-            %span.pull-right= "#{@stats.break_even_progress}%"
-            .progress-bar.progress-bar-warning{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_progress, :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_progress}%;"}
-              %span.sr-only= "#{@stats.break_even_progress}% Complete"
+            .progress-bar.progress-bar-warning{:role=>"progressbar",:'aria-valuenow'=>@stats.break_even_bar_value, :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_bar_value}%;"}
+            - if @stats.break_even_progress > 100
+              .progress-bar.progress-bar-success{:role=>"progressbar", :'aria-valuenow'=>(100 - @stats.break_even_bar_value), :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{100 - @stats.break_even_bar_value}%;"}
 
         %li.list-group-item
           %p
             %strong= "#{usd_format(@stats.break_even(:usd))}"
             USD to break even:
+            %span.pull-right= "#{@stats.break_even_progress(:usd)}%"
 
           .progress
-            %span.pull-right= "#{@stats.break_even_progress(:usd)}%"
-            .progress-bar{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_progress(:usd), :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_progress(:usd)}%;"}
-              %span.sr-only= "#{@stats.break_even_progress(:usd)}% Complete"
+            .progress-bar{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_bar_value(:usd), :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_bar_value(:usd)}%;"}
+            - if @stats.break_even_progress(:usd) > 100
+              .progress-bar.progress-bar-success{:role=>"progressbar", :'aria-valuenow'=>(100 - @stats.break_even_bar_value(:usd)), :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{100 - @stats.break_even_bar_value(:usd)}%;"}
 
 
 

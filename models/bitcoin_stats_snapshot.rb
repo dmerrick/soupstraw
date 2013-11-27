@@ -60,6 +60,14 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     end
   end
 
+  def break_even_bar_value(in_usd = false)
+    if break_even_progress(in_usd) > 100
+      percent = (100 / break_even_progress(in_usd)) * 100
+      return percent.round(2)
+    end
+    break_even_progress(in_usd)
+  end
+
   def total_earned
     usd_value * btc_mined
   end
