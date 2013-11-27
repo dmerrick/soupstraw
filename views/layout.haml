@@ -39,6 +39,11 @@
                 %a{:href => '/stats'} Stats
               %li
                 %a{:href => '/themes'} Themes
+              - if @user
+                %li
+                  %a{:href => '/lights/on'} Lights On
+                %li
+                  %a{:href => '/lights/off'} Lights Off
 
         %ul.nav.navbar-right
           - if @user
