@@ -23,4 +23,4 @@
       .panel-heading
         BTC Mined Over Time
       .panel-body
-        = line_chart "/btc_mined.json?rig_id=#{@rig_id}"
+        = line_chart @graph_payload

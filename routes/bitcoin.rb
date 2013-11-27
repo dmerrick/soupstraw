@@ -69,6 +69,16 @@ class Soupstraw < Sinatra::Base
     end.to_json
   end
 
+  # this allows the chart load to faster via AJAX
+  get '/bitcoins/:rig_id/btc_mined.json' do
+    content_type :json
+
+    rig = MiningRig.find(params[:rig_id])
+
+    # format the data for chartkick
+    rig.snapshots.group_by_hour(:created_at).maximum(:btc_mined).to_json
+  end
+
   get '/bitcoins/:rig_id' do
     @rig_id = params[:rig_id] || 1
     rig = MiningRig.find(@rig_id)
@@ -80,12 +90,14 @@ class Soupstraw < Sinatra::Base
   end
 
   # this is a work in progress that only logged in users should see
-  #TODO: make this work with different rigs
-  get '/stats', auth: :user do
-    @rig_id = request[:rig_id] || 1
-    #TODO: consider making this an activerecord order
-    @rigs = MiningRig.all.sort_by { |rig| rig.total_earned }.reverse
+  get '/stats/?:rig_id?', auth: :user do
+    @rig_id = params[:rig_id] || 1
     @title = 'Bitcoin Stats'
+    @graph_payload = "/bitcoins/#{@rig_id}/btc_mined.json"
+
+    # this is for the table of rigs
+    #TODO: consider making this an activerecord order
+    @rigs = MiningRig.active.sort_by { |rig| rig.total_earned }.reverse
     haml :'bitcoin/stats'
   end
 
@@ -93,18 +105,6 @@ class Soupstraw < Sinatra::Base
     response = home_api('/bladehealth')
     @content = response.body
     haml :blank
-  end
-
-  # this allows the chart load to faster via AJAX
-  #TODO: make this work with different rigs
-  get '/btc_mined.json' do
-    content_type :json
-
-    @rig_id = request[:rig_id] || 1
-    rig = MiningRig.find(@rig_id)
-
-    # format the data for chartkick
-    rig.snapshots.group_by_hour(:created_at).maximum(:btc_mined).to_json
   end
 
 end
