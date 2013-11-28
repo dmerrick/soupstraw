@@ -93,8 +93,8 @@ class MiningRig < ActiveRecord::Base
   def +(other_rig)
     MiningRig.new do |rig|
       rig.name = "Composite of MiningRig##{id} and MiningRig##{other_rig.id}"
-      rig.btc_cost = btc_cost + other_rig.btc_cost
-      rig.usd_cost = usd_cost + other_rig.usd_cost
+      rig.btc_cost = btc_cost.to_f + other_rig.btc_cost.to_f
+      rig.usd_cost = usd_cost.to_f + other_rig.usd_cost.to_f
 
       # use the first rig's settings:
       #FIXME: use something else here?
