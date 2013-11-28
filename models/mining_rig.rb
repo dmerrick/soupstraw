@@ -5,6 +5,8 @@ class MiningRig < ActiveRecord::Base
   validates_presence_of :pool_name
   has_many :bitcoin_stats_snapshots
 
+  #TODO: run take_snapshot! after create?
+
   # supported periods for the graph interval
   # (default is :auto)
   GRAPH_INTERVALS = { auto: 0, hour: 1, day: 2, week: 3 }
