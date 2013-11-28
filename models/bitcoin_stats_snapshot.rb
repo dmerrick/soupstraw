@@ -8,7 +8,7 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     if mining_rig.pool_name == 'eligius'
       return 'http://eligius.st/~luke-jr/raw/7/balances.json'
     elsif mining_rig.pool_name == 'btcguild'
-      return "https://www.btcguild.com/api.php?api_key=#{mining_rig.pool_api_key}lol"
+      return "https://www.btcguild.com/api.php?api_key=#{mining_rig.pool_api_key}"
     else
       raise 'unsupported mining pool'
     end
