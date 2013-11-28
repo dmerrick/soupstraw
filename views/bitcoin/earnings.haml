@@ -6,6 +6,7 @@
     = "#{usd_format(@stats.total_earned)} worth of BTC mined"
     %small (Updated every minute.)
 
+
 .row
   .col-md-6
     .panel.panel-default
@@ -23,43 +24,46 @@
             per BTC:
           %span.pull-right= "(#{usd_format(@stats.usd_per_day)}/day)"
 
+
     .panel.panel-default
       .panel-heading
         Progress to Break-Even
+
       %ul.list-group
-        %li.list-group-item
-          %p
-            - if @stats.break_even > 0
-              %strong= "#{@stats.break_even}"
-              BTC to break even:
-              %span.pull-right= "#{@stats.break_even_progress}%"
-            - else
-              %span.text-success
-                %strong= "#{@stats.break_even.abs}"
-                BTC in profit!
+        - if @stats.mining_rig.btc_cost
+          %li.list-group-item
+            %p
+              - if @stats.break_even > 0
+                %strong= "#{@stats.break_even}"
+                BTC to break even:
+                %span.pull-right= "#{@stats.break_even_progress}%"
+              - else
+                %span.text-success
+                  %strong= "#{@stats.break_even.abs}"
+                  BTC in profit!
+
+            .progress{:class => ('progress-striped active' if @stats.break_even_progress < 100)}
+              .progress-bar.progress-bar-warning{:role=>"progressbar",:'aria-valuenow'=>@stats.break_even_bar_value, :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_bar_value}%;"}
+              - if @stats.break_even_progress > 100
+                .progress-bar.progress-bar-success{:role=>"progressbar", :'aria-valuenow'=>(100 - @stats.break_even_bar_value), :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{100 - @stats.break_even_bar_value}%;"}
 
 
-          .progress{:class => ('progress-striped active' if @stats.break_even_progress < 100)}
-            .progress-bar.progress-bar-warning{:role=>"progressbar",:'aria-valuenow'=>@stats.break_even_bar_value, :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_bar_value}%;"}
-            - if @stats.break_even_progress > 100
-              .progress-bar.progress-bar-success{:role=>"progressbar", :'aria-valuenow'=>(100 - @stats.break_even_bar_value), :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{100 - @stats.break_even_bar_value}%;"}
+        - if @stats.mining_rig.usd_cost
+          %li.list-group-item
+            %p
+              - if @stats.break_even(:usd) > 0
+                %strong= "#{usd_format(@stats.break_even(:usd))}"
+                USD to break even:
+                %span.pull-right= "#{@stats.break_even_progress(:usd)}%"
+              - else
+                %span.text-success
+                  %strong= "#{usd_format(@stats.break_even(:usd).abs)}"
+                  USD in profit!
 
-        %li.list-group-item
-          %p
-            - if @stats.break_even(:usd) > 0
-              %strong= "#{usd_format(@stats.break_even(:usd))}"
-              USD to break even:
-              %span.pull-right= "#{@stats.break_even_progress(:usd)}%"
-            - else
-              %span.text-success
-                %strong= "#{usd_format(@stats.break_even(:usd).abs)}"
-                USD in profit!
-
-          .progress{:class => ('progress-striped active' if @stats.break_even_progress(:usd) < 100)}
-            .progress-bar{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_bar_value(:usd), :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_bar_value(:usd)}%;"}
-            - if @stats.break_even_progress(:usd) > 100
-              .progress-bar.progress-bar-success{:role=>"progressbar", :'aria-valuenow'=>(100 - @stats.break_even_bar_value(:usd)), :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{100 - @stats.break_even_bar_value(:usd)}%;"}
-
+            .progress{:class => ('progress-striped active' if @stats.break_even_progress(:usd) < 100)}
+              .progress-bar{:role=>"progressbar", :'aria-valuenow'=>@stats.break_even_bar_value(:usd), :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{@stats.break_even_bar_value(:usd)}%;"}
+              - if @stats.break_even_progress(:usd) > 100
+                .progress-bar.progress-bar-success{:role=>"progressbar", :'aria-valuenow'=>(100 - @stats.break_even_bar_value(:usd)), :'aria-valuemin'=>'0', :'aria-valuemax'=>'100', :style=>"width: #{100 - @stats.break_even_bar_value(:usd)}%;"}
 
 
   .col-md-3
@@ -76,6 +80,7 @@
       .panel-body
         %a{:href=>"bitcoin:#{MiningRig.first.wallet_address}"}
           %img{:src=>"/images/bitcoin_qr_code.png", :style=>"height: 80px; width: 80px;"}
+
 
 .row
   .col-md-9
