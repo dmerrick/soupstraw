@@ -30,6 +30,10 @@ class MiningRig < ActiveRecord::Base
     last_snapshot.total_earned
   end
 
+  def days_to_break_even(in_usd = false)
+    last_snapshot.days_to_break_even(in_usd)
+  end
+
   def take_snapshot!
     BitcoinStatsSnapshot.create do |s|
       s.mining_rig = self

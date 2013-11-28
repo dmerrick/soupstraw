@@ -10,12 +10,17 @@
         Top Earners
       %table.table.table-hover
         %tbody
+          %tr
+            %th USD Mined
+            %th Name
+            %th Days to Break-Even
           - @rigs.each do |rig|
             %tr
-            %td= usd_format(rig.total_earned)
-            %td
-              %a{href: "/bitcoins/#{rig.id}", :class => ('text-muted' unless rig.active?)}
-                = rig.name
+              %td= usd_format(rig.total_earned)
+              %td
+                %a{href: "/bitcoins/#{rig.id}", :class => ('text-muted' unless rig.active?)}
+                  = rig.name
+              %td= rig.days_to_break_even(:usd).round(1)
 
 .row
   .col-md-9
