@@ -65,7 +65,7 @@
   .col-md-3
     .well.well-sm
       %a{:href=>"http://bitcoinwisdom.com/"} Bitcoin Value Stats
-    - unless @stats.new_record?
+    - unless @stats.new_record? || @stats.mining_rig.pool_name != 'eligius'
       .well.well-sm
         %a{:href=>"http://eligius.st/~wizkid057/newstats/userstats.php/#{@stats.mining_rig.wallet_address}"} Mining Pool Stats
     .well.well-sm
