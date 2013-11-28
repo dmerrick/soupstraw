@@ -2,7 +2,10 @@ module Bitcoin
 
   # find current BTC->USD exchange rate (weighted average)
   def current_usd_value
-    usd_value_url = settings.app[:usd_value_api]
+    #FIXME: this doesn't work cause you can't access settings
+    # within a static method (for whatever reason)
+    #usd_value_url = settings.app[:usd_value_api]
+    usd_value_url = 'http://api.bitcoinaverage.com/no-mtgox/ticker/USD'
     current_value_json = JSON.parse(URI.parse(usd_value_url).read)
     current_value_json['last'].to_f
   end
