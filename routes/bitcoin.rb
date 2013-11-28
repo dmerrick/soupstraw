@@ -1,8 +1,8 @@
 class Soupstraw < Sinatra::Base
 
-  get '/bitcoins/?' do
-    @rig_id = request[:rig_id] || 1
-    redirect "/bitcoins/#{@rig_id}"
+  # redirect to to path specified in application.yml
+  get '/bitcoins?/?' do
+    redirect settings.app[:bitcoin_path]
   end
 
   # combine the total_earned data for two rigs

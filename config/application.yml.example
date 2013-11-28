@@ -1,6 +1,7 @@
 development:
   site_url: soupstraw.com
   default_path: /home
+  bitcoin_path: /bitcoins/1
   usd_value_api: http://api.bitcoinaverage.com/no-mtgox/ticker/USD
   cookie_secret: super_secure
   home_url: localhost:8080
