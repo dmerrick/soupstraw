@@ -2,6 +2,7 @@ class MiningRig < ActiveRecord::Base
 
   #TODO: more validations here
   validates_presence_of :name
+  validates_presence_of :pool_name
   has_many :bitcoin_stats_snapshots
 
   # supported periods for the graph interval

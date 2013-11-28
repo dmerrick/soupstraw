@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131125205118) do
+ActiveRecord::Schema.define(version: 20131128192042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20131125205118) do
     t.decimal  "preexisting_btc_balance", precision: 11, scale: 8
     t.integer  "graph_interval",                                   default: 0
     t.boolean  "active",                                           default: true
+    t.string   "pool_name",                                        default: "eligius"
+    t.string   "pool_api_key"
   end
 
   create_table "users", force: true do |t|

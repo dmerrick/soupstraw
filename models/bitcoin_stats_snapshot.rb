@@ -4,9 +4,14 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
   validates  :btc_mined, numericality: { greater_than: 0.0 }
   belongs_to :mining_rig
 
-  # right now we only support Eligius
   def stats_url
-    'http://eligius.st/~luke-jr/raw/7/balances.json'
+    if mining_rig.pool_name == 'eligius'
+      return 'http://eligius.st/~luke-jr/raw/7/balances.json'
+    elsif mining_rig.pool_name == 'btcguild'
+      return "https://www.btcguild.com/api.php?api_key=#{mining_rig.pool_api_key}lol"
+    else
+      raise 'unsupported mining pool'
+    end
   end
 
   def btc_per_day
@@ -23,17 +28,36 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
   def current_btc_mined
     begin
       bitcoin_stats_json = JSON.parse(URI.parse(stats_url).read)
-    rescue Timeout::Error
-      #flash.now[:danger] = "Connection to mining stats page timed out. Is their server down?"
+    rescue Timeout::Error, JSON::ParserError
+      # return a balance of zero if something goes wrong
       return 0.0
     end
 
-    # return zero if the wallet_address is not in the pool
-    return 0.0 unless bitcoin_stats_json[mining_rig.wallet_address]
+    # get the total from the Eligius mining pool
+    if mining_rig.pool_name == 'eligius'
+      # return zero if the wallet_address is not in the pool
+      return 0.0 unless bitcoin_stats_json[mining_rig.wallet_address]
 
-    total  = bitcoin_stats_json[mining_rig.wallet_address]['balance'].to_i
-    total += bitcoin_stats_json[mining_rig.wallet_address]['everpaid'].to_i
-    total *= 0.00000001
+      # add the current balance and the total paid balance
+      total  = bitcoin_stats_json[mining_rig.wallet_address]['balance'].to_i
+      total += bitcoin_stats_json[mining_rig.wallet_address]['everpaid'].to_i
+
+      # convert to a float
+      total *= 0.00000001
+
+    # get the total from the BTC Guild mining pool
+    elsif mining_rig.pool_name == 'btcguild'
+      # return zero if the api key is invalid
+      return 0.0 unless bitcoin_stats_json['user']['total_rewards']
+
+      total = bitcoin_stats_json['user']['total_rewards']
+
+    # fail if the pool is not supported
+    else
+      raise 'unsupported mining pool'
+    end
+
+    # add the preexisting_btc_balance if required
     total += mining_rig.preexisting_btc_balance if mining_rig.preexisting_btc_balance
     total.round(8)
   end
