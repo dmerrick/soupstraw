@@ -107,9 +107,11 @@ class Soupstraw < Sinatra::Base
   end
 
   get '/bladehealth', auth: :user do
+    @title = 'Blade Health'
     response = home_api('/bladehealth')
-    @content = h(response.body)
-    haml :blank
+    @miners = JSON.parse(response.body)
+    @json_data = JSON.pretty_generate(@miners) if request[:with_json]
+    haml :'bitcoin/bladehealth'
   end
 
 end

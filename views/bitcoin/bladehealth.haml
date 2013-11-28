@@ -1,0 +1,33 @@
+.page-header
+  %h1= @title
+
+/ add '?with_json=true' to include raw json
+
+.row
+  .col-md-9
+    %table.table.table-bordered.table-hover
+      %tbody
+        %tr
+          %th Name
+          %th Address
+          %th Server
+          %th Uptime
+          %th Hashrate
+          %th Efficiency
+        - @miners.each do |name, miner|
+          %tr{:class => efficiency_to_color(miner['efficiency'])}
+            %td
+              %a{href: 'http://' + miner['address']}= name
+            %td= miner['address']
+            %td= miner['server']
+            %td= miner['up_time']
+            %td= commaize(miner['total_mhs']) + ' Mhash/s'
+            %td= miner['efficiency']
+
+- if @json_data
+  .row
+    .col-md-9
+      %h4
+        Raw JSON
+      %pre.pre-scrollable
+        = @json_data

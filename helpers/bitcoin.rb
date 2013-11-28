@@ -16,6 +16,20 @@ module Bitcoin
     '$' + string
   end
 
+  # used for coloring rows in the blade health table
+  def efficiency_to_color(efficiency)
+    case efficiency.to_f
+    when 0..90
+      return 'danger'
+    when 91..98
+      return 'warning'
+    when 99..100
+      return ''
+    else
+      return 'success'
+    end
+  end
+
   # allow Bitcoin.foo() calls
   module_function :usd_value_url
   module_function :current_usd_value
