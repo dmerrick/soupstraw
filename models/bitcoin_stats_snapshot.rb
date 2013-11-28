@@ -65,10 +65,10 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
   # returns the remaining amount to earn in order to break even
   def break_even(in_usd = false)
     if in_usd
-      return 0 if mining_rig.usd_cost == 0
+      return 0.0 if mining_rig.usd_cost.to_f == 0.0
       return (mining_rig.usd_cost - total_earned).round(2)
     else
-      return 0 if mining_rig.btc_cost == 0
+      return 0.0 if mining_rig.btc_cost.to_f == 0.0
       return (mining_rig.btc_cost - btc_mined).round(8)
     end
   end
@@ -90,6 +90,10 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
       return percent.round(2)
     end
     break_even_progress(in_usd)
+  end
+
+  def days_to_break_even(in_usd = false)
+    break_even(in_usd) / (in_usd ? usd_per_day : btc_per_day)
   end
 
   def total_earned
