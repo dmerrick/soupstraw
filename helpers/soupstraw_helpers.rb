@@ -21,6 +21,11 @@ module SoupstrawHelpers
     Rack::Utils.escape_html(text)
   end
 
+  # add commas to a large number
+  def commaize(number)
+    number.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+  end
+
   def home_api(path)
     uri = URI.parse('http://' + settings.app[:home_url] + path)
     request = Net::HTTP::Get.new(uri.request_uri)
