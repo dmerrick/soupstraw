@@ -20,11 +20,11 @@ module Bitcoin
   # used for coloring rows in the blade health table
   def efficiency_to_color(efficiency)
     case efficiency.to_f
-    when 0..90
+    when 0.0..90.0
       return 'danger'
-    when 91..98
+    when 91.0..98.0
       return 'warning'
-    when 99..100
+    when 99.0..100.0
       return ''
     else
       return 'success'
