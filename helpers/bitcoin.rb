@@ -10,9 +10,10 @@ module Bitcoin
     current_value_json['last'].to_f
   end
 
-  def usd_format(value)
+  def usd_format(value, commas: true)
     string = value.round(2).to_s
     string += '0' if string.split('.').last.size != 2
+    string = commaize(string) if commas
     '$' + string
   end
 
