@@ -21,11 +21,3 @@
                 %a{href: "/bitcoins/#{rig.id}", :class => ('text-muted' unless rig.active?)}
                   = rig.name
               %td= rig.days_to_break_even(:usd).round(1)
-
-.row
-  .col-md-9
-    .panel.panel-default
-      .panel-heading
-        BTC Mined Over Time
-      .panel-body
-        = line_chart @graph_payload

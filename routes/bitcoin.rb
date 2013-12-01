@@ -89,21 +89,28 @@ class Soupstraw < Sinatra::Base
     haml :'bitcoin/earnings'
   end
 
-  get '/stats/?' do
+  #TODO: remove this route when people have updated their bookmarks
+  get '/stats/*', auth: :user do
+    redirect '/stats', info: 'Note: this URL has been changed.'
+  end
+
+  get '/stats/?', auth: :user do
+    @title = 'Bitcoin Stats'
+    @rigs = MiningRig.all.sort_by { |rig| rig.total_earned }.reverse
+    haml :'bitcoin/stats'
+  end
+
+  get '/graphs/?', auth: :user do
     @rig_id = request[:rig_id] || 1
-    redirect "/stats/#{@rig_id}"
+    redirect "/graphs/#{@rig_id}"
   end
 
   # this is a work in progress that only logged in users should see
-  get '/stats/:rig_id', auth: :user do
+  get '/graphs/:rig_id', auth: :user do
     @rig_id = params[:rig_id] || 1
-    @title = 'Bitcoin Stats'
+    @title = 'Bitcoin Graphs'
     @graph_payload = "/bitcoins/#{@rig_id}/btc_mined.json"
-
-    # this is for the table of rigs
-    #TODO: consider making this an activerecord order
-    @rigs = MiningRig.all.sort_by { |rig| rig.total_earned }.reverse
-    haml :'bitcoin/stats'
+    haml :'bitcoin/graphs'
   end
 
   get '/bladehealth', auth: :user do

@@ -1,0 +1,12 @@
+.page-header
+  %h1
+    = "#{@title}!"
+    %small Work in progress.
+
+.row
+  .col-md-9
+    .panel.panel-default
+      .panel-heading
+        BTC Mined Over Time
+      .panel-body
+        = line_chart @graph_payload
