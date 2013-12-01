@@ -19,7 +19,29 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     (btc_mined / mining_rig.days_running).round(8)
   end
 
+  #TODO: consider profit() and profit(:usd)
+  def btc_profit
+    break_even.abs
+  end
+
+  #TODO: consider profit_per_day() and profit_per_day(:usd)
+  def btc_profit_per_day
+    return 0 if mining_rig.days_running <= 0
+    (btc_profit / mining_rig.days_running).round(8)
+  end
+
   def usd_per_day
+    return 0 if mining_rig.days_running <= 0
+    (total_earned / mining_rig.days_running).round(2)
+  end
+
+  #TODO: consider profit() and profit(:usd)
+  def usd_profit
+    break_even(:usd).abs
+  end
+
+  #TODO: consider profit_per_day() and profit_per_day(:usd)
+  def usd_profit_per_day
     return 0 if mining_rig.days_running <= 0
     (total_earned / mining_rig.days_running).round(2)
   end
