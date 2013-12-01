@@ -6,6 +6,9 @@
     = "#{usd_format(@stats.total_earned)} worth of BTC mined"
     %small (Updated every minute.)
 
+- if @user
+  .lead= @stats.mining_rig.name
+
 
 .row
   .col-md-6

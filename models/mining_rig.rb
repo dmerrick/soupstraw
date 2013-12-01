@@ -98,7 +98,7 @@ class MiningRig < ActiveRecord::Base
   # this allows you to combine two rigs together
   def +(other_rig)
     MiningRig.new do |rig|
-      rig.name = "Composite of MiningRig##{id} and MiningRig##{other_rig.id}"
+      rig.name = "#{name} and #{other_rig.name}"
 
       rig.btc_cost = btc_cost + other_rig.btc_cost if btc_cost && other_rig.btc_cost
       rig.usd_cost = usd_cost + other_rig.usd_cost if usd_cost && other_rig.usd_cost
