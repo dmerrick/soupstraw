@@ -43,7 +43,7 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
   #TODO: consider profit_per_day() and profit_per_day(:usd)
   def usd_profit_per_day
     return 0 if mining_rig.days_running <= 0
-    (total_earned / mining_rig.days_running).round(2)
+    (usd_profit / mining_rig.days_running).round(2)
   end
 
   # find total BTC mined
