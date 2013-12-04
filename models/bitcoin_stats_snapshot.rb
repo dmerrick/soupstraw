@@ -81,7 +81,9 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
       # return zero if the api key is invalid
       return 0.0 unless bitcoin_stats_json['total_reward']
 
-      total = bitcoin_stats_json['total_reward']
+      # add the current balance and the total paid balance
+      total  = bitcoin_stats_json['balance'].to_f
+      total += bitcoin_stats_json['total_reward'].to_f
 
     # fail if the pool is not supported
     else
