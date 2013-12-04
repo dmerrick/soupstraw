@@ -9,6 +9,8 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
       return 'http://eligius.st/~luke-jr/raw/7/balances.json'
     elsif mining_rig.pool_name == 'btcguild'
       return "https://www.btcguild.com/api.php?api_key=#{mining_rig.pool_api_key}"
+    elsif mining_rig.pool_name == 'btcdig'
+      return "http://btcdig.com/api/v1/user/stats/#{mining_rig.pool_api_key}"
     else
       raise 'unsupported mining pool'
     end
@@ -73,6 +75,13 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
       return 0.0 unless bitcoin_stats_json['user']['total_rewards']
 
       total = bitcoin_stats_json['user']['total_rewards']
+
+    # get the total from the BTCDig mining pool
+    elsif mining_rig.pool_name == 'btcdig'
+      # return zero if the api key is invalid
+      return 0.0 unless bitcoin_stats_json['total_reward']
+
+      total = bitcoin_stats_json['total_reward']
 
     # fail if the pool is not supported
     else
