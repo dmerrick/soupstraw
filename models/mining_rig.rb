@@ -65,9 +65,9 @@ class MiningRig < ActiveRecord::Base
 
   # returns the graph interval, replacing :auto as necessary
   def effective_graph_interval
-    # automatically change the timescale based on days_running
+    # automatically change the timescale based on when it was created
     if graph_interval == :auto
-      case days_running.floor
+      case (DateTime.now - created_at.to_datetime).floor
       when 0..5
         return :hour
       when 6..90
