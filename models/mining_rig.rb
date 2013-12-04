@@ -5,7 +5,8 @@ class MiningRig < ActiveRecord::Base
   validates_presence_of :pool_name
   has_many :bitcoin_stats_snapshots
 
-  #TODO: run take_snapshot! after create?
+  # ensure that every rig has at least one snapshot
+  after_create :take_snapshot!, if: :active?
 
   # supported periods for the graph interval
   # (default is :auto)
