@@ -13,7 +13,7 @@ Bundler.require((ENV['RACK_ENV'] || 'development').to_sym)
 
 # include everything in lib and everything in models
 Dir['./lib/**/*.rb'].each { |file| require file }
-Dir['./models/*.rb'].each { |file| require file }
+Dir['./app/models/*.rb'].each { |file| require file }
 
 
 class Soupstraw < Sinatra::Base
@@ -31,6 +31,7 @@ class Soupstraw < Sinatra::Base
 
   set :database_file, 'config/database.yml'
   set :settings_file, 'config/application.yml'
+  set :views, Proc.new { File.join(root, 'app', 'views') }
 
   env = settings.environment.to_s
 
@@ -86,5 +87,5 @@ class Soupstraw < Sinatra::Base
 end
 
 # include helpers and routes
-require_relative 'helpers/init'
-require_relative 'routes/init'
+require_relative 'app/helpers/init'
+require_relative 'app/routes/init'
