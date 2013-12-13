@@ -20,4 +20,17 @@ class Soupstraw < Sinatra::Base
     redirect '/lights', info: 'Lights are now off.'
   end
 
+  get '/lights/flash/?', auth: :user do
+    @light_id = request[:light_id] || 1
+    redirect "/lights/flash/#{@light_id}?#{request.query_string}"
+  end
+
+  get '/lights/flash/:id', auth: :user do
+    response = home_api("/lights/flash/#{params[:id]}?#{request.query_string}")
+
+    #TODO: make this better
+    content_type :json
+    response.body
+  end
+
 end
