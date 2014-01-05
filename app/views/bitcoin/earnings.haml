@@ -75,6 +75,9 @@
         %a{:href=>"http://eligius.st/~wizkid057/newstats/userstats.php/#{@stats.mining_rig.wallet_address}"} Mining Pool Stats
     .well.well-sm
       %a{:href=>"http://bitcoinaverage.com/#USD"} Average Bitcoin Value
+    - if @user && !@stats.new_record?
+      .well.well-sm
+        %a{:href=>"/graphs/#{@stats.mining_rig.id}"} Graphs
     .panel.panel-default
       .panel-heading
         Donate
