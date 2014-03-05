@@ -9,10 +9,7 @@ set :ssh_options, {
   forward_agent: true
 }
 
-server 'app1.soupstraw.com',
-        user: 'deploy',
-        roles: %w{ app db }
-
+#TODO: if migrations fail, add db role here
 server 'app2.soupstraw.com',
         user: 'deploy',
         roles: %w{ web app }
