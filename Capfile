@@ -14,7 +14,7 @@ require 'capistrano/bundler'
 require 'capistrano-nc/nc'
 
 # enable datadog integration
-require "capistrano/datadog"
+require 'capistrano/datadog'
 
 #TODO: implement this
 # https://github.com/cramerdev/capistrano-chef
