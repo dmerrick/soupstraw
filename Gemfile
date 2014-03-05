@@ -28,7 +28,7 @@ gem 'capistrano-nc', '~> 0.1.0'
 #gem 'capistrano-rails'
 gem 'capistrano-rbenv', github: 'capistrano/rbenv'
 # datadog capistrano plugin
-gem 'dogapi', '~> 1.3.0'
+gem 'dogapi'
 
 group :development do
   gem 'shotgun'
