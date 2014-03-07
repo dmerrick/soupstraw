@@ -7,3 +7,4 @@ development:
   home_url: localhost:8080
   home_username: username
   home_password: password
+  datadog_key: somethingsomething
