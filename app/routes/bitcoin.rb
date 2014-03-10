@@ -86,6 +86,16 @@ class Soupstraw < Sinatra::Base
     @title = 'Bitcoin Earnings'
     @stats = rig.last_snapshot
     @graph_payload = "/bitcoins/#{@rig_id}/total_earned.json"
+
+    # show a warning if the snapshot is old
+    if @stats.created_at < (DateTime.now - 10.minutes)
+      time = DateTime.now.to_i - @stats.created_at.to_i
+      hours = time/3600.to_i
+      minutes = (time/60 - hours * 60).to_i
+      seconds = (time - (minutes * 60 + hours * 3600))
+      flash.now[:warning] = "Something is wrong: Snapshot was last updated #{hours}h#{minutes}m#{seconds}s ago."
+    end
+
     haml :'bitcoin/earnings'
   end
 
