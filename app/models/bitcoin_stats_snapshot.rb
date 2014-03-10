@@ -160,6 +160,8 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
       # take the average of their usd_values
       snap.usd_value  = (usd_value + other_snapshot.usd_value) / 2
       snap.mining_rig = mining_rig + other_snapshot.mining_rig
+      snap.usd_delta_since_yesterday = usd_delta_since_yesterday + other_snapshot.usd_delta_since_yesterday
+      snap.total_earned_since_yesterday = total_earned_since_yesterday + other_snapshot.total_earned_since_yesterday
     end
   end
 
