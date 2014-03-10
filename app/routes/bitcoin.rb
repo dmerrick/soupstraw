@@ -93,7 +93,7 @@ class Soupstraw < Sinatra::Base
       hours = time/3600.to_i
       minutes = (time/60 - hours * 60).to_i
       seconds = (time - (minutes * 60 + hours * 3600))
-      flash.now[:warning] = "Something is wrong: Snapshot was last updated #{hours}h#{minutes}m#{seconds}s ago."
+      flash.now[:warning] = "Something is wrong! Stats were last updated #{hours}h#{minutes}m#{seconds}s ago."
     end
 
     haml :'bitcoin/earnings'
