@@ -40,8 +40,11 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
   def usd_over_last_day
     # find the a snapshot roughly a day ago (within 2 minutes)
     yesterday = BitcoinStatsSnapshot.where("mining_rig_id = ? AND created_at > ? AND created_at < ?",
-    mining_rig.id, 1.day.ago, 1.day.ago + 2.minutes).first.total_earned
-    total_earned - yesterday
+    mining_rig.id, 1.day.ago, 1.day.ago + 2.minutes).first
+
+    return nil unless yesterday
+    earned_yesterday = yesterday.total_earned
+    total_earned - earned_yesterday
   end
 
   #TODO: consider profit() and profit(:usd)

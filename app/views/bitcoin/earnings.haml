@@ -23,10 +23,11 @@
             %strong= "#{usd_format(@stats.usd_value)}"
             per BTC:
           %span.pull-right= "(#{usd_format(@stats.usd_per_day)}/day)"
-        %li.list-group-item
-          %span
-            %strong= "#{usd_format(@stats.usd_over_last_day)}"
-            earned over the last 24 hours
+        - if @stats.usd_over_last_day
+          %li.list-group-item
+            %span
+              %strong= "#{usd_format(@stats.usd_over_last_day)}"
+              earned over the last 24 hours
 
 
     .panel.panel-default
