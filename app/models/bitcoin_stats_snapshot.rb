@@ -37,6 +37,13 @@ class BitcoinStatsSnapshot < ActiveRecord::Base
     (total_earned / mining_rig.days_running).round(2)
   end
 
+  def usd_over_last_day
+    # find the a snapshot roughly a day ago (within 2 minutes)
+    yesterday = BitcoinStatsSnapshot.where("mining_rig_id = ? AND created_at > ? AND created_at < ?",
+    mining_rig.id, 1.day.ago, 1.day.ago + 2.minutes).first.total_earned
+    total_earned - yesterday
+  end
+
   #TODO: consider profit() and profit(:usd)
   def usd_profit
     break_even(:usd).abs
