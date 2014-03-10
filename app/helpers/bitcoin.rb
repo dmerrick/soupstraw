@@ -14,7 +14,9 @@ module Bitcoin
     string = value.round(2).to_s
     string += '0' if string.split('.').last.size != 2
     string = commaize(string) if commas
-    '$' + string
+    string = '$' + string
+    # move the negative sign to the left of the dollar sign (if needed)
+    string.sub('$-','-$')
   end
 
   # used for coloring rows in the blade health table
