@@ -45,6 +45,9 @@ GEM
       capistrano (>= 3.0.0.pre)
     capistrano-nc (0.1.0)
       terminal-notifier (~> 1.4.2)
+    capistrano-newrelic (0.0.8)
+      capistrano (~> 3.0)
+      newrelic_rpm
     chartkick (1.2.0)
     chunky_png (1.2.9)
     coderay (1.0.9)
@@ -150,6 +153,7 @@ DEPENDENCIES
   capistrano
   capistrano-bundler
   capistrano-nc (~> 0.1.0)
+  capistrano-newrelic
   capistrano-rbenv!
   chartkick
   compass

@@ -29,6 +29,7 @@ gem 'capistrano-nc', '~> 0.1.0'
 gem 'capistrano-rbenv', github: 'capistrano/rbenv'
 # datadog capistrano plugin
 gem 'dogapi'
+gem 'capistrano-newrelic'
 
 group :development do
   gem 'shotgun'

@@ -30,9 +30,6 @@ set :rbenv_custom_path, '/opt/rbenv'
 # set to :debug if things are breaking
 set :log_level, :info
 
-# datadog integration
-set :datadog_api_key, YAML::load(File.open('config/application.yml'))['development']['datadog_key']
-
 # some defaults to keep around
 # set :default_env, { path: "/opt/rbenv/bin:$PATH" }
 # set :keep_releases, 5
@@ -78,8 +75,7 @@ namespace :deploy do
 
   # clean up old releases
   after :finishing, 'deploy:cleanup'
-  #TODO: consider implementing this
-  #after :finishing, 'newrelic:notice_deployment'
+  after :finishing, 'newrelic:notice_deployment'
 
 end
 
