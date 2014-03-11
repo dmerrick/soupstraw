@@ -5,5 +5,6 @@ tmp/**/*
 db/development.sqlite3
 config/database.yml
 config/application.yml
+config/newrelic.yml
 log
 ignore
