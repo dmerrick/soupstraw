@@ -14,8 +14,8 @@ namespace :bitcoin do
   namespace :snapshot do
     desc "Take snapshots for every mining rig"
     task :all do
-      env = settings.environment
-      if env == :production
+      env = settings.environment.to_s
+      if env == 'production'
         config_file = File.join(settings.root, 'config', 'application.yml')
         datadog_key = YAML::load(config_file)[env]['datadog_key']
         dog = Dogapi::Client.new(datadog_key)
