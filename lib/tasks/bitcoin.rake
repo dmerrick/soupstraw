@@ -36,17 +36,19 @@ namespace :bitcoin do
             #TODO: improve me
             content = "#{e.inspect}
                        #{snapshot.inspect}"
+            hostname = Dogapi.find_localhost
+            service = 'cron_btc_snapshot'
 
             # create the event to send
             event = Dogapi::Event.new(content,
-              msg_title:       'Cron job failed!',
-              aggregation_key: 'cron_btc_snapshot',
+              msg_title:       "[#{hostname}] #{service} failed",
+              aggregation_key: service,
               alert_type:      'error',
               tags:            ['ruby', 'dogapi', 'cron', 'bitcoin', env]
             )
 
             # actually send the event to datadog
-            dog.emit_event(event, host: Dogapi.find_localhost)
+            dog.emit_event(event, host: hostname)
           end
 
         else
