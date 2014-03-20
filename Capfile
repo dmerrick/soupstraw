@@ -19,7 +19,7 @@ require 'capistrano/newrelic'
 # enable datadog integration
 require 'capistrano/datadog'
 require 'yaml'
-set :datadog_api_key, YAML::load(File.open('config/application.yml'))['development']['datadog_key']
+set :datadog_api_key, YAML.load_file(File.open('config/application.yml'))['development']['datadog_key']
 
 #TODO: implement this
 # https://github.com/cramerdev/capistrano-chef

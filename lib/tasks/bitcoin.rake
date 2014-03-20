@@ -17,7 +17,7 @@ namespace :bitcoin do
       env = settings.environment.to_s
       if env == 'production'
         config_file = File.join(settings.root, 'config', 'application.yml')
-        datadog_key = YAML::load(config_file)[env]['datadog_key']
+        datadog_key = YAML.load_file(config_file)[env]['datadog_key']
         dog = Dogapi::Client.new(datadog_key)
       end
 

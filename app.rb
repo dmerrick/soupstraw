@@ -37,14 +37,14 @@ class Soupstraw < Sinatra::Base
 
   # import settings from application.yml
   application_settings = {}
-  YAML::load(File.open(settings.settings_file))[env].each do |key, value|
+  YAML.load_file(File.open(settings.settings_file))[env].each do |key, value|
     application_settings[key.to_sym] = value
   end
   set :app, application_settings
 
   # import settings from database.yml
   database_settings = {}
-  YAML::load(File.open(settings.database_file))[env].each do |key, value|
+  YAML.load_file(File.open(settings.database_file))[env].each do |key, value|
     database_settings[key.to_sym] = value
   end
   set :database, database_settings
