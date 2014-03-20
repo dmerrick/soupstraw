@@ -96,6 +96,15 @@ class MiningRig < ActiveRecord::Base
     snapshots.group_by_week(:created_at).average('btc_mined * usd_value')
   end
 
+  # prevents the rig from getting updates via cron
+  def disable!
+    write_attribute(:active, false)
+  end
+
+  def enable!
+    write_attribute(:active, true)
+  end
+
   # this allows you to combine two rigs together
   def +(other_rig)
     MiningRig.new do |rig|
