@@ -14,19 +14,16 @@ namespace :bitcoin do
   namespace :snapshot do
     desc "Take snapshots for every mining rig"
     task :all do
-
-      # send datadog events if we're in production
-      if settings.environment == :production
-        config_file = File.join(settings.root, 'config', 'application.yml')
-        datadog_key = YAML::load(config_file)['development']['datadog_key']
-        dog = Dogapi::Client.new(datadog_key)
-      end
-
       MiningRig.active.each do |rig|
-        if dog
+        env = settings.environment
+        if env == :production
 
-          # send datadog an event if we're configured for it
+          # send datadog an event if we're in production
           begin
+            config_file = File.join(settings.root, 'config', 'application.yml')
+            datadog_key = YAML::load(config_file)[env]['datadog_key']
+            dog = Dogapi::Client.new(datadog_key)
+
             # take the snapshot
             snapshot = rig.take_snapshot!
             #TODO: add this
@@ -42,7 +39,7 @@ namespace :bitcoin do
               msg_title:       'Cron job failed!',
               aggregation_key: 'cron_btc_snapshot',
               alert_type:      'error',
-              tags:            ['ruby', 'dogapi', 'cron', 'bitcoin', settings.environment]
+              tags:            ['ruby', 'dogapi', 'cron', 'bitcoin', env]
             )
 
             # shell out to get the hostname
