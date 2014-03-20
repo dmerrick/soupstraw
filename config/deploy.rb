@@ -19,7 +19,7 @@ set :git_shallow_clone, 1
 set :deploy_via, :remote_cache
 
 # symlink options
-set :linked_files, %w{config/application.yml config/database.yml config/unicorn.rb}
+set :linked_files, %w{config/application.yml config/database.yml config/unicorn.rb config/newrelic.yml}
 set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # rbenv options
