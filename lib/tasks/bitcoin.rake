@@ -44,11 +44,8 @@ namespace :bitcoin do
               tags:            ['ruby', 'dogapi', 'cron', 'bitcoin', env]
             )
 
-            # shell out to get the hostname
-            hostname = %[hostname]
-
             # actually send the event to datadog
-            dog.emit_event(event, host: hostname)
+            dog.emit_event(event, host: Dogapi.find_localhost)
           end
 
         else
