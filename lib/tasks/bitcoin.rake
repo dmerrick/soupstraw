@@ -17,7 +17,8 @@ namespace :bitcoin do
 
       # send datadog events if we're in production
       if settings.environment == :production
-        datadog_key = YAML::load(File.open('config/application.yml'))['development']['datadog_key']
+        config_file = File.join(settings.root, 'config', 'application.yml')
+        datadog_key = YAML::load(config_file)['development']['datadog_key']
         dog = Dogapi::Client.new(datadog_key)
       end
 
