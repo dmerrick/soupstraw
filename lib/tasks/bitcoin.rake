@@ -34,7 +34,8 @@ namespace :bitcoin do
 
             # send the exception and the snapshot
             #TODO: improve me
-            content = e.inspect + '\n' + snapshot.inspect
+            content = "#{e.inspect}
+                       #{snapshot.inspect}"
 
             # create the event to send
             event = Dogapi::Event.new(content,
