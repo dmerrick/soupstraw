@@ -14,16 +14,18 @@ namespace :bitcoin do
   namespace :snapshot do
     desc "Take snapshots for every mining rig"
     task :all do
+      env = settings.environment
+      if env == :production
+        config_file = File.join(settings.root, 'config', 'application.yml')
+        datadog_key = YAML::load(config_file)[env]['datadog_key']
+        dog = Dogapi::Client.new(datadog_key)
+      end
+
       MiningRig.active.each do |rig|
-        env = settings.environment
-        if env == :production
 
-          # send datadog an event if we're in production
+        # send datadog an event if we're in production
+        if dog
           begin
-            config_file = File.join(settings.root, 'config', 'application.yml')
-            datadog_key = YAML::load(config_file)[env]['datadog_key']
-            dog = Dogapi::Client.new(datadog_key)
-
             # take the snapshot
             snapshot = rig.take_snapshot!
             #TODO: add this
