@@ -84,6 +84,14 @@ class Soupstraw < Sinatra::Base
   use Rack::Session::Cookie, :expire_after => 90.days,
                              :secret => settings.app[:cookie_secret]
 
+  # ensure the agent is started using Unicorn
+  # this is needed when using Unicorn and preload_app is not set to true
+  # c.p. https://docs.newrelic.com/docs/ruby/no-data-with-unicorn
+  if defined?(Unicorn) && File.basename($0).start_with?('unicorn')
+    ::NewRelic::Agent.manual_start()
+    ::NewRelic::Agent.after_fork(force_reconnect: true)
+  end
+
 end
 
 # include helpers and routes
