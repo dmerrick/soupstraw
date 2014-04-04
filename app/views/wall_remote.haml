@@ -8,12 +8,11 @@
 .container
   .row.text-center
     .btn-group
-      %button.btn.btn-default
-        %h1
-          %strong
-            %a{:href=>'/lights/on'} on
-      %button.btn.btn-default
-        %h1
-          %strong
-            %a{:href=>'/lights/off'} off
-
+      %button.btn.btn-xxl.btn-default
+        %strong
+          %a{:id=>'wall-remote', :href=>'/lights/on'}
+            %i.fa.fa-eye
+      %button.btn.btn-xxl.btn-inverse
+        %strong
+          %a{:id=>'wall-remote', :href=>'/lights/off'}
+            %i.fa.fa-eye-slash

@@ -49,3 +49,13 @@ body {
     display: none !important;
   }
 }
+
+.btn-xxl {
+  padding: 18px 28px;
+  font-size: 172px;
+  border-radius: 8px;
+}
+
+#wall-remote {
+  color: black;
+}
