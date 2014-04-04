@@ -15,52 +15,56 @@
     %script{:src => "//www.google.com/jsapi"}
     %script{:src => "/javascripts/chartkick.js"}
   %body
-    %nav.navbar.navbar-default.navbar-fixed-top{:role=>"navigation"}
-      .navbar-header
-        %button.navbar-toggle{ :'data-toggle' => "collapse", :'data-target' => ".navbar-ex1-collapse"}
-          %span.sr-only Toggle Navigation
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.navbar-brand{:href => '/'} Soupstraw
+    - unless @no_navbar
+      %nav.navbar.navbar-default.navbar-fixed-top{:role=>"navigation"}
+        .navbar-header
+          %button.navbar-toggle{ :'data-toggle' => "collapse", :'data-target' => ".navbar-ex1-collapse"}
+            %span.sr-only Toggle Navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => '/'} Soupstraw
 
-      .collapse.navbar-collapse.navbar-ex1-collapse
-        %ul.nav.navbar-nav
-          %li
-            %a{:href => '/home'} Home
-          %li
-            %a{:href => '/bitcoins'} Bitcoins
-          %li.dropdown
-            %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown'}
-              Other Stuff
-              %b.caret
-            %ul.dropdown-menu
-              %li
-                %a{:href => '/stats'} Stats
-              %li
-                %a{:href => '/themes'} Themes
-              - if @user
-                %li.divider
+        .collapse.navbar-collapse.navbar-ex1-collapse
+          %ul.nav.navbar-nav
+            %li
+              %a{:href => '/home'} Home
+            %li
+              %a{:href => '/bitcoins'} Bitcoins
+            %li.dropdown
+              %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown'}
+                Other Stuff
+                %b.caret
+              %ul.dropdown-menu
                 %li
-                  %a{:href => '/bladehealth'} Blade Health
+                  %a{:href => '/stats'} Stats
                 %li
-                  %a{:href => '/graphs'} Graphs
-                %li.divider
-                %li
-                  %a{:href => '/lights/on'} Lights On
-                %li
-                  %a{:href => '/lights/off'} Lights Off
+                  %a{:href => '/themes'} Themes
+                - if @user
+                  %li.divider
+                  %li
+                    %a{:href => '/bladehealth'} Blade Health
+                  %li
+                    %a{:href => '/graphs'} Graphs
+                  %li.divider
+                  %li
+                    %a{:href => '/lights/on'} Lights On
+                  %li
+                    %a{:href => '/lights/off'} Lights Off
+                  %li.divider
+                  %li
+                    %a{:href => '/wall_remote'} Wall Remote
 
-        %ul.nav.navbar-right
-          - if @user
-            %li
-              %p.navbar-text
-                Hello,
-                %a.navbar-link{:href=>"/users/#{@user.id}"}= @user.first_name
-          - else
-            %li
-              %p.navbar-text
-                %a{:href => "/log_in"} Log In
+          %ul.nav.navbar-right
+            - if @user
+              %li
+                %p.navbar-text
+                  Hello,
+                  %a.navbar-link{:href=>"/users/#{@user.id}"}= @user.first_name
+            - else
+              %li
+                %p.navbar-text
+                  %a{:href => "/log_in"} Log In
 
     .container
       .row
