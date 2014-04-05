@@ -6,17 +6,21 @@
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
     - if @refresh
       %meta{:'http-equiv' => "refresh", :content => @refresh}
+
     %title= @title || "This is the Title."
     %link{:href => "/images/favicon.ico", :rel => "shortcut icon"}
+
     %link{:href=>'/stylesheets/bootstrap/bootstrap.min.css', :media => 'screen', :rel => 'stylesheet'}
     -if bootstrap_theme
       %link{:href=>bootstrap_theme, :media => 'screen', :rel => 'stylesheet'}
     %link{:href=>'//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css', :rel => 'stylesheet'}
     %link{:href=>'/stylesheets/application.css', :media => "screen", :rel => 'stylesheet'}
+
     %script{:src => "//code.jquery.com/jquery.js"}
     %script{:src => "//www.google.com/jsapi"}
     %script{:src => "/javascripts/chartkick.js"}
     %script{:src => "/javascripts/application.js"}
+
   %body
     - unless @no_navbar
       %nav.navbar.navbar-default.navbar-fixed-top{:role=>"navigation"}
