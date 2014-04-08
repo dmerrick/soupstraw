@@ -73,8 +73,11 @@ namespace :deploy do
   #  run "cd #{current_path} && env RAILS_ENV=#{rails_env} bundle exec rake db:seed"
   #end
 
+  # restart unicorn on each deploy
+  after :publishing, :restart
+
   # clean up old releases
-  after :finishing, 'deploy:cleanup'
+  after :finishing, :cleanup
   after :finishing, 'newrelic:notice_deployment'
 
 end
