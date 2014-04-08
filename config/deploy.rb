@@ -24,7 +24,8 @@ set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle publi
 
 # rbenv options
 set :rbenv_type, :system
-set :rbenv_ruby, '2.0.0-p247'
+#TODO: consider something like: File.read(File.join(File.dirname(__FILE__), '../.ruby-version'))
+set :rbenv_ruby, '2.1.1'
 set :rbenv_custom_path, '/opt/rbenv'
 
 # set to :debug if things are breaking
