@@ -14,8 +14,10 @@ namespace :bitcoin do
   namespace :snapshot do
     desc "Take snapshots for every mining rig"
     task :all do
+
       env = settings.environment.to_s
       start_time = Time.now
+
       if env == 'production'
         config_file = File.join(settings.root, 'config', 'application.yml')
         datadog_key = YAML.load_file(config_file)[env]['datadog_key']

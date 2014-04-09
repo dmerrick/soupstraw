@@ -1,13 +1,21 @@
 module Bitcoin
 
+  # hash to store the most recent USD value
+  @last_usd_value ||= Hash.new(0)
+
   # find current BTC->USD exchange rate (weighted average)
   def current_usd_value
-    #FIXME: this doesn't work cause you can't access settings
-    # within a static method (for whatever reason)
-    #usd_value_url = settings.app[:usd_value_api]
+    # return cached value if it was taken recently
+    cache_age = (Time.now - @last_usd_value[:last_update]).to_i
+    return @last_usd_value[:value] if cache_age < 2.minutes
+
+    # otherwise, get the current USD value from bitcoinaverage.com API
     usd_value_url = 'http://api.bitcoinaverage.com/ticker/global/USD'
     current_value_json = JSON.parse(URI.parse(usd_value_url).read)
-    current_value_json['last'].to_f
+
+    # cache the latest value and return it
+    @last_usd_value[:last_update] = Time.now
+    @last_usd_value[:value] = current_value_json['last'].to_f
   end
 
   def usd_format(value, commas: true)
