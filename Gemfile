@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-ruby   '2.1.1'
 
 gem 'rake'
 gem 'sinatra'
@@ -22,12 +21,9 @@ gem 'pry'
 gem 'tux'
 gem 'capistrano'
 gem 'capistrano-bundler'
-# enables OSX notifications
-gem 'capistrano-nc', '~> 0.1.0'
-#TODO: get migrations working
-#gem 'capistrano-rails'
+gem 'capistrano-nc', '~> 0.1.0' # enables OSX notifications
+#gem 'capistrano-rails' #TODO: get migrations working
 gem 'capistrano-rbenv', github: 'capistrano/rbenv'
-# datadog capistrano plugin
 gem 'dogapi'
 gem 'capistrano-newrelic'
 
