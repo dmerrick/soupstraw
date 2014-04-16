@@ -10,15 +10,21 @@ class Soupstraw < Sinatra::Base
 
   get '/lights/on', auth: :user do
     response = home_api('/lights/on')
-    #TODO: make this actually take advantage of the response
-    #redirect '/lights', info: 'Lights are now on.'
     redirect '/wall_remote'
   end
 
   get '/lights/off', auth: :user do
     response = home_api('/lights/off')
-    #TODO: make this actually take advantage of the response
-    #redirect '/lights', info: 'Lights are now off.'
+    redirect '/wall_remote'
+  end
+
+  get '/lights/toggle', auth: :user do
+    @light_id = request[:light_id] || 1
+    redirect "/lights/toggle/#{@light_id}?#{request.query_string}"
+  end
+
+  get '/lights/toggle/:id', auth: :user do
+    response = home_api("/lights/toggle/#{params[:id]}?#{request.query_string}")
     redirect '/wall_remote'
   end
 
