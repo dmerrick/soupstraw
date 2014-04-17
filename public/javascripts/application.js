@@ -7,4 +7,9 @@ $(document).ready(function() {
     .addClass('link external')
     .attr('target', '_blank');
 
+  // make iPad wall remote more responsive
+  $(function() {
+    FastClick.attach(document.body);
+  });
+
 });
