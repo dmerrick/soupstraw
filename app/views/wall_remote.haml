@@ -30,7 +30,7 @@
   .row.text-center
     .control-group
       .btn-group
-        %a{:id=>'wall-remote', :href=>'#'}
+        %a{:id=>'wall-remote', :href=>'/wall_remote/previous'}
           %button.btn.btn-default
             %strong
               %i.fa.fa-fast-backward
@@ -42,11 +42,11 @@
           %button.btn.btn-inverse.active
             %strong
               %i.fa.fa-play
-        %a{:id=>'wall-remote', :href=>'#'}
+        %a{:id=>'wall-remote', :href=>'/wall_remote/stop'}
           %button.btn.btn-default
             %strong
               %i.fa.fa-stop
-        %a{:id=>'wall-remote', :href=>'#'}
+        %a{:id=>'wall-remote', :href=>'/wall_remote/next'}
           %button.btn.btn-default
             %strong
               %i.fa.fa-fast-forward

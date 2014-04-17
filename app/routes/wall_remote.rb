@@ -13,7 +13,6 @@ class Soupstraw < Sinatra::Base
     @refresh = 30.minutes
 
     response = home_api('/itunes/play')
-    flash.now[:info] = response.body
     haml :wall_remote
   end
 
@@ -23,7 +22,33 @@ class Soupstraw < Sinatra::Base
     @refresh = 30.minutes
 
     response = home_api('/itunes/pause')
-    flash.now[:info] = response.body
+    haml :wall_remote
+  end
+
+  get '/wall_remote/stop', auth: :user do
+    @title = 'Soupstraw Wall Remote!'
+    @no_navbar = true
+    @refresh = 30.minutes
+
+    response = home_api('/itunes/stop')
+    haml :wall_remote
+  end
+
+  get '/wall_remote/next', auth: :user do
+    @title = 'Soupstraw Wall Remote!'
+    @no_navbar = true
+    @refresh = 30.minutes
+
+    response = home_api('/itunes/next')
+    haml :wall_remote
+  end
+
+  get '/wall_remote/previous', auth: :user do
+    @title = 'Soupstraw Wall Remote!'
+    @no_navbar = true
+    @refresh = 30.minutes
+
+    response = home_api('/itunes/previous')
     haml :wall_remote
   end
 
