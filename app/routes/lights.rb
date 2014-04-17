@@ -18,6 +18,12 @@ class Soupstraw < Sinatra::Base
     redirect '/wall_remote'
   end
 
+  # reset all lights to white
+  get '/lights/reset', auth: :user do
+    response = home_api('/lights/reset')
+    redirect '/wall_remote'
+  end
+
   get '/lights/toggle', auth: :user do
     @light_id = request[:light_id] || 1
     redirect "/lights/toggle/#{@light_id}?#{request.query_string}"
