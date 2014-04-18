@@ -11,7 +11,7 @@ class Soupstraw < Sinatra::Base
   get '/wall_remote/play', auth: :user do
     @title = 'Soupstraw Wall Remote!'
     @no_navbar = true
-    @refresh = 30.minutes
+    @refresh = "#{30.minutes}; url=/wall_remote"
 
     response = home_api('/itunes/play')
     haml :wall_remote
@@ -20,7 +20,7 @@ class Soupstraw < Sinatra::Base
   get '/wall_remote/pause', auth: :user do
     @title = 'Soupstraw Wall Remote!'
     @no_navbar = true
-    @refresh = 30.minutes
+    @refresh = "#{30.minutes}; url=/wall_remote"
 
     response = home_api('/itunes/pause')
     haml :wall_remote
@@ -29,7 +29,7 @@ class Soupstraw < Sinatra::Base
   get '/wall_remote/stop', auth: :user do
     @title = 'Soupstraw Wall Remote!'
     @no_navbar = true
-    @refresh = 30.minutes
+    @refresh = "#{30.minutes}; url=/wall_remote"
 
     response = home_api('/itunes/stop')
     haml :wall_remote
@@ -38,7 +38,7 @@ class Soupstraw < Sinatra::Base
   get '/wall_remote/next', auth: :user do
     @title = 'Soupstraw Wall Remote!'
     @no_navbar = true
-    @refresh = 30.minutes
+    @refresh = "#{30.minutes}; url=/wall_remote"
 
     response = home_api('/itunes/next')
     haml :wall_remote
@@ -47,7 +47,7 @@ class Soupstraw < Sinatra::Base
   get '/wall_remote/previous', auth: :user do
     @title = 'Soupstraw Wall Remote!'
     @no_navbar = true
-    @refresh = 30.minutes
+    @refresh = "#{30.minutes}; url=/wall_remote"
 
     response = home_api('/itunes/previous')
     haml :wall_remote
