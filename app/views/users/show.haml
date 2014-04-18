@@ -1,20 +1,10 @@
 - if @user
-  .page-header
-    %h2= "Welcome, #{@user.name}"
 
   .row
-    .col-md-6
-      .panel.panel-default
-        .panel-heading
-          Hue Lights
-        %ul.list-group
-          %li.list-group-item
-            %span
-              %a{:href=>'/lights/on'} on
-              \/
-              %a{:href=>'/lights/off'} off
-
-    .col-md-2
-      .well.well-lg
-        %strong
-          %a{:href=>'/log_out'} Log out
+    .jumbotron
+      .container
+        %h1= "Welcome, #{@user.name}"
+        %p
+          %a.btn.btn-primary.btn-lg{:href=>"/wall_remote"} Wall Remote
+        %p
+          %a.btn.btn-primary{:href=>"/log_out"} Log out
