@@ -35,7 +35,7 @@ module Bitcoin
     when 91.0..98.0
       return 'warning'
     when 99.0..100.0
-      return ''
+      return '' # just be white
     else
       return 'success'
     end
