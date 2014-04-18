@@ -4,6 +4,7 @@ class Soupstraw < Sinatra::Base
     @title = 'Soupstraw Wall Remote!'
     @no_navbar = true
     @refresh = 30.minutes
+
     haml :wall_remote
   end
 

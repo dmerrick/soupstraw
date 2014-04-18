@@ -9,19 +9,31 @@ class Soupstraw < Sinatra::Base
   end
 
   get '/lights/on', auth: :user do
+    @title = 'Soupstraw Wall Remote!'
+    @no_navbar = true
+    @refresh = 30.minutes
+
     response = home_api('/lights/on')
-    redirect '/wall_remote'
+    haml :wall_remote
   end
 
   get '/lights/off', auth: :user do
+    @title = 'Soupstraw Wall Remote!'
+    @no_navbar = true
+    @refresh = 30.minutes
+
     response = home_api('/lights/off')
-    redirect '/wall_remote'
+    haml :wall_remote
   end
 
   # reset all lights to white
   get '/lights/reset', auth: :user do
+    @title = 'Soupstraw Wall Remote!'
+    @no_navbar = true
+    @refresh = 30.minutes
+
     response = home_api('/lights/reset')
-    redirect '/wall_remote'
+    haml :wall_remote
   end
 
   get '/lights/toggle', auth: :user do
@@ -30,8 +42,12 @@ class Soupstraw < Sinatra::Base
   end
 
   get '/lights/toggle/:id', auth: :user do
+    @title = 'Soupstraw Wall Remote!'
+    @no_navbar = true
+    @refresh = 30.minutes
+
     response = home_api("/lights/toggle/#{params[:id]}?#{request.query_string}")
-    redirect '/wall_remote'
+    haml :wall_remote
   end
 
   get '/lights/flash/?', auth: :user do
