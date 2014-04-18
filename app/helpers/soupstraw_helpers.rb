@@ -43,4 +43,10 @@ module SoupstrawHelpers
     parts.first
   end
 
+  def wall_remote_settings
+    @title = 'Soupstraw Wall Remote!'
+    @no_navbar = true
+    @refresh = "#{30.minutes}; url=/wall_remote"
+  end
+
 end
