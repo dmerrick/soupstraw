@@ -27,13 +27,13 @@ set :rbenv_type, :system
 set :rbenv_ruby, `cat .ruby-version`.chomp
 set :rbenv_custom_path, '/opt/rbenv'
 
-# set to :debug if things are breaking
+# set to :debug, and :format to :pretty if things are breaking
 set :log_level, :info
+set :format, :dot
 
 # some defaults to keep around
 # set :default_env, { path: "/opt/rbenv/bin:$PATH" }
 # set :keep_releases, 5
-# set :format, :pretty
 
 namespace :deploy do
 
