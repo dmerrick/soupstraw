@@ -59,9 +59,34 @@
                     %a{:href => '/lights/on'} Lights On
                   %li
                     %a{:href => '/lights/off'} Lights Off
-                  %li.divider
+
+            - if @user
+              %li.dropdown
+                %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown'}
+                  Wall Remote
+                  %b.caret
+                %ul.dropdown-menu
                   %li
                     %a{:href => '/wall_remote'} Wall Remote
+                  %li.divider
+                  %li
+                    %a{:href => '/lights/on'} Lights On
+                  %li
+                    %a{:href => '/lights/off'} Lights Off
+                  %li.divider
+                  %li
+                    %a{:href => '/wall_remote/play'} Play
+                  %li
+                    %a{:href => '/wall_remote/pause'} Pause
+                  %li
+                    %a{:href => '/wall_remote/next'} Next
+                  %li
+                    %a{:href => '/wall_remote/previous'} Previous
+                  %li.divider
+                  %li
+                    %a{:href => '/wall_remote/volume/up'} Volume Up
+                  %li
+                    %a{:href => '/wall_remote/volume/down'} Volume Down
 
           %ul.nav.navbar-right
             - if @user
