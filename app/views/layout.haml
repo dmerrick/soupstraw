@@ -67,26 +67,44 @@
                   %b.caret
                 %ul.dropdown-menu
                   %li
-                    %a{:href => '/wall_remote'} Wall Remote
+                    %a{:href => '/wall_remote'}
+                      %i.fa.fa-desktop
+                      Wall Remote
                   %li.divider
                   %li
-                    %a{:href => '/lights/on'} Lights On
+                    %a{:href => '/lights/on'}
+                      %i.fa.fa-eye
+                      Lights On
                   %li
-                    %a{:href => '/lights/off'} Lights Off
+                    %a{:href => '/lights/off'}
+                      %i.fa.fa-eye-slash
+                      Lights Off
                   %li.divider
                   %li
-                    %a{:href => '/wall_remote/play'} Play
+                    %a{:href => '/wall_remote/play'}
+                      %i.fa.fa-play
+                      Play
                   %li
-                    %a{:href => '/wall_remote/pause'} Pause
+                    %a{:href => '/wall_remote/pause'}
+                      %i.fa.fa-pause
+                      Pause
                   %li
-                    %a{:href => '/wall_remote/next'} Next
+                    %a{:href => '/wall_remote/next'}
+                      %i.fa.fa-fast-forward
+                      Next
                   %li
-                    %a{:href => '/wall_remote/previous'} Previous
+                    %a{:href => '/wall_remote/previous'}
+                      %i.fa.fa-fast-backward
+                      Previous
                   %li.divider
                   %li
-                    %a{:href => '/wall_remote/volume/up'} Volume Up
+                    %a{:href => '/wall_remote/volume/up'}
+                      %i.fa.fa-volume-up
+                      Volume Up
                   %li
-                    %a{:href => '/wall_remote/volume/down'} Volume Down
+                    %a{:href => '/wall_remote/volume/down'}
+                      %i.fa.fa-volume-down
+                      Volume Down
 
           %ul.nav.navbar-right
             - if @user
