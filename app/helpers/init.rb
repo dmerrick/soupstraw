@@ -12,3 +12,7 @@ Soupstraw.helpers RenderPartial
 # enable bitcoin methods
 require_relative 'bitcoin'
 Soupstraw.helpers Bitcoin
+
+# enable healthcheck methods
+require_relative 'healthchecks'
+Soupstraw.helpers Healthchecks
