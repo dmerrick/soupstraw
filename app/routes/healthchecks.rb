@@ -1,5 +1,21 @@
 class Soupstraw < Sinatra::Base
 
+  # return OK if all components are alive
+  get '/healthcheck' do
+    content_type 'text/plain'
+
+    # start by checking cronhealth
+    cronhealth_status = get_self('/cronhealth').body
+    return cronhealth_status unless cronhealth_status =~ /OK/
+
+    # check the media center, which also tests deafguy
+    mediacenter_status = get_self('/healthcheck/mediacenter').body
+    return mediacenter_status unless mediacenter_status =~ /OK/
+
+    # if the above worked, we're good
+    'OK'
+  end
+
   # return OK if deafguy is alive and
   # running the right configuration
   get '/healthcheck/deafguy' do

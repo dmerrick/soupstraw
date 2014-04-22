@@ -35,6 +35,14 @@ module SoupstrawHelpers
     http.request(request)
   end
 
+  # make a request to a path on the current server
+  def get_self(path)
+    uri = URI.parse("http://localhost:#{request.env["SERVER_PORT"] + path}")
+    request = Net::HTTP::Get.new(uri.request_uri)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.request(request)
+  end
+
   def subdomain
     uri = URI.parse("http://#{request.env["HTTP_HOST"]}")
     parts = uri.host.split(".")
