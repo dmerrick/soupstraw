@@ -33,4 +33,22 @@ class Soupstraw < Sinatra::Base
     haml :blank
   end
 
+  # return OK if deafguy is alive and
+  # running the right configuration
+  get '/healthcheck/deafguy' do
+    content_type 'text/plain'
+    response = home_api('/')
+    return 'NODEAFGUY' unless response.body =~ /deafguy/
+    'OK'
+  end
+
+  # return OK if the media center is alive and
+  # running the right configuration
+  get '/healthcheck/mediacenter' do
+    content_type 'text/plain'
+    response = home_api('/healthcheck/mediacenter')
+    return response.body unless response.body =~ /OK/
+    'OK'
+  end
+
 end

@@ -133,6 +133,7 @@ class Soupstraw < Sinatra::Base
 
   # return OK if snapshots are still recent
   get '/cronhealth' do
+    content_type 'text/plain'
     threshold = 10.minutes
     last_snapshot = BitcoinStatsSnapshot.last
     seconds_since_last_snapshot = DateTime.now.to_i - last_snapshot.created_at.to_i
