@@ -30,6 +30,7 @@ module SoupstrawHelpers
     uri = URI.parse('http://' + settings.app[:home_url] + path)
     request = Net::HTTP::Get.new(uri.request_uri)
     request.basic_auth(settings.app[:home_username], settings.app[:home_password])
+    #TODO: catch exceptions here
     http = Net::HTTP.new(uri.host, uri.port)
     http.request(request)
   end
