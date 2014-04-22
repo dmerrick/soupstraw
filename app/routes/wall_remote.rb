@@ -35,4 +35,16 @@ class Soupstraw < Sinatra::Base
     haml :wall_remote
   end
 
+  get '/wall_remote/volume/up', auth: :user do
+    wall_remote_settings
+    response = home_api('/itunes/volume/up')
+    haml :wall_remote
+  end
+
+  get '/wall_remote/volume/down', auth: :user do
+    wall_remote_settings
+    response = home_api('/itunes/volume/down')
+    haml :wall_remote
+  end
+
 end
