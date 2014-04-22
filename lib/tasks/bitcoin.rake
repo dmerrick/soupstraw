@@ -39,6 +39,7 @@ namespace :bitcoin do
             # send the exception and the snapshot
             #TODO: improve me
             content = "#{e.inspect}
+                       #{e.backtrace.join("\n")}
                        #{snapshot.inspect}"
             hostname = Dogapi.find_localhost
             service = 'cron_btc_snapshot'
