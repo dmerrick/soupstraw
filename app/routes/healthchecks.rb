@@ -4,8 +4,12 @@ class Soupstraw < Sinatra::Base
   # running the right configuration
   get '/healthcheck/deafguy' do
     content_type 'text/plain'
-    response = home_api('/')
-    return 'NODEAFGUY' unless response.body =~ /deafguy/
+    begin
+      response = home_api('/')
+    rescue Errno::ECONNREFUSED
+      return 'DEAFGUYDOWN'
+    end
+    return 'NOTDEAFGUY' unless response.body =~ /deafguy/
     'OK'
   end
 
@@ -13,7 +17,11 @@ class Soupstraw < Sinatra::Base
   # running the right configuration
   get '/healthcheck/mediacenter' do
     content_type 'text/plain'
-    response = home_api('/healthcheck/mediacenter')
+    begin
+      response = home_api('/healthcheck/mediacenter')
+    rescue Errno::ECONNREFUSED
+      return 'DEAFGUYDOWN'
+    end
     return response.body unless response.body =~ /OK/
     'OK'
   end
