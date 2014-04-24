@@ -76,7 +76,66 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %button.close{:'data-dismiss'=>'modal', :'aria-hidden'=>'true'}
-          &times;
+        %h3
+          %i.fa.fa-desktop
+          Icon Glossary
+
       .modal-body
-        There will be an icon glossary here.
+        %h4
+          Living room light controls:
+        %p
+          %i.fa.fa-2x.fa-eye
+          \: Lights On
+        %p
+          %i.fa.fa-2x.fa-eye-slash
+          \: Lights Off
+        %p
+          %i.fa.fa-2x.fa-trash-o
+          \: Reset Color
+
+        %hr
+        %h4
+          Individual light controls:
+        - if is_dana?
+          %p
+            %i.fa.fa-2x.fa-angle-double-left
+            \: Dana's Bedroom
+        %p
+          %i.fa.fa-2x.fa-angle-left
+          \: Morgan's Desk
+        %p
+          %i.fa.fa-2x.fa-angle-double-up
+          \: Nearest TV
+        %p
+          %i.fa.fa-2x.fa-angle-up
+          \: Couches
+
+        %hr
+        %h4
+          iTunes controls:
+        %p
+          %i.fa.fa-2x.fa-play
+          \: Play
+        %p
+          %i.fa.fa-2x.fa-pause
+          \: Pause
+        %p
+          %i.fa.fa-2x.fa-stop
+          \: Stop
+        %p
+          %i.fa.fa-2x.fa-fast-forward
+          \: Next
+        %p
+          %i.fa.fa-2x.fa-fast-backward
+          \: Previous
+        %p
+          %i.fa.fa-2x.fa-volume-up
+          \: Volume Up
+        %p
+          %i.fa.fa-2x.fa-volume-down
+          \: Volume Down
+
+        %hr
+        %p
+          %i.fa.fa-2x.fa-question
+          \: This Guide
