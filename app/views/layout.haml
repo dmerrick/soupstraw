@@ -48,14 +48,14 @@
                   %a{:href => '/stats'} Stats
                 %li
                   %a{:href => '/themes'} Themes
-                - if @user
+                - if is_user?
                   %li.divider
                   %li
                     %a{:href => '/bladehealth'} Blade Health
                   %li
                     %a{:href => '/graphs'} Graphs
 
-            - if @user
+            - if is_user?
               %li.dropdown
                 %a.dropdown-toggle{:href => '#', :'data-toggle' => 'dropdown'}
                   Wall Remote
@@ -102,7 +102,7 @@
                       Volume Down
 
           %ul.nav.navbar-right
-            - if @user
+            - if is_user?
               %li
                 %p.navbar-text
                   Hello,

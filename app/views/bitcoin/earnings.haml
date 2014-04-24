@@ -3,7 +3,7 @@
     = "#{usd_format(@stats.total_earned)} worth of BTC mined"
     %small.hidden-if-mobile (Updated every minute.)
 
-- if @user
+- if is_user?
   .lead= @stats.mining_rig.name
 
 
@@ -81,7 +81,7 @@
         %a{:href=>"http://eligius.st/~wizkid057/newstats/userstats.php/#{@stats.mining_rig.wallet_address}"} Mining Pool Stats
     .well.well-sm
       %a{:href=>"http://bitcoinaverage.com/#USD"} Average Bitcoin Value
-    - if @user && !@stats.new_record?
+    - if is_user? && !@stats.new_record?
       .well.well-sm
         %a{:href=>"/graphs/#{@stats.mining_rig.id}"} Graphs
     .panel.panel-default
