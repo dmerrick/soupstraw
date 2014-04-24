@@ -20,10 +20,17 @@ class Soupstraw < Sinatra::Base
     haml :wall_remote
   end
 
-  # reset all lights to white
+  # reset living room light(s) to white
   get '/lights/living_room/reset', auth: :user do
     wall_remote_settings
     response = home_api('/lights/living_room/reset')
+    haml :wall_remote
+  end
+
+  # reset bedroom light(s) to white
+  get '/lights/bedroom/reset', auth: :dana do
+    wall_remote_settings
+    response = home_api('/lights/bedroom/reset')
     haml :wall_remote
   end
 
