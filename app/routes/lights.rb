@@ -8,6 +8,8 @@ class Soupstraw < Sinatra::Base
     haml :lights
   end
 
+  #TODO: add brightness controls
+
   get '/lights/living_room/on', auth: :user do
     wall_remote_settings
     response = home_api('/lights/living_room/on')
