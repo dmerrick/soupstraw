@@ -10,20 +10,20 @@ class Soupstraw < Sinatra::Base
 
   get '/lights/living_room/on', auth: :user do
     wall_remote_settings
-    response = home_api('/lights/on')
+    response = home_api('/lights/living_room/on')
     haml :wall_remote
   end
 
   get '/lights/living_room/off', auth: :user do
     wall_remote_settings
-    response = home_api('/lights/off')
+    response = home_api('/lights/living_room/off')
     haml :wall_remote
   end
 
   # reset all lights to white
   get '/lights/living_room/reset', auth: :user do
     wall_remote_settings
-    response = home_api('/lights/reset')
+    response = home_api('/lights/living_room/reset')
     haml :wall_remote
   end
 
