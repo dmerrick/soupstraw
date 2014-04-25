@@ -9,6 +9,7 @@
     - if @no_navbar
       / hide the mobile Safari UI
       %meta{:name => 'apple-mobile-web-app-capable', :content => 'yes'}
+      %meta{:name => 'apple-mobile-web-app-status-bar-style', :content => 'black-translucent'}
 
     %title= @title || "This is the Title."
     %link{:href => "/images/favicon.ico", :rel => "shortcut icon"}
