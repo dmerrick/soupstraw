@@ -38,15 +38,6 @@ body {
   border-top-right-radius: 0;
 }
 
-// keep this at the bottom
-// http://stackoverflow.com/questions/10513715
-// 767px is taken from bootstrap's navbar-collapse
-@media (max-width: 767px) {
-  .hidden-if-mobile {
-    display:none !important;
-  }
-}
-
 .btn-xxl {
   padding: 18px 28px;
   font-size: 172px;
@@ -65,4 +56,13 @@ body {
   position: absolute;
   bottom: 0;
   margin-bottom: 15px;
+}
+
+// keep this at the bottom
+// http://stackoverflow.com/questions/10513715
+// 767px is taken from bootstrap's navbar-collapse
+@media (max-width: 767px) {
+  .hidden-if-mobile {
+    display:none !important;
+  }
 }
