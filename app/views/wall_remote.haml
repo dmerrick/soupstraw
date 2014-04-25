@@ -6,11 +6,11 @@
           %a{:id=>'wall-remote', :href=>'/lights/living_room/on'}
             %button.btn.btn-xxl.btn-default
               %strong
-                %i.fa.fa-eye
+                %i.fa.fa-fw.fa-eye
           %a{:id=>'wall-remote', :href=>'/lights/living_room/off'}
             %button.btn.btn-xxl.btn-inverse.active
               %strong
-                %i.fa.fa-eye-slash
+                %i.fa.fa-fw.fa-eye-slash
 
     .container.top-buffer
       .row.text-center
@@ -18,19 +18,19 @@
           - if is_dana?
             %a{:id=>'wall-remote', :href=>'/lights/toggle/4'}
               %button.btn.btn-default
-                %i.fa.fa-4x.fa-angle-double-left
+                %i.fa.fa-4x.fa-fw.fa-angle-double-left
           %a{:id=>'wall-remote', :href=>'/lights/toggle/3'}
             %button.btn.btn-default
-              %i.fa.fa-4x.fa-angle-left
+              %i.fa.fa-4x.fa-fw.fa-angle-left
           %a{:id=>'wall-remote', :href=>'/lights/toggle/2'}
             %button.btn.btn-default
-              %i.fa.fa-4x.fa-angle-double-up
+              %i.fa.fa-4x.fa-fw.fa-angle-double-up
           %a{:id=>'wall-remote', :href=>'/lights/toggle/1'}
             %button.btn.btn-default
-              %i.fa.fa-4x.fa-angle-up
+              %i.fa.fa-4x.fa-fw.fa-angle-up
           %a{:id=>'wall-remote', :href=>'/lights/living_room/reset'}
             %button.btn.btn-default
-              %i.fa.fa-4x.fa-eraser
+              %i.fa.fa-4x.fa-fw.fa-eraser
 
     .container.top-buffer
       .row.text-center
@@ -39,34 +39,34 @@
             %a{:id=>'wall-remote', :href=>'/wall_remote/previous'}
               %button.btn.btn-default
                 %strong
-                  %i.fa.fa-3x.fa-fast-backward
+                  %i.fa.fa-3x.fa-fw.fa-fast-backward
             %a{:id=>'wall-remote', :href=>'/wall_remote/pause'}
               %button.btn.btn-default
                 %strong
-                  %i.fa.fa-3x.fa-pause
+                  %i.fa.fa-3x.fa-fw.fa-pause
             %a{:id=>'wall-remote', :href=>'/wall_remote/play'}
               %button.btn.btn-default
                 %strong
-                  %i.fa.fa-3x.fa-play
+                  %i.fa.fa-3x.fa-fw.fa-play
             %a{:id=>'wall-remote', :href=>'/wall_remote/stop'}
               %button.btn.btn-default
                 %strong
-                  %i.fa.fa-3x.fa-stop
+                  %i.fa.fa-3x.fa-fw.fa-stop
             %a{:id=>'wall-remote', :href=>'/wall_remote/next'}
               %button.btn.btn-default
                 %strong
-                  %i.fa.fa-3x.fa-fast-forward
+                  %i.fa.fa-3x.fa-fw.fa-fast-forward
 
   .control-group.pull-right
     .btn-group
       %a{:id=>'wall-remote', :href=>'/wall_remote/volume/down'}
         %button.btn.btn-default
           %strong
-            %i.fa.fa-2x.fa-volume-down
+            %i.fa.fa-2x.fa-fw.fa-volume-down
       %a{:id=>'wall-remote', :href=>'/wall_remote/volume/up'}
         %button.btn.btn-default
           %strong
-            %i.fa.fa-2x.fa-volume-up
+            %i.fa.fa-2x.fa-fw.fa-volume-up
 
 
 %button.btn.btn-default.btn-lg{:'data-toggle'=>'modal', :'data-target'=>'#helpmodal'}
@@ -84,13 +84,13 @@
         %h4
           Living room light controls:
         %p
-          %i.fa.fa-2x.fa-eye
+          %i.fa.fa-2x.fa-fw.fa-eye
           \: Lights On
         %p
-          %i.fa.fa-2x.fa-eye-slash
+          %i.fa.fa-2x.fa-fw.fa-eye-slash
           \: Lights Off
         %p
-          %i.fa.fa-2x.fa-eraser
+          %i.fa.fa-2x.fa-fw.fa-eraser
           \: Reset Color
 
         %hr
@@ -98,19 +98,19 @@
           Toggle individual lights:
         - if is_dana?
           %p
-            %i.fa.fa-2x.fa-angle-double-left
+            %i.fa.fa-2x.fa-fw.fa-angle-double-left
             \: Dana's Bedroom
         %p
-          %i.fa.fa-2x.fa-angle-left
+          %i.fa.fa-2x.fa-fw.fa-angle-left
           \: Morgan's Desk
         %p
-          %i.fa.fa-2x.fa-angle-double-up
+          %i.fa.fa-2x.fa-fw.fa-angle-double-up
           \: Nearest TV
         %p
-          %i.fa.fa-2x.fa-angle-up
+          %i.fa.fa-2x.fa-fw.fa-angle-up
           \: Couches
 
         %hr
         %p
-          %i.fa.fa-2x.fa-question
+          %i.fa.fa-2x.fa-fw.fa-question
           \: This Guide
