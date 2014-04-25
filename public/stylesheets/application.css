@@ -62,3 +62,9 @@ body {
 .top-buffer {
   margin-top: 20px;
 }
+
+.bottom-aligned {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 15px;
+}

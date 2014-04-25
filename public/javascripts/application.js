@@ -12,4 +12,8 @@ $(document).ready(function() {
     FastClick.attach(document.body);
   });
 
+  // show the wall remote tooltip
+  // (if we add more text, consider using a popover)
+  $('#wall-remote-tooltip').tooltip('show')
+
 });

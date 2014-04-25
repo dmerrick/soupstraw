@@ -68,9 +68,9 @@
           %strong
             %i.fa.fa-2x.fa-fw.fa-volume-up
 
-
-%button.btn.btn-default.btn-lg{:'data-toggle'=>'modal', :'data-target'=>'#helpmodal'}
-  %i.fa.fa-2x.fa-question
+.row
+  %button.btn.btn-default.btn-lg.bottom-aligned#wall-remote-tooltip{:'data-toggle'=>'modal', :'data-target'=>'#helpmodal', :'data-placement'=>'top', :'data-trigger'=>'manual', :title=>'Tap here to start!'}
+    %i.fa.fa-2x.fa-question
 
 .modal.fade#helpmodal{:'tabindex'=>'-1', :role=>'dialog', :'aria-labelledby'=>'helpmodallabel', :'aria-hidden'=>'true'}
   .modal-dialog
