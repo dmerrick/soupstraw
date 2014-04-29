@@ -10,7 +10,7 @@ module Bitcoin
     return @last_usd_value[:value] if cache_age < 2.minutes
 
     # otherwise, get the current USD value from bitcoinaverage.com API
-    usd_value_url = 'http://api.bitcoinaverage.com/ticker/global/USD'
+    usd_value_url = 'https://api.bitcoinaverage.com/ticker/global/USD'
     current_value_json = JSON.parse(URI.parse(usd_value_url).read)
 
     # cache the latest value and return it
