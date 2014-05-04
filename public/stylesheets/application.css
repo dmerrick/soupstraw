@@ -54,6 +54,18 @@ body {
   color: black;
 }
 
+.eraser {
+  color: #ED82A2;
+}
+
+.sun {
+  color: #ED648D;
+}
+
+.moon {
+  color: #E8D5B7;
+}
+
 .top-buffer {
   margin-top: 20px;
 }
