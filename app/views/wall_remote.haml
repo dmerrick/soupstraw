@@ -3,70 +3,70 @@
     .container
       .row.text-center
         .btn-group
-          %a.sun{:href=>'/lights/living_room/on'}
+          %a{:href=>'/lights/living_room/on'}
             %button.btn.btn-xxl.btn-default
               %strong
-                %i.fa.fa-fw.fa-sun-o
-          %a.moon{:href=>'/lights/living_room/off'}
+                %i.fa.fa-fw.fa-sun-o.sun
+          %a{:href=>'/lights/living_room/off'}
             %button.btn.btn-xxl.btn-inverse.active
               %strong
-                %i.fa.fa-fw.fa-moon-o
+                %i.fa.fa-fw.fa-moon-o.moon
 
     .container.top-buffer
       .row.text-center
         .btn-group
           - if is_dana?
-            %a.black{:href=>'/lights/toggle/4'}
+            %a{:href=>'/lights/toggle/4'}
               %button.btn.btn-default
-                %i.fa.fa-4x.fa-fw.fa-angle-double-left
-          %a.black{:href=>'/lights/toggle/3'}
+                %i.fa.fa-4x.fa-fw.fa-angle-double-left.black
+          %a{:href=>'/lights/toggle/3'}
             %button.btn.btn-default
-              %i.fa.fa-4x.fa-fw.fa-angle-left
-          %a.black{:href=>'/lights/toggle/2'}
+              %i.fa.fa-4x.fa-fw.fa-angle-left.black
+          %a{:href=>'/lights/toggle/2'}
             %button.btn.btn-default
-              %i.fa.fa-4x.fa-fw.fa-angle-double-up
-          %a.black{:href=>'/lights/toggle/1'}
+              %i.fa.fa-4x.fa-fw.fa-angle-double-up.black
+          %a{:href=>'/lights/toggle/1'}
             %button.btn.btn-default
-              %i.fa.fa-4x.fa-fw.fa-angle-up
-          %a.eraser{:href=>'/lights/living_room/reset'}
+              %i.fa.fa-4x.fa-fw.fa-angle-up.black
+          %a{:href=>'/lights/living_room/reset'}
             %button.btn.btn-default
-              %i.fa.fa-4x.fa-fw.fa-eraser
+              %i.fa.fa-4x.fa-fw.fa-eraser.eraser
 
     .container.top-buffer
       .row.text-center
         .control-group
           .btn-group
-            %a.black{:href=>'/wall_remote/previous'}
+            %a{:href=>'/wall_remote/previous'}
               %button.btn.btn-default
                 %strong
-                  %i.fa.fa-3x.fa-fw.fa-fast-backward
-            %a.black{:href=>'/wall_remote/pause'}
+                  %i.fa.fa-3x.fa-fw.fa-fast-backward.black
+            %a{:href=>'/wall_remote/pause'}
               %button.btn.btn-default
                 %strong
-                  %i.fa.fa-3x.fa-fw.fa-pause
-            %a.black{:href=>'/wall_remote/play'}
+                  %i.fa.fa-3x.fa-fw.fa-pause.black
+            %a{:href=>'/wall_remote/play'}
               %button.btn.btn-default
                 %strong
-                  %i.fa.fa-3x.fa-fw.fa-play
-            %a.black{:href=>'/wall_remote/stop'}
+                  %i.fa.fa-3x.fa-fw.fa-play.black
+            %a{:href=>'/wall_remote/stop'}
               %button.btn.btn-default
                 %strong
-                  %i.fa.fa-3x.fa-fw.fa-stop
-            %a.black{:href=>'/wall_remote/next'}
+                  %i.fa.fa-3x.fa-fw.fa-stop.black
+            %a{:href=>'/wall_remote/next'}
               %button.btn.btn-default
                 %strong
-                  %i.fa.fa-3x.fa-fw.fa-fast-forward
+                  %i.fa.fa-3x.fa-fw.fa-fast-forward.black
 
   .control-group.pull-right
     .btn-group
-      %a.black{:href=>'/wall_remote/volume/down'}
+      %a{:href=>'/wall_remote/volume/down'}
         %button.btn.btn-default
           %strong
-            %i.fa.fa-2x.fa-fw.fa-volume-down
-      %a.black{:href=>'/wall_remote/volume/up'}
+            %i.fa.fa-2x.fa-fw.fa-volume-down.black
+      %a{:href=>'/wall_remote/volume/up'}
         %button.btn.btn-default
           %strong
-            %i.fa.fa-2x.fa-fw.fa-volume-up
+            %i.fa.fa-2x.fa-fw.fa-volume-up.black
 
 .row
   %button.btn.btn-default.btn-lg.bottom-aligned#wall-remote-tooltip{:'data-toggle'=>'modal', :'data-target'=>'#helpmodal', :'data-placement'=>'top', :'data-trigger'=>'manual', :title=>'Tap here to start!'}
