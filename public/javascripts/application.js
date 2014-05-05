@@ -17,43 +17,33 @@ $(document).ready(function() {
   $('#wall-remote-tooltip').tooltip('show');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // try connecting to the API endpoint on the local network,
   // and if that fails, redirect to the path
   function try_local_before_redirecting(path) {
 
     // try the local API endpoint first
     api_url = "http://10.0.1.2:9595" + path
-    alert(api_url);
-    $.get( api_url, function() {
+    //alert(api_url);
 
-      // local request worked,
-      // so we need to stop right here
-      alert("ajax worked; stopping");
-      
-    }).fail(function() {
+    // FIXME: maybe try getJSON()?
+    $.ajax({
+      url: api_url,
+      dataType: "jsonp",
+      success: function (data) {
 
-      alert("ajax failed");
+        // local request worked,
+        // so we need to stop right here
+        alert("ajax worked; stopping");
 
-      // local request failed,
-      // so redirect to the path
-      window.location = path;
+      },
+      failure: function (data) {
 
+        // local request failed,
+        // so redirect to the path
+        alert("ajax failed");
+        //window.location = path;
+
+      }
     });
 
   } // end try_local_before_redirecting()
@@ -62,9 +52,12 @@ $(document).ready(function() {
   // this is just an example selector for now
   // (only the volume up button uses it right now)
   $("a#ajax-test").click(function(e) {
-    e.stopPropagation();
+    // FIXME: use this magic? ...
+    //e.stopPropagation();
     path = $(this).attr('href');
     try_local_before_redirecting(path);
+    // FIXME: ... or this magic?
+    //return false;
   });
 
   function try_local_before_redirecting(path) {
