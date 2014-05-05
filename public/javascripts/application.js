@@ -16,17 +16,36 @@ $(document).ready(function() {
   // (if we add more text, consider using a popover)
   $('#wall-remote-tooltip').tooltip('show');
 
+
+  // try connecting to the API endpoint on the local network,
+  // and if that fails, redirect to the path
   function try_local_before_redirecting(path) {
+
+    // try the local API endpoint first
     api_url = "http://10.0.1.2:9595" + path
-
     $.get( api_url, function() {
-      alert( "success" );
-    }).fail(function() {
-      alert( "error" );
-    });
-  }
 
-  $("a#ajax-test").click(function() {
+      // TODO: implement me
+      // local request worked,
+      // so we need to stop right here
+      // as in, stop the page from following the link
+      // do I do this with a return?
+      // or is there a better way to do this?
+
+    }).fail(function() {
+
+      // TODO: implement me
+      // local request failed,
+      // so just follow the link
+
+    });
+
+  } // end try_local_before_redirecting()
+
+  // actually attach the function to the buttons
+  // this is just an example selector for now
+  // (only the volume up button uses it right now)
+  $("a #ajax-test").click(function() {
     path = $(this).attr('href');
     try_local_before_redirecting(path);
   });
