@@ -2,6 +2,9 @@
 
 ## How do I get started?
 
+    cp config/application.yml.example application.yml
+    cp config/database.yml.example database.yml
+    # vim application.yml database.yml
     bundle install
     rake db:migrate
 
