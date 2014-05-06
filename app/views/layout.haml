@@ -15,6 +15,10 @@
 
     %title= @title || "This is the Title."
     %link{:href => "/images/favicon.ico", :rel => "shortcut icon"}
+    - if @apple_touch_icon
+      / custom apple touch icon here
+    - else
+      %link{:href => "/images/tablet-apple-touch-icon-144x144-precomposed.png", :rel => "apple-touch-icon"}
 
     %link{:href=>'/stylesheets/bootstrap/bootstrap.min.css', :media => 'screen', :rel => 'stylesheet'}
     -if bootstrap_theme
