@@ -17,6 +17,16 @@ module SoupstrawHelpers
     end
   end
 
+  def apple_touch_icon(icon)
+    path = "/images/#{icon}-apple-touch-icon-144x144-precomposed.png"
+    if File.exist? "#{settings.root}/public#{path}"
+      return path
+    else
+      # default site icon
+      return "/images/tablet-apple-touch-icon-144x144-precomposed.png"
+    end
+  end
+
   def h(text)
     Rack::Utils.escape_html(text)
   end

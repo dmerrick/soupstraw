@@ -12,12 +12,14 @@ class Soupstraw < Sinatra::Base
 
   get '/lights/living_room/on', auth: :user do
     wall_remote_settings
+    @icon = 'eye'
     response = home_api('/lights/living_room/on')
     haml :wall_remote
   end
 
   get '/lights/living_room/off', auth: :user do
     wall_remote_settings
+    @icon = 'eye-slash'
     response = home_api('/lights/living_room/off')
     haml :wall_remote
   end
@@ -43,6 +45,7 @@ class Soupstraw < Sinatra::Base
 
   get '/lights/toggle/:id', auth: :user do
     wall_remote_settings
+    @icon = 'light'
     response = home_api("/lights/toggle/#{params[:id]}?#{request.query_string}")
     haml :wall_remote
   end
