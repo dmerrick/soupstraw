@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+#FIXME: better place to put this
+# if you have trouble installing activerecord/pg,
+# and you are using Postgres.app (recommended), run:
+# export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
+
 gem 'rake'
 gem 'sinatra'
 gem 'sinatra-activerecord'
